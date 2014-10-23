@@ -11,7 +11,7 @@ import junit.framework.Assert;
 public class ApplicationTest extends ActivityUnitTestCase {
 
     public ApplicationTest() {
-        super(Welcome.class);
+        super(HomeActivity.class);
     }
 
     public void testFoo() {
