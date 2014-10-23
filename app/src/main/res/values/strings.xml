@@ -4,5 +4,12 @@
     <string name="app_name">Museum</string>
     <string name="hello_world">Hallo Naturfreunde!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_home">Museum Begleiter</string>
+    <string name="title_companion">Begleiter</string>
+    <string name="title_question">Frage ans Museum</string>
+    <string name="title_about">Über das Museum</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
 
 </resources>
