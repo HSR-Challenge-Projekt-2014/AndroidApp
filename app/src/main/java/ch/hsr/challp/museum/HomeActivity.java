@@ -1,165 +1,122 @@
 package ch.hsr.challp.museum;
 
 import android.app.Activity;
-
-import android.app.ActionBar;
 import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class HomeActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
-
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
-    private CharSequence mTitle;
-
+public class HomeActivity extends Activity {
+    String[] menu;
+    DrawerLayout dLayout;
+    ListView dList;
+    ArrayAdapter<String> adapter;
+    private ActionBarDrawerToggle dToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        menu = new String[]{"Begleiter", "Fragen ans Museum", "Read at Home", "Fragen"};
+        dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        dList = (ListView) findViewById(R.id.left_drawer_list);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menu);
+        dList.setAdapter(adapter);
+        dList.setSelector(android.R.color.holo_blue_dark);
+        dList.setOnItemClickListener(new OnItemClickListener() {
+            @Override
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+            public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+                dLayout.closeDrawers();
+                showContent(position);
+            }
 
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        });
+        dToggle = new ActionBarDrawerToggle(this, dLayout,
+                R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 
+            /**
+             * Called when a drawer has settled in a completely closed state.
+             */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /**
+             * Called when a drawer has settled in a completely open state.
+             */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+        dLayout.setDrawerListener(dToggle);
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
+
+        showContent(0);
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        dToggle.syncState();
     }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_companion);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_question);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_about);
-                break;
-        }
-    }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.home, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        dToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (dToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        // Handle your other action bar items...
+
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
+    /* Called whenever we call invalidateOptionsMenu() */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        //boolean drawerOpen = dLayout.isDrawerOpen(dList);
+        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    private void showContent(int position) {
+        Fragment fragment;
+        String title = menu[position];
+        if (position == 0) {
+            fragment = new GuideFragment();
+        } else if (position == 1) {
+            fragment = new QuestionFragment();
+        } else {
             Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString("Menu", menu[position]);
+            fragment = new DetailFragment();
             fragment.setArguments(args);
-            return fragment;
         }
-
-        public PlaceholderFragment() {
-        }
-
-        private View startGuideButton;
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, final ViewGroup container,
-                Bundle savedInstanceState) {
-            int section = getArguments().getInt(ARG_SECTION_NUMBER);
-            View rootView = null;
-            if(section == 1) {
-
-                rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-                startGuideButton = rootView.findViewById(R.id.guide_start_button);
-                startGuideButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(container.getContext(),"Begleiter gestartet...",Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-            } else if (section == 2) {
-                rootView = inflater.inflate(R.layout.fragment_questions,container,false);
-            } else {
-                Log.w(getTag(),"Section with id " + section + " not found.");
-            }
-
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((HomeActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
+        getActionBar().setTitle(title);
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
 }
