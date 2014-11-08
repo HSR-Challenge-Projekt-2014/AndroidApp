@@ -14,4 +14,21 @@
     <string name="drawer_open">Menu öffnen</string>
     <string name="drawer_close">Menu schliessen</string>
 
+    <string-array name="topics_list">
+        <item>Abenteuerliches</item>
+        <item>Historisches</item>
+        <item>Spass und Spannung</item>
+    </string-array>
+
+    <string-array name="rooms_list">
+        <item>Raum 1</item>
+        <item>Raum 2</item>
+        <item>Raum 3</item>
+    </string-array>
+
+    <string-array name="filters_list">
+        <item>Neuste</item>
+        <item>Beliebteste</item>
+    </string-array>
+
 </resources>
