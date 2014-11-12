@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import org.altbeacon.beacon.BeaconManager;
 
 
@@ -24,9 +25,18 @@ public class GuideFragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PointOfInterestFragment()).commit();
+            }
+        });
+
+        Button startBeaconTestButton = (Button) view.findViewById(R.id.start_beacon_test);
+        startBeaconTestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 verifyBluetooth();
             }
         });
+
         return view;
     }
 

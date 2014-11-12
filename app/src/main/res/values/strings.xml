@@ -37,5 +37,6 @@
     <string name="poi_fragment_title">Point of Interest Fragment</string>
     <string name="content_title">Spass und Spannung</string>
     <string name="content_header_description">Content header description</string>
+    <string name="start_beacon_test">BeaconTest starten</string>
 
 </resources>
