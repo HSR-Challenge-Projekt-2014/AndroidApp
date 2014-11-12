@@ -10,6 +10,7 @@ public class Content implements Parcelable {
     private int imageResource;
     private String title;
     private String contentText;
+    private String previewLocation;
 
     private Content(Parcel in) {
         previewImageResource = in.readInt();
@@ -17,14 +18,16 @@ public class Content implements Parcelable {
         imageResource = in.readInt();
         title = in.readString();
         contentText = in.readString();
+        previewLocation = in.readString();
     }
 
-    public Content(String previewTitle, int previewImageResource, int imageResource, String title, String contentText) {
+    public Content(String previewTitle, int previewImageResource, int imageResource, String title, String contentText, String previewLocation) {
         this.previewImageResource = previewImageResource;
         this.previewTitle = previewTitle;
         this.imageResource = imageResource;
         this.title = title;
         this.contentText = contentText;
+        this.previewLocation = previewLocation;
     }
 
     public int getPreviewImageResource() {
@@ -45,6 +48,22 @@ public class Content implements Parcelable {
 
     public int getImageResource() {
         return imageResource;
+    }
+
+    public String getPreviewLocation() {
+        return previewLocation;
+    }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "previewImageResource=" + previewImageResource +
+                ", previewTitle='" + previewTitle + '\'' +
+                ", imageResource=" + imageResource +
+                ", title='" + title + '\'' +
+                ", contentText='" + contentText + '\'' +
+                ", previewLocation='" + previewLocation + '\'' +
+                '}';
     }
 
     // this is used to regenerate the content. All Parcelables must have a CREATOR that implements these two methods
@@ -70,16 +89,7 @@ public class Content implements Parcelable {
         parcel.writeInt(imageResource);
         parcel.writeString(title);
         parcel.writeString(contentText);
+        parcel.writeString(previewLocation);
     }
 
-    @Override
-    public String toString() {
-        return "Content{" +
-                "previewImageResource=" + previewImageResource +
-                ", previewTitle='" + previewTitle + '\'' +
-                ", imageResource=" + imageResource +
-                ", title='" + title + '\'' +
-                ", contentText='" + contentText + '\'' +
-                '}';
-    }
 }

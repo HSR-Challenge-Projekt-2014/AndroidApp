@@ -13,23 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp">
-
-            <ImageView
-                android:id="@+id/contentPreviewImage"
-                android:layout_width="50dp"
-                android:layout_height="60dp"
-                android:scaleType="centerCrop" />
-
-            <TextView
-                android:id="@+id/contentPreviewDescription"
-                android:layout_width="match_parent"
-                android:padding="15dp"
-                android:layout_height="80dp" />
-
-        </LinearLayout>
+        <include layout="@layout/page_header" />
 
         <LinearLayout
             android:layout_width="match_parent"

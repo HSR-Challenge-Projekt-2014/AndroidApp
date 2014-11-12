@@ -25,8 +25,9 @@ public class ContentActivity extends Activity {
         setContentView(R.layout.activity_content);
         content = getIntent().getParcelableExtra(P_CONTENT_ID);
 
-        ((ImageView) findViewById(R.id.contentPreviewImage)).setImageResource(content.getPreviewImageResource());
-        ((TextView) findViewById(R.id.contentPreviewDescription)).setText(content.getPreviewTitle());
+        ((ImageView) findViewById(R.id.pagePreviewImage)).setImageResource(content.getPreviewImageResource());
+        ((TextView) findViewById(R.id.pagePreviewDescription)).setText(content.getPreviewTitle());
+        ((TextView) findViewById(R.id.pagePreviewLocation)).setText(content.getPreviewLocation());
         ((TextView) findViewById(R.id.contentTitle)).setText(content.getTitle());
         ((TextView) findViewById(R.id.contentText)).setText(content.getContentText());
         ((ImageView) findViewById(R.id.contentImage)).setImageResource(content.getImageResource());

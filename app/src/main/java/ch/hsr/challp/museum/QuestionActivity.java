@@ -30,9 +30,9 @@ public class QuestionActivity extends Activity {
         image.setImageResource(question.getImage());
         TextView text = (TextView) findViewById(R.id.question_text);
         text.setText(question.getText());
-        TextView topic = (TextView) findViewById(R.id.question_topic);
+        TextView topic = (TextView) findViewById(R.id.pagePreviewDescription);
         topic.setText(question.getTopic().getName());
-        TextView location = (TextView) findViewById(R.id.question_location);
+        TextView location = (TextView) findViewById(R.id.pagePreviewLocation);
         location.setText(question.getRoom().getName());
         // TODO add drawer to this activity
     }
