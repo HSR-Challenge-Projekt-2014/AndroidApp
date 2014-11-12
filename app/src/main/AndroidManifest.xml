@@ -31,10 +31,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.hsr.challp.museum.HomeActivity" />
         </activity>
+        <activity
+            android:name="ch.hsr.challp.museum.ContentActivity"
+            android:label="@string/title_activity_content" >
+        </activity>
         <service
             android:name=".service.BeaconScanService"
             android:exported="false" >
         </service>
     </application>
-
 </manifest>
