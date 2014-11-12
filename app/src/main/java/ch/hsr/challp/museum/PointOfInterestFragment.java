@@ -26,11 +26,11 @@ public class PointOfInterestFragment extends Fragment {
          * Mock Data
          */
         List<Content> contents = new ArrayList<Content>();
-        contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Historisches", R.drawable.content_historisches, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Spass und Spannung", R.drawable.content_spass, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Liebesleben", R.drawable.content_liebensleben, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Energie", R.drawable.content_energie, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
+        contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
+        contents.add(new Content("Historisches", R.drawable.content_historisches, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
+        contents.add(new Content("Spass und Spannung", R.drawable.content_spass, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
+        contents.add(new Content("Liebesleben", R.drawable.content_liebensleben, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
+        contents.add(new Content("Energie", R.drawable.content_energie, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
         this.pointOfInterest = new PointOfInterest("Der Bär in St.Ipsum", R.drawable.poi_header, contents);
 
     }
