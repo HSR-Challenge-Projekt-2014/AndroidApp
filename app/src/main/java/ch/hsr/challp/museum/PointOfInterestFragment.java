@@ -26,11 +26,11 @@ public class PointOfInterestFragment extends Fragment {
          * Mock Data
          */
         List<Content> contents = new ArrayList<Content>();
-        contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer));
-        contents.add(new Content("Historisches", R.drawable.content_historisches));
-        contents.add(new Content("Spass und Spannung", R.drawable.content_spass));
-        contents.add(new Content("Liebesleben", R.drawable.content_liebensleben));
-        contents.add(new Content("Energie", R.drawable.content_energie));
+        contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla"));
+        contents.add(new Content("Historisches", R.drawable.content_historisches, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla"));
+        contents.add(new Content("Spass und Spannung", R.drawable.content_spass, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla"));
+        contents.add(new Content("Liebesleben", R.drawable.content_liebensleben, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla"));
+        contents.add(new Content("Energie", R.drawable.content_energie, R.drawable.content_image, "Foobar", "Lorem Ipsum blabla"));
         this.pointOfInterest = new PointOfInterest("Der Bär in St.Ipsum", R.drawable.poi_header, contents);
 
     }
