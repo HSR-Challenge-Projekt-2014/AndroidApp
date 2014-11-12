@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import org.altbeacon.beacon.BeaconManager;
+import ch.hsr.challp.museum.service.BeaconScanService;
 
 
 public class GuideFragment extends Fragment {
@@ -41,47 +41,30 @@ public class GuideFragment extends Fragment {
     }
 
     private void verifyBluetooth() {
-        try {
-            if (!BeaconManager.getInstanceForApplication(getActivity()).checkAvailability()) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Bluetooth not enabled");
-                builder.setMessage("Enable Bluetooth now?");
-                builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (enableBluetooth()) {
-                            Intent serviceIntent = new Intent(getActivity(), BeaconScanService.class);
-                            getActivity().startService(serviceIntent);
-                            Intent intent = new Intent(getActivity(), BeaconTest.class);
-                            startActivity(intent);
-                        } else {
-                            goHome();
-                        }
-                    }
-                });
-                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (!bluetoothAdapter.isEnabled()) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Bluetooth not enabled");
+            builder.setMessage("Enable Bluetooth now?");
+            builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if (enableBluetooth()) {
+                        startServiceAndGoToBeaconTest();
+                    } else {
                         goHome();
                     }
-                });
-                builder.show();
-            }
-        } catch (RuntimeException e) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Bluetooth LE not available");
-            builder.setMessage("Sorry, this device does not support Bluetooth LE.");
-            builder.setPositiveButton(android.R.string.ok, null);
-            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    getActivity().finish();
-                    System.exit(0);
                 }
-
+            });
+            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    goHome();
+                }
             });
             builder.show();
+        } else {
+            startServiceAndGoToBeaconTest();
         }
     }
 
@@ -93,5 +76,12 @@ public class GuideFragment extends Fragment {
     private Boolean enableBluetooth() {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         return bluetoothAdapter.enable();
+    }
+
+    private void startServiceAndGoToBeaconTest() {
+        Intent serviceIntent = new Intent(getActivity(), BeaconScanService.class);
+        getActivity().startService(serviceIntent);
+        Intent intent = new Intent(getActivity(), BeaconTest.class);
+        startActivity(intent);
     }
 }

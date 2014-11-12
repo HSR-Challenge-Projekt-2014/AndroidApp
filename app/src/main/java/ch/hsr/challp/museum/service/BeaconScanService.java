@@ -1,4 +1,4 @@
-package ch.hsr.challp.museum;
+package ch.hsr.challp.museum.service;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,6 +26,10 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import ch.hsr.challp.museum.BeaconTest;
+import ch.hsr.challp.museum.R;
+import ch.hsr.challp.museum.interfaces.BeaconScanClient;
+
 
 public class BeaconScanService extends Service implements BeaconConsumer {
     private final static String TAG = "BeaconScanService";
@@ -34,13 +38,11 @@ public class BeaconScanService extends Service implements BeaconConsumer {
     private BeaconManager beaconManager;
     private List<BeaconScanClient> clients;
 
+    private Beacon currentBeacon;
 
     public Beacon getCurrentBeacon() {
         return currentBeacon;
     }
-
-    //private Region currentRegion;
-    private Beacon currentBeacon;
 
     public void registerActivity(BeaconScanClient beaconTest) {
         if (clients == null) {
@@ -54,25 +56,25 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         clients.remove(beaconTest);
     }
 
-
-    public class LocalBinder extends Binder {
-        BeaconScanService getService() {
-            return BeaconScanService.this;
-        }
+    public void killSelf() {
+        stopSelf();
     }
 
     @Override
     public void onCreate() {
         beaconManager = BeaconManager.getInstanceForApplication(this);
+        // altbeacon
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=aabb,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
+        // kontakt beacons
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25"));
+        // magic?
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:0-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "BeaconScanService starting", Toast.LENGTH_SHORT).show();
         return START_STICKY;
     }
 
@@ -84,7 +86,8 @@ public class BeaconScanService extends Service implements BeaconConsumer {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "BeaconScanService stopping", Toast.LENGTH_SHORT).show();
+        beaconManager.unbind(this);
     }
 
     @Override
@@ -92,43 +95,42 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         beaconManager.setRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-                if (beacons.size() > 0) {
-                    Beacon closestBeacon = null;
-                    for (Beacon beacon : beacons) {
-                        if (closestBeacon == null) {
-                            closestBeacon = beacon;
-                        } else {
-                            closestBeacon = closestBeacon.getDistance() > beacon.getDistance() ? beacon : closestBeacon;
-                        }
-                    }
-
-                    if (!closestBeacon.equals(currentBeacon)) {
-                        if (currentBeacon != null) {
-                            removeNotification(currentBeacon);
-                        }
-                    }
-                    updateClients();
-                    showNotification(closestBeacon);
-                    currentBeacon = closestBeacon;
-                }
+                setCurrentBeacon(beacons);
             }
         });
 
         try {
-            //Region region1 = new Region("kontakt-beacon-01", Identifier.parse("F7826DA6-4FA2-4E98-8024-BC5B71E0893E"), Identifier.parse("10244"), Identifier.parse("54936"));
-            //Region region2 = new Region("kontakt-beacon-02", Identifier.parse("F7826DA6-4FA2-4E98-8024-BC5B71E0893E"), Identifier.parse("31576"), Identifier.parse("38281"));
-            //Region region3 = new Region("simulated-beacon-01", Identifier.parse("F7826DA6-4FA2-4E98-8024-BC5B71E0893E"), Identifier.parse("1"), Identifier.parse("2"));
-            //beaconManager.startMonitoringBeaconsInRegion(region1);
-            //beaconManager.startMonitoringBeaconsInRegion(region2);
-            //beaconManager.startMonitoringBeaconsInRegion(region3);
             beaconManager.startRangingBeaconsInRegion(new Region("Museum", null, null, null));
         } catch (RemoteException e) {
+            Log.d(TAG, "Error while starting beacon ranging, " + e.getMessage());
+        }
+    }
 
+    private void setCurrentBeacon(Collection<Beacon> beacons) {
+        if (!beacons.isEmpty()) {
+            Beacon closestBeacon = null;
+            for (Beacon beacon : beacons) {
+                if (closestBeacon == null) {
+                    closestBeacon = beacon;
+                } else {
+                    closestBeacon = closestBeacon.getDistance() > beacon.getDistance() ? beacon : closestBeacon;
+                }
+            }
+            if (!closestBeacon.equals(currentBeacon)) {
+                if (currentBeacon != null) {
+                    removeNotification(currentBeacon);
+                }
+                showNotification(closestBeacon);
+            }
+            currentBeacon = closestBeacon;
+            updateClients();
         }
     }
 
     private void updateClients() {
         if (clients == null) return;
+
+        // consider using other way to communicate with the UI
         try {
             Handler lo = new Handler(Looper.getMainLooper());
             lo.post(new Runnable() {
@@ -163,5 +165,11 @@ public class BeaconScanService extends Service implements BeaconConsumer {
     private void removeNotification(Beacon beacon) {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(beacon.getId3().toInt());
+    }
+
+    public class LocalBinder extends Binder {
+        public BeaconScanService getService() {
+            return BeaconScanService.this;
+        }
     }
 }

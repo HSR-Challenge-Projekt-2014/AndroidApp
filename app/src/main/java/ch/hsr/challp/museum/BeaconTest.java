@@ -12,12 +12,14 @@ import android.widget.EditText;
 
 import org.altbeacon.beacon.Beacon;
 
+import ch.hsr.challp.museum.interfaces.BeaconScanClient;
+import ch.hsr.challp.museum.service.BeaconScanService;
 
-public class BeaconTest extends Activity implements BeaconScanClient{
+
+public class BeaconTest extends Activity implements BeaconScanClient {
     private BeaconScanService beaconScanService = null;
 
     private ServiceConnection serviceConnectionConnection = new ServiceConnection() {
-
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
             BeaconScanService.LocalBinder binder = (BeaconScanService.LocalBinder) service;
@@ -35,22 +37,11 @@ public class BeaconTest extends Activity implements BeaconScanClient{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beacon_test);
-
-
-        Button bindButton = (Button) this.findViewById(R.id.bind_service);
-        Button checkButton = (Button) this.findViewById(R.id.check_service);
-
-        bindButton.setOnClickListener(new View.OnClickListener() {
+        Button killServiceButton = (Button) this.findViewById(R.id.kill_service);
+        killServiceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bindServiceNow();
-            }
-        });
-
-        checkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                checkService();
+                killService();
             }
         });
     }
@@ -82,18 +73,26 @@ public class BeaconTest extends Activity implements BeaconScanClient{
     }
 
     private void checkService() {
-        EditText text = (EditText) this.findViewById(R.id.region_name);
         if (beaconScanService != null) {
-            Beacon beacon = beaconScanService.getCurrentBeacon();
-            text.setText(beacon.getId3() + "dist: " + beacon.getDistance() + "m");
-        } else {
-            text.setText("No Service/Beacon");
+            setStatusText(beaconScanService.getCurrentBeacon());
+        }
+    }
+
+    private void killService() {
+        if(beaconScanService != null) {
+            unbindServiceNow();
+            beaconScanService.killSelf();
+            beaconScanService = null;
         }
     }
 
     @Override
     public void updateBeaconState(Beacon beacon) {
-        EditText text = (EditText) this.findViewById(R.id.region_name);
+        setStatusText(beacon);
+    }
+
+    private void setStatusText(Beacon beacon) {
+        EditText text = (EditText) this.findViewById(R.id.beacon_info);
         if (beacon != null) {
             text.setText(beacon.getId3() + "dist: " + beacon.getDistance() + "m");
         } else {

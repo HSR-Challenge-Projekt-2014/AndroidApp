@@ -32,7 +32,7 @@
                 android:value="ch.hsr.challp.museum.HomeActivity" />
         </activity>
         <service
-            android:name=".BeaconScanService"
+            android:name=".service.BeaconScanService"
             android:exported="false" >
         </service>
     </application>

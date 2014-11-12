@@ -1,4 +1,4 @@
-package ch.hsr.challp.museum;
+package ch.hsr.challp.museum.interfaces;
 
 import org.altbeacon.beacon.Beacon;
 

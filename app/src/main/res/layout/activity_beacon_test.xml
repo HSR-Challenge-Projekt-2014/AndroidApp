@@ -7,31 +7,26 @@
     tools:context="ch.hsr.challp.museum.BeaconTest">
 
     <TextView android:text="Beacont Service Test" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/textView" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/region_name"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="bind"
-        android:id="@+id/bind_service"
-        android:layout_below="@+id/region_name"
+        android:id="@+id/beacon_info"
+        android:layout_below="@+id/textView"
+        android:layout_toEndOf="@+id/textView"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="69dp" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="check"
-        android:id="@+id/check_service"
-        android:layout_alignTop="@+id/bind_service"
-        android:layout_alignParentEnd="true" />
+        android:text="kill service"
+        android:id="@+id/kill_service"
+        android:layout_below="@+id/beacon_info"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
 
 
 </RelativeLayout>
