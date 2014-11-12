@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class GuideFragment extends Fragment {
 
@@ -19,7 +18,7 @@ public class GuideFragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "GUIDE STARTING!", Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PointOfInterestFragment()).commit();
             }
         });
         return view;
