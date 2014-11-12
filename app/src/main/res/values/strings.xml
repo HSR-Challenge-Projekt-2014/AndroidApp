@@ -13,5 +13,7 @@
     <string name="action_example">Example action</string>
     <string name="drawer_open">Menu öffnen</string>
     <string name="drawer_close">Menu schliessen</string>
+    <string name="title_activity_monitoring">MonitoringActivity</string>
+    <string name="title_activity_beacon_test">BeaconTest</string>
 
 </resources>
