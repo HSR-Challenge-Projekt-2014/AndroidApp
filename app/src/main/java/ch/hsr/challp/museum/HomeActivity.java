@@ -116,7 +116,7 @@ public class HomeActivity extends Activity {
             fragment.setArguments(args);
         }
         getActionBar().setTitle(title);
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("").commit();
     }
 
 }
