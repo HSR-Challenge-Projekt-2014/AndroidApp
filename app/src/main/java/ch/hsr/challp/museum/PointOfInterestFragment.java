@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import ch.hsr.challp.museum.adapter.ContentPreviewAdapter;
+
 
 public class PointOfInterestFragment extends Fragment {
 

@@ -1,10 +1,12 @@
-package ch.hsr.challp.museum;
+package ch.hsr.challp.museum.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import ch.hsr.challp.museum.R;
 
 public class ContentPreviewAdapter extends BaseAdapter {
 
