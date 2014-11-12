@@ -1,15 +1,17 @@
 package ch.hsr.challp.museum;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class QuestionFragment extends Fragment {
+public class QuestionFragment extends Fragment implements View.OnClickListener {
 
     private Spinner spinnerTopic;
     private Spinner spinnerRoom;
@@ -39,9 +41,17 @@ public class QuestionFragment extends Fragment {
 
         for (int i = 0; i <= 15; i++) {
             View question = inflater.inflate(R.layout.question_row, null);
+            question.setOnClickListener(this);
             questionLayout.addView(question);
         }
 
         return result;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Log.i(getClass().getName(), "question selected");
+        Intent intent = new Intent(view.getContext(), QuestionActivity.class);
+        startActivity(intent);
     }
 }

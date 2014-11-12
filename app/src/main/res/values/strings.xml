@@ -4,6 +4,7 @@
     <string name="app_name">Museum</string>
     <string name="hello_world">Hallo Naturfreunde!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_ask_question">Ask Question</string>
     <string name="title_activity_home">Museum Begleiter</string>
     <string name="title_companion">Begleiter</string>
     <string name="title_question">Frage ans Museum</string>
@@ -19,16 +20,16 @@
         <item>Historisches</item>
         <item>Spass und Spannung</item>
     </string-array>
-
     <string-array name="rooms_list">
         <item>Raum 1</item>
         <item>Raum 2</item>
         <item>Raum 3</item>
     </string-array>
-
     <string-array name="filters_list">
         <item>Neuste</item>
         <item>Beliebteste</item>
     </string-array>
+
+    <string name="title_activity_question">QuestionActivity</string>
 
 </resources>
