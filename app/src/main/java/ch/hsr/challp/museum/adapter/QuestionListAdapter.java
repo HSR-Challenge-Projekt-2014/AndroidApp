@@ -9,23 +9,43 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ch.hsr.challp.museum.R;
 import ch.hsr.challp.museum.model.Question;
+import ch.hsr.challp.museum.model.Room;
+import ch.hsr.challp.museum.model.Topic;
 
 /**
  * Created by Michi on 12.11.2014.
  */
-public class QuestionListAdapter extends ArrayAdapter {
+public class QuestionListAdapter extends ArrayAdapter<Question> {
 
     private final Context context;
-    private List<Question> items;
+    private List<Question> allItems;
+    private List<Question> shownItems;
 
     public QuestionListAdapter(Context context, List<Question> items) {
         super(context, R.layout.question_row, items);
         this.context = context;
-        this.items = items;
+        this.allItems = new ArrayList<Question>(items);
+        this.shownItems = new ArrayList<Question>(items);
+    }
+
+    @Override
+    public Question getItem(int position) {
+        return shownItems.get(position);
+    }
+
+    @Override
+    public int getPosition(Question item) {
+        return shownItems.indexOf(item);
+    }
+
+    @Override
+    public int getCount() {
+        return shownItems.size();
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -45,4 +65,23 @@ public class QuestionListAdapter extends ArrayAdapter {
         return view;
 
     }
+
+    public void filter(Topic topic, Room room) {
+        List<Question> filterResult = new ArrayList<Question>(allItems);
+        if (!(topic == null || Topic.ALL_ITEMS.equals(topic))) {
+            for (Question q : new ArrayList<Question>(allItems)) {
+                if (!q.getTopic().equals(topic))
+                    filterResult.remove(q);
+            }
+        }
+        if (!(room == null || Room.ALL_ROOMS.equals(room))) {
+            for (Question q : new ArrayList<Question>(allItems)) {
+                if (!q.getRoom().equals(room))
+                    filterResult.remove(q);
+            }
+        }
+        shownItems = filterResult;
+        notifyDataSetChanged();
+    }
+
 }

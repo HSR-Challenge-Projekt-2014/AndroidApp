@@ -22,7 +22,7 @@ public class QuestionActivity extends Activity {
         setTitle("Beantwortete Frage");
 
         Integer questionId = getIntent().getIntExtra(P_QUESTION_ID, 0);
-        Question question = Question.getAll().get(questionId);
+        Question question = Question.getById(questionId);
 
         TextView title = (TextView) findViewById(R.id.question_title);
         title.setText(question.getTitle());
@@ -30,6 +30,10 @@ public class QuestionActivity extends Activity {
         image.setImageResource(question.getImage());
         TextView text = (TextView) findViewById(R.id.question_text);
         text.setText(question.getText());
+        TextView topic = (TextView) findViewById(R.id.question_topic);
+        topic.setText(question.getTopic().getName());
+        TextView location = (TextView) findViewById(R.id.question_location);
+        location.setText(question.getRoom().getName());
         // TODO add drawer to this activity
     }
 

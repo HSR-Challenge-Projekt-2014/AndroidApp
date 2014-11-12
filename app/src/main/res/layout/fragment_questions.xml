@@ -23,21 +23,14 @@
                 android:id="@+id/spinner_topic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.5" />
 
             <Spinner
                 android:id="@+id/spinner_room"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="0.3" />
-
-            <Spinner
-                android:id="@+id/spinner_filter"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="0.3" />
+                android:layout_weight="0.5" />
 
         </LinearLayout>
 
