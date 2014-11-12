@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ch.hsr.challp.museum.PointOfInterestFragment">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/poiHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/poiTitle"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:padding="15dp"
+            android:textSize="@dimen/title_font_size"
+            android:background="@drawable/border" />
+
+        <GridView
+            android:id="@+id/POIContentPane"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="3"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="15dp"
+            android:gravity="start"
+            android:padding="15dp" />
+    </LinearLayout>
+</FrameLayout>

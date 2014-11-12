@@ -11,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import org.altbeacon.beacon.BeaconManager;
+
 
 public class GuideFragment extends Fragment {
 

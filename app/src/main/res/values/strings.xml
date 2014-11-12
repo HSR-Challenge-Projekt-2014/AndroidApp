@@ -4,6 +4,7 @@
     <string name="app_name">Museum</string>
     <string name="hello_world">Hallo Naturfreunde!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_ask_question">Ask Question</string>
     <string name="title_activity_home">Museum Begleiter</string>
     <string name="title_companion">Begleiter</string>
     <string name="title_question">Frage ans Museum</string>
@@ -15,5 +16,26 @@
     <string name="drawer_close">Menu schliessen</string>
     <string name="title_activity_monitoring">MonitoringActivity</string>
     <string name="title_activity_beacon_test">BeaconTest</string>
+
+    <string-array name="topics_list">
+        <item>Abenteuerliches</item>
+        <item>Historisches</item>
+        <item>Spass und Spannung</item>
+    </string-array>
+    <string-array name="rooms_list">
+        <item>Raum 1</item>
+        <item>Raum 2</item>
+        <item>Raum 3</item>
+    </string-array>
+    <string-array name="filters_list">
+        <item>Neuste</item>
+        <item>Beliebteste</item>
+    </string-array>
+
+    <string name="title_activity_question">QuestionActivity</string>
+    <string name="title_activity_point_of_interest">PointOfInterestActivity</string>
+    <string name="poi_fragment_title">Point of Interest Fragment</string>
+    <string name="content_title">Spass und Spannung</string>
+    <string name="content_header_description">Content header description</string>
 
 </resources>
