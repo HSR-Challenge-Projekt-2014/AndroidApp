@@ -33,7 +33,6 @@
     <string name="title_activity_question">QuestionActivity</string>
     <string name="title_activity_point_of_interest">PointOfInterestActivity</string>
     <string name="poi_fragment_title">Point of Interest Fragment</string>
-    <string name="poi_title">Der Bär in St.Ipsum</string>
     <string name="content_title">Spass und Spannung</string>
     <string name="content_header_description">Content header description</string>
 

@@ -5,21 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.List;
 
 import ch.hsr.challp.museum.R;
+import ch.hsr.challp.museum.model.Content;
 
 public class ContentPreviewAdapter extends BaseAdapter {
 
-    public static final int COUNT = 5;
     private Context context;
+    private List<Content> contents;
 
-    public ContentPreviewAdapter(Context context) {
+    public ContentPreviewAdapter(Context context, List<Content> contents) {
         this.context = context;
+        this.contents = contents;
     }
 
     @Override
     public int getCount() {
-        return COUNT;
+        return contents.size();
     }
 
     @Override
@@ -35,6 +41,11 @@ public class ContentPreviewAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return inflater.inflate(R.layout.content_preview, viewGroup);
+        View result = inflater.inflate(R.layout.content_preview, null);
+
+        ((TextView) result.findViewById(R.id.contentPreviewDescription)).setText(contents.get(i).getPresentationTitle());
+        ((ImageView) result.findViewById(R.id.contentPreviewImage)).setImageResource(contents.get(i).getPresentationImageResource());
+
+        return result;
     }
 }
