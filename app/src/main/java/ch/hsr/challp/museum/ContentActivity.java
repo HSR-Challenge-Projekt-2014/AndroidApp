@@ -1,9 +1,9 @@
 package ch.hsr.challp.museum;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,12 +25,17 @@ public class ContentActivity extends Activity {
         setContentView(R.layout.activity_content);
         content = getIntent().getParcelableExtra(P_CONTENT_ID);
 
-        ((ImageView) findViewById(R.id.pagePreviewImage)).setImageResource(content.getPreviewImageResource());
-        ((TextView) findViewById(R.id.pagePreviewDescription)).setText(content.getPreviewTitle());
-        ((TextView) findViewById(R.id.pagePreviewLocation)).setText(content.getPreviewLocation());
-        ((TextView) findViewById(R.id.contentTitle)).setText(content.getTitle());
-        ((TextView) findViewById(R.id.contentText)).setText(content.getContentText());
-        ((ImageView) findViewById(R.id.contentImage)).setImageResource(content.getImageResource());
+        ((ImageView) findViewById(R.id.page_preview_image)).setImageResource(content.getPreviewImageResource());
+        ((TextView) findViewById(R.id.page_preview_description)).setText(content.getPreviewTitle());
+        ((TextView) findViewById(R.id.page_preview_location)).setText(content.getPreviewLocation());
+        ((TextView) findViewById(R.id.page_title)).setText(content.getTitle());
+        ((TextView) findViewById(R.id.page_text)).setText(content.getContentText());
+        ((ImageView) findViewById(R.id.page_image)).setImageResource(content.getImageResource());
+
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(R.string.title_activity_content);
+        }
     }
 
 
@@ -39,20 +44,5 @@ public class ContentActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_content, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

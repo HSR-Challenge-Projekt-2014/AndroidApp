@@ -8,44 +8,5 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ch.hsr.challp.museum.QuestionActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include layout="@layout/page_header" />
-
-        <ScrollView
-            android:id="@+id/scrollView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/question_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Title"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
-
-                <ImageView
-                    android:id="@+id/question_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="150dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/bear_drawing" />
-
-                <TextView
-                    android:id="@+id/question_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Text"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+    <include layout="@layout/abstract_page" />
 </RelativeLayout>

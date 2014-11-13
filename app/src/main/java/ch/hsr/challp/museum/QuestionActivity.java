@@ -24,16 +24,18 @@ public class QuestionActivity extends Activity {
         Integer questionId = getIntent().getIntExtra(P_QUESTION_ID, 0);
         Question question = Question.getById(questionId);
 
-        TextView title = (TextView) findViewById(R.id.question_title);
+        TextView title = (TextView) findViewById(R.id.page_title);
         title.setText(question.getTitle());
-        ImageView image = (ImageView) findViewById(R.id.question_image);
+        ImageView image = (ImageView) findViewById(R.id.page_image);
         image.setImageResource(question.getImage());
-        TextView text = (TextView) findViewById(R.id.question_text);
+        TextView text = (TextView) findViewById(R.id.page_text);
         text.setText(question.getText());
-        TextView topic = (TextView) findViewById(R.id.pagePreviewDescription);
+        TextView topic = (TextView) findViewById(R.id.page_preview_description);
         topic.setText(question.getTopic().getName());
-        TextView location = (TextView) findViewById(R.id.pagePreviewLocation);
+        TextView location = (TextView) findViewById(R.id.page_preview_location);
         location.setText(question.getRoom().getName());
+        ImageView previewImage = (ImageView) findViewById(R.id.page_preview_image);
+        previewImage.setImageResource(R.drawable.bear_drawing); // TODO: create preview image
         // TODO add drawer to this activity
     }
 

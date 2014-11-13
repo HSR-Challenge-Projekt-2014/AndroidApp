@@ -1,5 +1,6 @@
 package ch.hsr.challp.museum;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Configuration;
@@ -25,7 +26,7 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        menu = new String[]{"Begleiter", "Fragen ans Museum", "Read at Home", "Fragen"};
+        menu = new String[]{"Begleiter", "Fragen ans Museum", "Read at Home"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, menu);
@@ -61,8 +62,11 @@ public class HomeActivity extends Activity {
         };
         dLayout.setDrawerListener(dToggle);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+        }
 
         showContent(0);
     }
@@ -115,7 +119,10 @@ public class HomeActivity extends Activity {
             fragment = new DetailFragment();
             fragment.setArguments(args);
         }
-        getActionBar().setTitle(title);
+        final ActionBar actionBar = getActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+        }
         getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("").commit();
     }
 
