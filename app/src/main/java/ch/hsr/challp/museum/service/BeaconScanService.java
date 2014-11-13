@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import ch.hsr.challp.museum.interfaces.BeaconScanClient;
+import ch.hsr.challp.museum.model.PointOfInterest;
 
 
 public class BeaconScanService extends Service implements BeaconConsumer {
@@ -38,7 +39,7 @@ public class BeaconScanService extends Service implements BeaconConsumer {
     private Beacon currentBeacon;
     private Beacon nextBeacon;
     private Integer nextBeaconChangeDelay = 0;
-    private Region region;
+    private List<Region> regions;
     private BeaconServiceNotificationProvider notificationProvider;
 
     public Beacon getCurrentBeacon() {
@@ -105,7 +106,7 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         // magic?
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:0-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
-        region = new Region("Museum", null, null, null);
+        regions = PointOfInterest.getAllRegions();
         notificationProvider = new BeaconServiceNotificationProvider(this);
         notificationProvider.createServiceRunningNotification();
     }
@@ -128,7 +129,9 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         notificationProvider.removeNotification();
 
         try {
-            beaconManager.stopRangingBeaconsInRegion(region);
+            for (Region region : regions) {
+                beaconManager.stopRangingBeaconsInRegion(region);
+            }
         } catch (RemoteException e) {
             Log.d(TAG, "Error while stopping beacon ranging, " + e.getMessage());
         }
@@ -144,7 +147,9 @@ public class BeaconScanService extends Service implements BeaconConsumer {
             }
         });
         try {
-            beaconManager.startRangingBeaconsInRegion(region);
+            for (Region region : regions) {
+                beaconManager.startRangingBeaconsInRegion(region);
+            }
         } catch (RemoteException e) {
             Log.d(TAG, "Error while starting beacon ranging, " + e.getMessage());
         }
