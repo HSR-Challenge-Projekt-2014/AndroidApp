@@ -17,6 +17,7 @@ import org.altbeacon.beacon.BeaconParser;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,8 +40,10 @@ public class BeaconScanService extends Service implements BeaconConsumer {
     private Beacon currentBeacon;
     private Beacon nextBeacon;
     private Integer nextBeaconChangeDelay = 0;
+    private Integer noBeaconChangeDelay = 0;
     private List<Region> regions;
     private BeaconServiceNotificationProvider notificationProvider;
+    private Region wildcardRegion;
 
     public Beacon getCurrentBeacon() {
         return currentBeacon;
@@ -48,8 +51,10 @@ public class BeaconScanService extends Service implements BeaconConsumer {
 
     private void setCurrentBeacon(Collection<Beacon> beacons) {
         if (!beacons.isEmpty()) {
+            noBeaconChangeDelay = 0;
             Beacon closestBeacon = getClosestBeacon(beacons);
             // closest beacon is not already current beacon
+            Log.d(getClass().getName(), "Closest beacon is " + closestBeacon.getId3());
             if (!closestBeacon.equals(currentBeacon)) {
                 if (!closestBeacon.equals(nextBeacon)) { // closest beacon is new candidate
                     nextBeaconChangeDelay = 1;
@@ -59,18 +64,27 @@ public class BeaconScanService extends Service implements BeaconConsumer {
                     if (nextBeaconChangeDelay >= BEACON_CHANGE_DELAY) {
                         notificationProvider.createPoiNotification(closestBeacon);
                         currentBeacon = closestBeacon;
+                        updateClients();
                     }
                 }
             }
-            updateClients();
         } else {
-            notificationProvider.removePoiNotification();
+            noBeaconChangeDelay++;
+            if (noBeaconChangeDelay >= BEACON_CHANGE_DELAY) {
+                noBeaconChangeDelay = 0;
+                notificationProvider.removePoiNotification();
+                currentBeacon = null;
+                updateClients();
+            }
+            Log.d(getClass().getName(), "No beacons in range.");
         }
     }
 
     private Beacon getClosestBeacon(Collection<Beacon> beacons) {
         Beacon closestBeacon = null;
         for (Beacon beacon : beacons) {
+            if (!isKnownBeacon(beacon)) continue;
+            Log.d(getClass().getName(), "Beacon " + beacon.getId3() + " with distance " + beacon.getDistance());
             if (closestBeacon == null) {
                 closestBeacon = beacon;
             } else {
@@ -80,16 +94,27 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         return closestBeacon;
     }
 
+    private boolean isKnownBeacon(Beacon beacon) {
+        for (Region region : regions) {
+            if (beacon.getId3().equals(region.getId3())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void registerActivity(BeaconScanClient beaconTest) {
         if (clients == null) {
             clients = new LinkedList<>();
         }
         clients.add(beaconTest);
+        Log.d(getClass().getName(), "registered, new clients: " + clients.size());
     }
 
     public void unregisterActivity(BeaconScanClient beaconTest) {
         if (clients == null) return;
         clients.remove(beaconTest);
+        Log.d(getClass().getName(), "unregistered, remaining clients: " + clients.size());
     }
 
     public void killSelf() {
@@ -106,7 +131,10 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         // magic?
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:0-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
+
         regions = PointOfInterest.getAllRegions();
+        wildcardRegion = new Region("Museum", null, null, null);
+
         notificationProvider = new BeaconServiceNotificationProvider(this);
         notificationProvider.createServiceRunningNotification();
     }
@@ -129,9 +157,7 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         notificationProvider.removeNotification();
 
         try {
-            for (Region region : regions) {
-                beaconManager.stopRangingBeaconsInRegion(region);
-            }
+            beaconManager.stopRangingBeaconsInRegion(wildcardRegion);
         } catch (RemoteException e) {
             Log.d(TAG, "Error while stopping beacon ranging, " + e.getMessage());
         }
@@ -143,16 +169,24 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         beaconManager.setRangeNotifier(new RangeNotifier() {
             @Override
             public void didRangeBeaconsInRegion(Collection<Beacon> beacons, Region region) {
-                setCurrentBeacon(beacons);
+                setCurrentBeacon(removeUnknownBeacons(beacons));
             }
         });
         try {
-            for (Region region : regions) {
-                beaconManager.startRangingBeaconsInRegion(region);
-            }
+            beaconManager.startRangingBeaconsInRegion(wildcardRegion);
         } catch (RemoteException e) {
             Log.d(TAG, "Error while starting beacon ranging, " + e.getMessage());
         }
+    }
+
+    private Collection<Beacon> removeUnknownBeacons(Collection<Beacon> beacons) {
+        Collection<Beacon> result = new ArrayList<>();
+        for (Beacon beacon : beacons) {
+            if (isKnownBeacon(beacon)) {
+                result.add(beacon);
+            }
+        }
+        return result;
     }
 
     private void updateClients() {

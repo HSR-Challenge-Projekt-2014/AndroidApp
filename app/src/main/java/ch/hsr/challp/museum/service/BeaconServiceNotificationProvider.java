@@ -12,14 +12,14 @@ import android.support.v4.app.TaskStackBuilder;
 
 import org.altbeacon.beacon.Beacon;
 
-import ch.hsr.challp.museum.BeaconTest;
+import ch.hsr.challp.museum.HomeActivity;
 import ch.hsr.challp.museum.R;
 import ch.hsr.challp.museum.broadcastreceiver.NotificationReceiver;
 
 public class BeaconServiceNotificationProvider {
 
     private static final Integer NOTIFICATION_ID = 1337;
-    private final static Integer VIBRATE_DURATION = 200; // miliseconds
+    private final static Integer VIBRATE_DURATION = 200; // milliseconds
 
     private NotificationCompat.Builder builder;
     private NotificationManager notificationManager;
@@ -35,12 +35,12 @@ public class BeaconServiceNotificationProvider {
 
     private void initNotification() {
         builder.setOngoing(true);
-        builder.setPriority(Notification.PRIORITY_MAX);
+        builder.setPriority(Notification.PRIORITY_MAX); // TODO decrease priority
 
         // go to activity when clicked
-        Intent resultIntent = new Intent(context, BeaconTest.class);
+        Intent resultIntent = new Intent(context, HomeActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(BeaconTest.class);
+        stackBuilder.addParentStack(HomeActivity.class);
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);

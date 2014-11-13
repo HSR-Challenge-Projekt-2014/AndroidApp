@@ -14,26 +14,35 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/section_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20sp"
-            android:text="Museums Begleiter"
-            android:textSize="22sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20sp"
-            android:text="Dies ist der interaktive Begleiter des Naturmuseums. Der Begleiter wird Ihnen während des blablablabla..."
+            android:text="An dieser Position sind keine zusätzlichen Informationen verfügbar."
             android:textSize="14sp" />
 
-        <Button
-            android:id="@+id/guide_start_button"
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20sp"
+            android:text="Benachrichtigungen sind aktiviert, sobald Informationen abrufbar sind, werden Sie darauf aufmerksam gemacht."
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20sp"
-            android:text="Begleiter starten" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/ic_guide" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="50dp"
+            android:text="Fragen ans Museum" />
 
     </LinearLayout>
 

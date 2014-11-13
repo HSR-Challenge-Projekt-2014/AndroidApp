@@ -1,12 +1,13 @@
 package ch.hsr.challp.museum;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import ch.hsr.challp.museum.adapter.NavDrawerListAdapter;
 import ch.hsr.challp.museum.model.NavDrawerItem;
+import ch.hsr.challp.museum.service.BeaconScanService;
 
 public class HomeActivity extends Activity {
     public static final int SECTION_GUIDE = 0;
@@ -113,7 +115,11 @@ public class HomeActivity extends Activity {
     private void showContent(int position) {
         Fragment fragment;
         if (position == SECTION_GUIDE) {
-            fragment = new GuideFragment();
+            if (beaconScanServiceActive()) {
+                fragment = new GuideRunningFragment();
+            } else {
+                fragment = new GuideFragment();
+            }
         } else if (position == SECTION_QUESTION) {
             fragment = new QuestionFragment();
         } else {
@@ -123,9 +129,19 @@ public class HomeActivity extends Activity {
             fragment.setArguments(args);
         }
         setTitleByFragment(position);
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("").commit();
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
         dList.setItemChecked(position, true);
         dList.setSelection(position);
+    }
+
+    private boolean beaconScanServiceActive() {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (BeaconScanService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void setTitleByFragment(int position) {
