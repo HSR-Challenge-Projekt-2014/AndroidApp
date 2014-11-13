@@ -79,11 +79,13 @@ public class BeaconTest extends Activity implements BeaconScanClient {
     }
 
     private void killService() {
-        if(beaconScanService != null) {
+        if (beaconScanService != null) {
             unbindServiceNow();
             beaconScanService.killSelf();
             beaconScanService = null;
         }
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
     @Override

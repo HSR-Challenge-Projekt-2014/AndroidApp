@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ch.hsr.challp.museum">
+    package="ch.hsr.challp.museum" >
 
     <!-- Needed in order to allow the app to enable Bluetooth -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name="ch.hsr.challp.museum.HomeActivity"
-            android:label="@string/title_activity_home">
+            android:label="@string/title_activity_home" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,7 +28,7 @@
         <activity
             android:name="ch.hsr.challp.museum.QuestionActivity"
             android:label="@string/title_activity_question"
-            android:parentActivityName="ch.hsr.challp.museum.HomeActivity">
+            android:parentActivityName="ch.hsr.challp.museum.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.hsr.challp.museum.HomeActivity" />
@@ -37,9 +37,17 @@
             android:name="ch.hsr.challp.museum.ContentActivity"
             android:label="@string/title_activity_content" >
         </activity>
+
         <service
-            android:name=".service.BeaconScanService"
+            android:name="ch.hsr.challp.museum.service.BeaconScanService"
             android:exported="false" >
         </service>
+
+        <receiver
+            android:name=".broadcastreceiver.NotificationReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
     </application>
+
 </manifest>

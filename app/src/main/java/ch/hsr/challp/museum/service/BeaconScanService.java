@@ -1,18 +1,12 @@
 package ch.hsr.challp.museum.service;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
-import android.os.Vibrator;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -27,15 +21,12 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-import ch.hsr.challp.museum.BeaconTest;
-import ch.hsr.challp.museum.R;
 import ch.hsr.challp.museum.interfaces.BeaconScanClient;
 
 
 public class BeaconScanService extends Service implements BeaconConsumer {
     private final static String TAG = "BeaconScanService";
 
-    private final static Integer VIBRATE_DURATION = 400; // miliseconds
     // change current beacon after new beacon was measured x times
     private final static Integer BEACON_CHANGE_DELAY = 5;
 
@@ -48,6 +39,7 @@ public class BeaconScanService extends Service implements BeaconConsumer {
     private Beacon nextBeacon;
     private Integer nextBeaconChangeDelay = 0;
     private Region region;
+    private BeaconServiceNotificationProvider notificationProvider;
 
     public Beacon getCurrentBeacon() {
         return currentBeacon;
@@ -63,17 +55,15 @@ public class BeaconScanService extends Service implements BeaconConsumer {
                     nextBeacon = closestBeacon;
                 } else { // closest beacon is recurring
                     ++nextBeaconChangeDelay;
-                    if(nextBeaconChangeDelay >= BEACON_CHANGE_DELAY) {
-                        if (currentBeacon != null) {
-                            removeNotification(currentBeacon);
-                        }
-                        vibrate();
-                        showNotification(closestBeacon);
+                    if (nextBeaconChangeDelay >= BEACON_CHANGE_DELAY) {
+                        notificationProvider.createPoiNotification(closestBeacon);
                         currentBeacon = closestBeacon;
                     }
                 }
             }
             updateClients();
+        } else {
+            notificationProvider.removePoiNotification();
         }
     }
 
@@ -116,6 +106,8 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:0-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
         region = new Region("Museum", null, null, null);
+        notificationProvider = new BeaconServiceNotificationProvider(this);
+        notificationProvider.createServiceRunningNotification();
     }
 
     @Override
@@ -133,9 +125,8 @@ public class BeaconScanService extends Service implements BeaconConsumer {
     @Override
     public void onDestroy() {
         Toast.makeText(this, "BeaconScanService stopping", Toast.LENGTH_SHORT).show();
-        if(currentBeacon != null) {
-            removeNotification(currentBeacon);
-        }
+        notificationProvider.removeNotification();
+
         try {
             beaconManager.stopRangingBeaconsInRegion(region);
         } catch (RemoteException e) {
@@ -175,33 +166,6 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         } catch (Throwable t) {
             t.printStackTrace();
         }
-    }
-
-    private void showNotification(Beacon beacon) {
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this);
-        notificationBuilder.setContentTitle("Neuer POI " + beacon.getId3() + " dist: " + beacon.getDistance() + "m");
-        notificationBuilder.setContentText("Neuer Inhalt verfügbar: " + beacon.getId3());
-        notificationBuilder.setSmallIcon(R.drawable.ic_stat_notification);
-        Intent resultIntent = new Intent(this, BeaconTest.class);
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(BeaconTest.class);
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-        notificationBuilder.setContentIntent(resultPendingIntent);
-
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(beacon.getId3().toInt(), notificationBuilder.build());
-    }
-
-    private void removeNotification(Beacon beacon) {
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(beacon.getId3().toInt());
-    }
-
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(VIBRATE_DURATION);
     }
 
     public class LocalBinder extends Binder {
