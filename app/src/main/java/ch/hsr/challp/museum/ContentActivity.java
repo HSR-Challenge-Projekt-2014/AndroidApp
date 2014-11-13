@@ -14,9 +14,6 @@ public class ContentActivity extends Activity {
 
     public static final String P_CONTENT_ID = "ContentId";
 
-    public ContentActivity() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +33,8 @@ public class ContentActivity extends Activity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_content, menu);
         return true;
     }

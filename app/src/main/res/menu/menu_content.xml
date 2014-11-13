@@ -1,4 +1,2 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ch.hsr.challp.museum.ContentActivity">
-
-</menu>
+    tools:context="ch.hsr.challp.museum.ContentActivity" />
