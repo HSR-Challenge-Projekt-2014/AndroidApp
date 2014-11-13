@@ -1,12 +1,12 @@
 package ch.hsr.challp.museum;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,17 +21,21 @@ import ch.hsr.challp.museum.adapter.NavDrawerListAdapter;
 import ch.hsr.challp.museum.model.NavDrawerItem;
 
 public class HomeActivity extends Activity {
-    private String[] menu;
+    public static final int SECTION_GUIDE = 0;
+    public static final int SECTION_QUESTION = 1;
+    public static final int SECTION_READ_LATER = 2;
+    public static final int SECTION_INFORMATION = 3;
+    private String[] titles;
     private DrawerLayout dLayout;
+    private ListView dList;
+    private ListAdapter adapter;
     private ActionBarDrawerToggle dToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ListView dList;
-        ListAdapter adapter;
         setContentView(R.layout.activity_home);
-        menu = new String[]{"Begleiter", "Fragen ans Museum", "Read at Home"};
+        titles = new String[]{getString(R.string.title_companion), getString(R.string.title_question), getString(R.string.title_read_later), getString(R.string.title_about)};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
         List<NavDrawerItem> items = new ArrayList<>();
@@ -72,10 +76,9 @@ public class HomeActivity extends Activity {
         };
         dLayout.setDrawerListener(dToggle);
 
-        final ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setHomeButtonEnabled(true);
         }
 
         showContent(0);
@@ -109,21 +112,25 @@ public class HomeActivity extends Activity {
 
     private void showContent(int position) {
         Fragment fragment;
-        String title = menu[position];
-        if (position == 0) {
+        if (position == SECTION_GUIDE) {
             fragment = new GuideFragment();
-        } else if (position == 1) {
+        } else if (position == SECTION_QUESTION) {
             fragment = new QuestionFragment();
         } else {
             Bundle args = new Bundle();
-            args.putString("Menu", menu[position]);
+            args.putString("Menu", titles[position]);
             fragment = new DetailFragment();
             fragment.setArguments(args);
         }
-        if (getActionBar() != null) {
-            getActionBar().setTitle(title);
-        }
+        setTitleByFragment(position);
         getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("").commit();
+        dList.setItemChecked(position, true);
+        dList.setSelection(position);
+    }
+
+    private void setTitleByFragment(int position) {
+        String title = titles[position];
+        if (getActionBar() != null) getActionBar().setTitle(title);
     }
 
 }
