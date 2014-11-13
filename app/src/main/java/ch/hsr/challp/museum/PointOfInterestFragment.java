@@ -9,34 +9,15 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.hsr.challp.museum.adapter.ContentPreviewAdapter;
-import ch.hsr.challp.museum.model.Content;
 import ch.hsr.challp.museum.model.PointOfInterest;
 
 
 public class PointOfInterestFragment extends Fragment {
 
-    private final PointOfInterest pointOfInterest;
-
-    public PointOfInterestFragment() {
-        /**
-         * Mock Data
-         */
-        List<Content> contents = new ArrayList<>();
-        contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Historisches", R.drawable.content_historisches, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Spass und Spannung", R.drawable.content_spass, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Liebesleben", R.drawable.content_liebensleben, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Energie", R.drawable.content_energie, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        this.pointOfInterest = new PointOfInterest("Der Bär in St.Ipsum", R.drawable.poi_header, contents);
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        PointOfInterest pointOfInterest = PointOfInterest.getAll().get(0);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_point_of_interest, container, false);
 
