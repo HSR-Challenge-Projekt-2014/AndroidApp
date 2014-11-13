@@ -35,10 +35,10 @@ public class HomeActivity extends Activity {
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
         List<NavDrawerItem> items = new ArrayList<>();
-        items.add(new NavDrawerItem("Begleiter", R.drawable.ic_guide));
-        items.add(new NavDrawerItem("Fragen ans Museum", R.drawable.ic_question));
-        items.add(new NavDrawerItem("Read at Home", R.drawable.ic_read_later));
-        items.add(new NavDrawerItem("Über das Museum", R.drawable.ic_information));
+        items.add(new NavDrawerItem(getString(R.string.title_companion), R.drawable.ic_guide));
+        items.add(new NavDrawerItem(getString(R.string.title_question), R.drawable.ic_question));
+        items.add(new NavDrawerItem(getString(R.string.title_read_later), R.drawable.ic_read_later));
+        items.add(new NavDrawerItem(getString(R.string.title_about), R.drawable.ic_information));
 
         adapter = new NavDrawerListAdapter(getApplicationContext(), items);
         dList.setAdapter(adapter);
@@ -72,8 +72,10 @@ public class HomeActivity extends Activity {
         };
         dLayout.setDrawerListener(dToggle);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setHomeButtonEnabled(true);
+        }
 
         showContent(0);
     }
@@ -126,7 +128,7 @@ public class HomeActivity extends Activity {
             fragment = new DetailFragment();
             fragment.setArguments(args);
         }
-        getActionBar().setTitle(title);
+        if (getActionBar() != null) getActionBar().setTitle(title);
         getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("").commit();
         dList.setItemChecked(position, true);
         dList.setSelection(position);

@@ -16,8 +16,8 @@ import ch.hsr.challp.museum.model.NavDrawerItem;
 
 public class NavDrawerListAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<NavDrawerItem> navDrawerItems;
+    private final Context context;
+    private final List<NavDrawerItem> navDrawerItems;
 
     public NavDrawerListAdapter(Context context, List<NavDrawerItem> navDrawerItems) {
         this.context = context;
