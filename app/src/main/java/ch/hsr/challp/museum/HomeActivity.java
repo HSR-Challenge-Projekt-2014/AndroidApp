@@ -11,14 +11,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ch.hsr.challp.museum.adapter.NavDrawerListAdapter;
+import ch.hsr.challp.museum.model.NavDrawerItem;
 
 public class HomeActivity extends Activity {
     private String[] menu;
     private DrawerLayout dLayout;
     private ListView dList;
-    private ArrayAdapter<String> adapter;
+    private ListAdapter adapter;
     private ActionBarDrawerToggle dToggle;
 
     @Override
@@ -28,9 +34,14 @@ public class HomeActivity extends Activity {
         menu = new String[]{"Begleiter", "Fragen ans Museum", "Read at Home", "Fragen"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, menu);
+        List<NavDrawerItem> items = new ArrayList<>();
+        items.add(new NavDrawerItem("Begleiter", R.drawable.ic_guide));
+        items.add(new NavDrawerItem("Fragen ans Museum", R.drawable.ic_question));
+        items.add(new NavDrawerItem("Read at Home", R.drawable.ic_read_later));
+        items.add(new NavDrawerItem("Über das Museum", R.drawable.ic_information));
+
+        adapter = new NavDrawerListAdapter(getApplicationContext(), items);
         dList.setAdapter(adapter);
-        dList.setSelector(android.R.color.holo_blue_dark);
         dList.setOnItemClickListener(new OnItemClickListener() {
             @Override
 
@@ -117,6 +128,8 @@ public class HomeActivity extends Activity {
         }
         getActionBar().setTitle(title);
         getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("").commit();
+        dList.setItemChecked(position, true);
+        dList.setSelection(position);
     }
 
 }
