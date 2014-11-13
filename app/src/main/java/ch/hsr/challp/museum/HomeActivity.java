@@ -7,31 +7,41 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ch.hsr.challp.museum.adapter.NavDrawerListAdapter;
+import ch.hsr.challp.museum.model.NavDrawerItem;
 
 public class HomeActivity extends Activity {
     private String[] menu;
     private DrawerLayout dLayout;
-    private ListView dList;
-    private ArrayAdapter<String> adapter;
     private ActionBarDrawerToggle dToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ListView dList;
+        ListAdapter adapter;
         setContentView(R.layout.activity_home);
         menu = new String[]{"Begleiter", "Fragen ans Museum", "Read at Home"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, menu);
+        List<NavDrawerItem> items = new ArrayList<>();
+        items.add(new NavDrawerItem(getString(R.string.title_companion), R.drawable.ic_guide));
+        items.add(new NavDrawerItem(getString(R.string.title_question), R.drawable.ic_question));
+        items.add(new NavDrawerItem(getString(R.string.title_read_later), R.drawable.ic_read_later));
+        items.add(new NavDrawerItem(getString(R.string.title_about), R.drawable.ic_information));
+
+        adapter = new NavDrawerListAdapter(getApplicationContext(), items);
         dList.setAdapter(adapter);
-        dList.setSelector(android.R.color.holo_blue_dark);
         dList.setOnItemClickListener(new OnItemClickListener() {
             @Override
 
@@ -97,15 +107,6 @@ public class HomeActivity extends Activity {
     }
 
 
-    /* Called whenever we call invalidateOptionsMenu() */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-        //boolean drawerOpen = dLayout.isDrawerOpen(dList);
-        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
     private void showContent(int position) {
         Fragment fragment;
         String title = menu[position];
@@ -119,9 +120,8 @@ public class HomeActivity extends Activity {
             fragment = new DetailFragment();
             fragment.setArguments(args);
         }
-        final ActionBar actionBar = getActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(title);
+        if (getActionBar() != null) {
+            getActionBar().setTitle(title);
         }
         getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("").commit();
     }

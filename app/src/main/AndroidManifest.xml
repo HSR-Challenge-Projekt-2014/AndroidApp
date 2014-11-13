@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -21,8 +23,7 @@
         </activity>
         <activity
             android:name="ch.hsr.challp.museum.BeaconTest"
-            android:label="@string/title_activity_beacon_test" >
-        </activity>
+            android:label="@string/title_activity_beacon_test" />
         <activity
             android:name="ch.hsr.challp.museum.QuestionActivity"
             android:label="@string/title_activity_question"
@@ -33,11 +34,10 @@
         </activity>
         <activity
             android:name="ch.hsr.challp.museum.ContentActivity"
-            android:label="@string/title_activity_content" >
-        </activity>
+            android:label="@string/title_activity_content" />
+
         <service
             android:name=".service.BeaconScanService"
-            android:exported="false" >
-        </service>
+            android:exported="false" />
     </application>
 </manifest>

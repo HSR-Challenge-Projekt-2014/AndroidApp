@@ -11,7 +11,7 @@ public class Topic {
     public static final Topic FUN = new Topic("Spass und Spannung");
     private static final List<Topic> ALL = Arrays.asList(ALL_ITEMS, ADVENTURE, HISTORIC, FUN);
 
-    private String name;
+    private final String name;
 
     private Topic(String name) {
         this.name = name;

@@ -20,7 +20,7 @@ import ch.hsr.challp.museum.model.Topic;
 public class QuestionListAdapter extends ArrayAdapter<Question> {
 
     private final Context context;
-    private List<Question> allItems;
+    private final List<Question> allItems;
     private List<Question> shownItems;
 
     public QuestionListAdapter(Context context, List<Question> items) {

@@ -12,7 +12,6 @@ import ch.hsr.challp.museum.model.Content;
 
 public class ContentActivity extends Activity {
 
-    private Content content;
     public static final String P_CONTENT_ID = "ContentId";
 
     public ContentActivity() {
@@ -21,9 +20,8 @@ public class ContentActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_content);
-        content = getIntent().getParcelableExtra(P_CONTENT_ID);
+        Content content = getIntent().getParcelableExtra(P_CONTENT_ID);
 
         ((ImageView) findViewById(R.id.page_preview_image)).setImageResource(content.getPreviewImageResource());
         ((TextView) findViewById(R.id.page_preview_description)).setText(content.getPreviewTitle());

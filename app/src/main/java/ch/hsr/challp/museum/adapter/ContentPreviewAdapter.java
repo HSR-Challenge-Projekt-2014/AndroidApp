@@ -18,8 +18,8 @@ import ch.hsr.challp.museum.model.Content;
 
 public class ContentPreviewAdapter extends BaseAdapter {
 
-    private Context context;
-    private List<Content> contents;
+    private final Context context;
+    private final List<Content> contents;
 
     public ContentPreviewAdapter(Context context, List<Content> contents) {
         this.context = context;
