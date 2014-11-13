@@ -44,9 +44,30 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         return currentBeacon;
     }
 
+    private void setCurrentBeacon(Collection<Beacon> beacons) {
+        if (!beacons.isEmpty()) {
+            Beacon closestBeacon = null;
+            for (Beacon beacon : beacons) {
+                if (closestBeacon == null) {
+                    closestBeacon = beacon;
+                } else {
+                    closestBeacon = closestBeacon.getDistance() > beacon.getDistance() ? beacon : closestBeacon;
+                }
+            }
+            if (!closestBeacon.equals(currentBeacon)) {
+                if (currentBeacon != null) {
+                    removeNotification(currentBeacon);
+                }
+                showNotification(closestBeacon);
+            }
+            currentBeacon = closestBeacon;
+            updateClients();
+        }
+    }
+
     public void registerActivity(BeaconScanClient beaconTest) {
         if (clients == null) {
-            clients = new LinkedList<BeaconScanClient>();
+            clients = new LinkedList<>();
         }
         clients.add(beaconTest);
     }
@@ -103,27 +124,6 @@ public class BeaconScanService extends Service implements BeaconConsumer {
             beaconManager.startRangingBeaconsInRegion(new Region("Museum", null, null, null));
         } catch (RemoteException e) {
             Log.d(TAG, "Error while starting beacon ranging, " + e.getMessage());
-        }
-    }
-
-    private void setCurrentBeacon(Collection<Beacon> beacons) {
-        if (!beacons.isEmpty()) {
-            Beacon closestBeacon = null;
-            for (Beacon beacon : beacons) {
-                if (closestBeacon == null) {
-                    closestBeacon = beacon;
-                } else {
-                    closestBeacon = closestBeacon.getDistance() > beacon.getDistance() ? beacon : closestBeacon;
-                }
-            }
-            if (!closestBeacon.equals(currentBeacon)) {
-                if (currentBeacon != null) {
-                    removeNotification(currentBeacon);
-                }
-                showNotification(closestBeacon);
-            }
-            currentBeacon = closestBeacon;
-            updateClients();
         }
     }
 

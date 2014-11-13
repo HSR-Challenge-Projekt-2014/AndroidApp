@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class DetailFragment extends Fragment {
-    TextView text;
+    private TextView text;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle args) {

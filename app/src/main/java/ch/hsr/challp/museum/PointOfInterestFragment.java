@@ -25,7 +25,7 @@ public class PointOfInterestFragment extends Fragment {
         /**
          * Mock Data
          */
-        List<Content> contents = new ArrayList<Content>();
+        List<Content> contents = new ArrayList<>();
         contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
         contents.add(new Content("Historisches", R.drawable.content_historisches, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
         contents.add(new Content("Spass und Spannung", R.drawable.content_spass, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));

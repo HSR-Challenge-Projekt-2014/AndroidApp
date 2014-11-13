@@ -15,10 +15,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class HomeActivity extends Activity {
-    String[] menu;
-    DrawerLayout dLayout;
-    ListView dList;
-    ArrayAdapter<String> adapter;
+    private String[] menu;
+    private DrawerLayout dLayout;
+    private ListView dList;
+    private ArrayAdapter<String> adapter;
     private ActionBarDrawerToggle dToggle;
 
     @Override
@@ -28,7 +28,7 @@ public class HomeActivity extends Activity {
         menu = new String[]{"Begleiter", "Fragen ans Museum", "Read at Home", "Fragen"};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, menu);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, menu);
         dList.setAdapter(adapter);
         dList.setSelector(android.R.color.holo_blue_dark);
         dList.setOnItemClickListener(new OnItemClickListener() {

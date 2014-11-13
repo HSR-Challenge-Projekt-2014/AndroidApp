@@ -3,9 +3,6 @@ package ch.hsr.challp.museum.model;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by Michi on 12.11.2014.
- */
 public class Topic {
 
     public static final Topic ALL_ITEMS = new Topic("Alle");
@@ -16,7 +13,7 @@ public class Topic {
 
     private String name;
 
-    public Topic(String name) {
+    private Topic(String name) {
         this.name = name;
     }
 

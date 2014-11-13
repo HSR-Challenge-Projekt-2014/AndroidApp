@@ -34,12 +34,12 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
         spinnerTopic = (Spinner) result.findViewById(R.id.spinner_topic);
         spinnerRoom = (Spinner) result.findViewById(R.id.spinner_room);
 
-        ArrayAdapter<Topic> topicAdapter = new ArrayAdapter<Topic>(container.getContext(), android.R.layout.simple_spinner_item, Topic.getAll());
+        ArrayAdapter<Topic> topicAdapter = new ArrayAdapter<>(container.getContext(), android.R.layout.simple_spinner_item, Topic.getAll());
         topicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTopic.setAdapter(topicAdapter);
         spinnerTopic.setOnItemSelectedListener(new SpinnerListener());
 
-        ArrayAdapter<Room> roomAdapter = new ArrayAdapter<Room>(container.getContext(), android.R.layout.simple_spinner_item, Room.getAll());
+        ArrayAdapter<Room> roomAdapter = new ArrayAdapter<>(container.getContext(), android.R.layout.simple_spinner_item, Room.getAll());
         roomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRoom.setAdapter(roomAdapter);
         spinnerRoom.setOnItemSelectedListener(new SpinnerListener());

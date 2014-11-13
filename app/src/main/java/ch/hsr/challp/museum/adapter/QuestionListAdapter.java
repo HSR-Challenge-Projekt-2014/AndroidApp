@@ -17,9 +17,6 @@ import ch.hsr.challp.museum.model.Question;
 import ch.hsr.challp.museum.model.Room;
 import ch.hsr.challp.museum.model.Topic;
 
-/**
- * Created by Michi on 12.11.2014.
- */
 public class QuestionListAdapter extends ArrayAdapter<Question> {
 
     private final Context context;
@@ -29,8 +26,8 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
     public QuestionListAdapter(Context context, List<Question> items) {
         super(context, R.layout.question_row, items);
         this.context = context;
-        this.allItems = new ArrayList<Question>(items);
-        this.shownItems = new ArrayList<Question>(items);
+        this.allItems = new ArrayList<>(items);
+        this.shownItems = new ArrayList<>(items);
     }
 
     @Override
@@ -50,7 +47,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         //ViewHolder holder = null;
-        Question question = (Question) getItem(position);
+        Question question = getItem(position);
 
         // This block exists to inflate the settings list item conditionally based on whether
         // we want to support a grid or list view.
@@ -67,15 +64,15 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
     }
 
     public void filter(Topic topic, Room room) {
-        List<Question> filterResult = new ArrayList<Question>(allItems);
+        List<Question> filterResult = new ArrayList<>(allItems);
         if (!(topic == null || Topic.ALL_ITEMS.equals(topic))) {
-            for (Question q : new ArrayList<Question>(allItems)) {
+            for (Question q : new ArrayList<>(allItems)) {
                 if (!q.getTopic().equals(topic))
                     filterResult.remove(q);
             }
         }
         if (!(room == null || Room.ALL_ROOMS.equals(room))) {
-            for (Question q : new ArrayList<Question>(allItems)) {
+            for (Question q : new ArrayList<>(allItems)) {
                 if (!q.getRoom().equals(room))
                     filterResult.remove(q);
             }

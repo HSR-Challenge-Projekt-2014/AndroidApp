@@ -5,11 +5,8 @@ import java.util.List;
 
 import ch.hsr.challp.museum.R;
 
-/**
- * Created by Michi on 12.11.2014.
- */
 public class Question {
-    private static List<Question> all = new ArrayList<Question>();
+    private static List<Question> all = new ArrayList<>();
     private static String LOREM_IPSUM = "Eine wunderbare Heiterkeit hat meine ganze Seele eingenommen, gleich den süßen Frühlingsmorgen, die ich mit ganzem Herzen genieße. Ich bin allein und freue mich meines Lebens in dieser Gegend, die für solche Seelen geschaffen ist wie die meine. Ich bin so glücklich, mein Bester, so ganz in dem Gefühle von ruhigem Dasein versunken, daß meine Kunst darunter leidet.";
 
     static {
@@ -25,7 +22,7 @@ public class Question {
     private Topic topic;
     private Room room;
 
-    public Question(int id, String title, String text, int image, Topic topic, Room room) {
+    private Question(int id, String title, String text, int image, Topic topic, Room room) {
         this.id = id;
         this.title = title;
         this.text = text;
