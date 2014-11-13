@@ -14,17 +14,16 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="ch.hsr.challp.museum.HomeActivity"
-            android:label="@string/title_activity_home" >
-            <intent-filter>
+            android:label="@string/title_activity_home"
+            android:launchMode="singleTop">
+             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+             </intent-filter>
         </activity>
         <activity
             android:name="ch.hsr.challp.museum.BeaconTest"
-            android:label="@string/title_activity_beacon_test" >
-        </activity>
+            android:label="@string/title_activity_beacon_test" />
         <activity
             android:name="ch.hsr.challp.museum.QuestionActivity"
             android:label="@string/title_activity_question"
@@ -35,7 +34,11 @@
         </activity>
         <activity
             android:name="ch.hsr.challp.museum.ContentActivity"
-            android:label="@string/title_activity_content" >
+            android:label="@string/title_activity_content"
+            android:parentActivityName="ch.hsr.challp.museum.ContentActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ch.hsr.challp.museum.ContentActivity" />
         </activity>
 
         <service
@@ -48,6 +51,7 @@
             android:enabled="true"
             android:exported="false" >
         </receiver>
+
     </application>
 
 </manifest>

@@ -5,12 +5,12 @@ import android.os.Parcelable;
 
 public class Content implements Parcelable {
 
-    private int previewImageResource;
-    private String previewTitle;
-    private int imageResource;
-    private String title;
-    private String contentText;
-    private String previewLocation;
+    private final int previewImageResource;
+    private final String previewTitle;
+    private final int imageResource;
+    private final String title;
+    private final String contentText;
+    private final String previewLocation;
 
     private Content(Parcel in) {
         previewImageResource = in.readInt();

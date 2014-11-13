@@ -11,26 +11,41 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import ch.hsr.challp.museum.adapter.NavDrawerListAdapter;
+import ch.hsr.challp.museum.model.NavDrawerItem;
+
 public class HomeActivity extends Activity {
-    private String[] menu;
+    public static final int SECTION_GUIDE = 0;
+    public static final int SECTION_QUESTION = 1;
+    public static final int SECTION_READ_LATER = 2;
+    public static final int SECTION_INFORMATION = 3;
+    private String[] titles;
     private DrawerLayout dLayout;
     private ListView dList;
-    private ArrayAdapter<String> adapter;
+    private ListAdapter adapter;
     private ActionBarDrawerToggle dToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        menu = new String[]{"Begleiter", "Fragen ans Museum", "Read at Home", "Fragen"};
+        titles = new String[]{getString(R.string.title_companion), getString(R.string.title_question), getString(R.string.title_read_later), getString(R.string.title_about)};
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, menu);
+        List<NavDrawerItem> items = new ArrayList<>();
+        items.add(new NavDrawerItem(getString(R.string.title_companion), R.drawable.ic_guide));
+        items.add(new NavDrawerItem(getString(R.string.title_question), R.drawable.ic_question));
+        items.add(new NavDrawerItem(getString(R.string.title_read_later), R.drawable.ic_read_later));
+        items.add(new NavDrawerItem(getString(R.string.title_about), R.drawable.ic_information));
+
+        adapter = new NavDrawerListAdapter(getApplicationContext(), items);
         dList.setAdapter(adapter);
-        dList.setSelector(android.R.color.holo_blue_dark);
         dList.setOnItemClickListener(new OnItemClickListener() {
             @Override
 
@@ -61,8 +76,10 @@ public class HomeActivity extends Activity {
         };
         dLayout.setDrawerListener(dToggle);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
+        if (getActionBar() != null) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setHomeButtonEnabled(true);
+        }
 
         showContent(0);
     }
@@ -93,30 +110,27 @@ public class HomeActivity extends Activity {
     }
 
 
-    /* Called whenever we call invalidateOptionsMenu() */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-        //boolean drawerOpen = dLayout.isDrawerOpen(dList);
-        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
     private void showContent(int position) {
         Fragment fragment;
-        String title = menu[position];
-        if (position == 0) {
+        if (position == SECTION_GUIDE) {
             fragment = new GuideFragment();
-        } else if (position == 1) {
+        } else if (position == SECTION_QUESTION) {
             fragment = new QuestionFragment();
         } else {
             Bundle args = new Bundle();
-            args.putString("Menu", menu[position]);
+            args.putString("Menu", titles[position]);
             fragment = new DetailFragment();
             fragment.setArguments(args);
         }
-        getActionBar().setTitle(title);
+        setTitleByFragment(position);
         getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack("").commit();
+        dList.setItemChecked(position, true);
+        dList.setSelection(position);
+    }
+
+    private void setTitleByFragment(int position) {
+        String title = titles[position];
+        if (getActionBar() != null) getActionBar().setTitle(title);
     }
 
 }

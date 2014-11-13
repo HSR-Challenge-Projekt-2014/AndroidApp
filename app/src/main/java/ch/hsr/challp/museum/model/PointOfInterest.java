@@ -3,9 +3,9 @@ package ch.hsr.challp.museum.model;
 import java.util.List;
 
 public class PointOfInterest {
-    private String title;
-    private int headerResource;
-    private List<Content> contents;
+    private final String title;
+    private final int headerResource;
+    private final List<Content> contents;
 
     public PointOfInterest(String title, int headerResource, List<Content> contents) {
         this.title = title;
