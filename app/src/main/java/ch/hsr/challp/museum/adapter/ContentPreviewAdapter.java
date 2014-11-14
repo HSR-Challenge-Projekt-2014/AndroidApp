@@ -55,9 +55,8 @@ public class ContentPreviewAdapter extends BaseAdapter {
             }
         });
 
-        ((TextView) result.findViewById(R.id.contentPreviewDescription)).setText(contents.get(i).getPreviewTitle());
+        ((TextView) result.findViewById(R.id.contentPreviewDescription)).setText(contents.get(i).getTopic().getName());
         ((ImageView) result.findViewById(R.id.contentPreviewImage)).setImageResource(contents.get(i).getPreviewImageResource());
-
 
 
         return result;
