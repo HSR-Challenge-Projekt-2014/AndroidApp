@@ -22,6 +22,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import ch.hsr.challp.museum.emulator.Emulator;
+import ch.hsr.challp.museum.emulator.TimedBeaconSimulator;
 import ch.hsr.challp.museum.interfaces.BeaconScanClient;
 import ch.hsr.challp.museum.model.PointOfInterest;
 
@@ -131,6 +133,11 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         // magic?
         beaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:0-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
         beaconManager.bind(this);
+
+        // Emulate beacon on Android device emulators
+        if (Emulator.isEmulator()) {
+            BeaconManager.setBeaconSimulator(new TimedBeaconSimulator());
+        }
 
         regions = PointOfInterest.getAllRegions();
         wildcardRegion = new Region("Museum", null, null, null);

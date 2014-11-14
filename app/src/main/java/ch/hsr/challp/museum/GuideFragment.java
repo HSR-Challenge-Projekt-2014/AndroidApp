@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import ch.hsr.challp.museum.emulator.Emulator;
 import ch.hsr.challp.museum.service.BeaconScanService;
 
 
@@ -33,7 +34,7 @@ public class GuideFragment extends Fragment {
 
     private void verifyBluetoothAndStartGuide() {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (!bluetoothAdapter.isEnabled()) {
+        if (bluetoothAdapter != null && !bluetoothAdapter.isEnabled() && !Emulator.isEmulator()) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Bluetooth not enabled");
             builder.setMessage("Enable Bluetooth now?");
