@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -12,8 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CompoundButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ public class HomeActivity extends Activity {
     public static final int SECTION_QUESTION = 1;
     public static final int SECTION_READ_LATER = 2;
     public static final int SECTION_INFORMATION = 3;
+    public static final String NOTIFICATIONS = "NOTIFICATIONS";
+    public static final String SETTINGS = "SETTINGS";
     private String[] titles;
     private DrawerLayout dLayout;
     private ListView dList;
@@ -45,6 +50,21 @@ public class HomeActivity extends Activity {
         items.add(new NavDrawerItem(getString(R.string.title_question), R.drawable.ic_question));
         items.add(new NavDrawerItem(getString(R.string.title_read_later), R.drawable.ic_read_later));
         items.add(new NavDrawerItem(getString(R.string.title_about), R.drawable.ic_information));
+
+        // notification switch
+        Switch notificationSwitch = (Switch) dLayout.findViewById(R.id.switch_notification);
+        final SharedPreferences prefs = getSharedPreferences(SETTINGS, MODE_PRIVATE);
+        notificationSwitch.setChecked(prefs.getBoolean(NOTIFICATIONS, true));
+        notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(prefs.getBoolean(NOTIFICATIONS, true)) {
+                    prefs.edit().putBoolean(NOTIFICATIONS, false).commit();
+                } else {
+                    prefs.edit().putBoolean(NOTIFICATIONS, true).commit();
+                }
+            }
+        });
 
         adapter = new NavDrawerListAdapter(getApplicationContext(), items);
         dList.setAdapter(adapter);
