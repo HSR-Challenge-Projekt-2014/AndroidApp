@@ -43,12 +43,7 @@
         <service
             android:name="ch.hsr.challp.museum.service.BeaconScanService"
             android:exported="false" />
-
-        <receiver
-            android:name=".broadcastreceiver.NotificationReceiver"
-            android:enabled="true"
-            android:exported="false" />
-
+        
     </application>
 
 </manifest>

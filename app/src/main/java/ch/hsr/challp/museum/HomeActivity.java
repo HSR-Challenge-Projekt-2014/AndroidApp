@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -30,8 +31,10 @@ public class HomeActivity extends Activity {
     public static final int SECTION_QUESTION = 1;
     public static final int SECTION_READ_LATER = 2;
     public static final int SECTION_INFORMATION = 3;
+    public static final int SECTION_GUIDE_STOPPED = 4;
     public static final String NOTIFICATIONS = "NOTIFICATIONS";
     public static final String SETTINGS = "SETTINGS";
+    public static final String SECTION = "SECTION";
     private String[] titles;
     private DrawerLayout dLayout;
     private ListView dList;
@@ -42,7 +45,13 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        titles = new String[]{getString(R.string.title_companion), getString(R.string.title_question), getString(R.string.title_read_later), getString(R.string.title_about)};
+        titles = new String[]{
+                getString(R.string.title_companion),
+                getString(R.string.title_question),
+                getString(R.string.title_read_later),
+                getString(R.string.title_about),
+                getString(R.string.title_stopped)
+        };
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
         List<NavDrawerItem> items = new ArrayList<>();
@@ -103,7 +112,7 @@ public class HomeActivity extends Activity {
             getActionBar().setHomeButtonEnabled(true);
         }
 
-        showContent(0);
+        showContent(getSectionIdFromExtras());
     }
 
     @Override
@@ -142,6 +151,8 @@ public class HomeActivity extends Activity {
             }
         } else if (position == SECTION_QUESTION) {
             fragment = new QuestionFragment();
+        }else if (position == SECTION_GUIDE_STOPPED) {
+            fragment = new GuideStoppedFragment();
         } else {
             Bundle args = new Bundle();
             args.putString("Menu", titles[position]);
@@ -167,6 +178,17 @@ public class HomeActivity extends Activity {
     private void setTitleByFragment(int position) {
         String title = titles[position];
         if (getActionBar() != null) getActionBar().setTitle(title);
+    }
+
+    private int getSectionIdFromExtras() {
+        Intent previousIntent = getIntent();
+        if(previousIntent != null) {
+            Bundle extras = previousIntent.getExtras();
+            if(extras != null) {
+                return extras.getInt(SECTION, 0);
+            }
+        }
+        return 0;
     }
 
 }
