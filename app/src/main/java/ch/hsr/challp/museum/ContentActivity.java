@@ -3,7 +3,6 @@ package ch.hsr.challp.museum;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
@@ -13,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 import ch.hsr.challp.museum.model.Content;
@@ -104,62 +102,6 @@ public class ContentActivity extends Activity {
     }
 
 
-    private class ContentReader {
-
-        private TextToSpeech tts;
-        private List<String> stringsToSpeech;
-        private boolean isPlaying = false;
-        private Handler handler;
-        private Runnable runnable;
-
-        public ContentReader(TextToSpeech tts, List<String> stringsToSpeech) {
-            this.tts = tts;
-            this.stringsToSpeech = stringsToSpeech;
-        }
-
-        public boolean isPlaying() {
-            return isPlaying;
-        }
-
-        public void stopPlaying() {
-            handler.removeCallbacks(runnable);
-            if (tts != null) {
-                tts.stop();
-            }
-            isPlaying = false;
-        }
-
-        public void play() {
-            isPlaying = true;
-            handler = new Handler();
-            runnable = new Runnable() {
-                int index = 0;
-
-                @Override
-                public void run() {
-                    if (tts == null) {
-                        isPlaying = false;
-                        return;
-                    }
-
-                    if (!tts.isSpeaking()) {
-                        if (index < stringsToSpeech.size()) {
-                            tts.speak(stringsToSpeech.get(index), TextToSpeech.QUEUE_FLUSH, null);
-                            index++;
-                        } else {
-                            isPlaying = false;
-                        }
-                    }
-
-                    if (isPlaying()) {
-                        handler.postDelayed(this, 100);
-                    }
-                }
-            };
-            handler.postDelayed(runnable, 100);
-        }
-
-    }
 }
 
 
