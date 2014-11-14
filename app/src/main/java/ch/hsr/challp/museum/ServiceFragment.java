@@ -47,15 +47,16 @@ public abstract class ServiceFragment extends Fragment implements BeaconScanClie
         Log.d(getClass().getName(), "unbinding service for fragment");
     }
 
-    private void bindServiceNow() {
+    protected void bindServiceNow() {
         Intent serviceIntent = new Intent(getActivity(), BeaconScanService.class);
         getActivity().getApplicationContext().bindService(serviceIntent, serviceConnectionConnection, Context.BIND_AUTO_CREATE);
     }
 
-    private void unbindServiceNow() {
+    protected void unbindServiceNow() {
         if (beaconScanService != null) {
             beaconScanService.unregisterActivity(ServiceFragment.this);
             getActivity().getApplicationContext().unbindService(serviceConnectionConnection);
+            beaconScanService = null;
         }
     }
 

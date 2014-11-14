@@ -15,7 +15,6 @@ import org.altbeacon.beacon.Beacon;
 
 import ch.hsr.challp.museum.HomeActivity;
 import ch.hsr.challp.museum.R;
-import ch.hsr.challp.museum.broadcastreceiver.NotificationReceiver;
 
 public class BeaconServiceNotificationProvider {
 
@@ -49,10 +48,12 @@ public class BeaconServiceNotificationProvider {
         builder.setContentIntent(resultPendingIntent);
 
         // buttons
-        Intent killServiceIntent = new Intent(context, NotificationReceiver.class);
-        killServiceIntent.setAction("KILL_SERVICE");
-        PendingIntent pendingIntentKill = PendingIntent.getBroadcast(context, 0, killServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.addAction(android.R.drawable.ic_menu_close_clear_cancel, "Beenden", pendingIntentKill);
+        Intent stopServiceIntent = new Intent(context, HomeActivity.class);
+        stopServiceIntent.putExtra(HomeActivity.SECTION, HomeActivity.SECTION_GUIDE_STOPPED);
+        stackBuilder.addParentStack(HomeActivity.class);
+        stackBuilder.addNextIntent(stopServiceIntent);
+        PendingIntent stopServicePendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.addAction(android.R.drawable.ic_menu_close_clear_cancel, "Beenden", stopServicePendingIntent);
     }
 
     public void createServiceRunningNotification() {
@@ -65,7 +66,7 @@ public class BeaconServiceNotificationProvider {
 
     public void createPoiNotification(Beacon beacon) {
         // check if notifications are enabled
-        if(prefs.getBoolean(HomeActivity.NOTIFICATIONS, true)) {
+        if (prefs.getBoolean(HomeActivity.NOTIFICATIONS, true)) {
             builder.setVibrate(new long[]{0, VIBRATE_DURATION, VIBRATE_DURATION / 2, VIBRATE_DURATION});
         }
         builder.setContentText("Neuer Inhalt verfügbar: " + beacon.getId3() + " " + beacon.getDistance() + "m");

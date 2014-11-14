@@ -29,4 +29,6 @@
     <string name="start_beacon_test">BeaconTest starten</string>
     <string name="title_activity_content">Begleiter</string>
     <string name="action_play_content">Inhalt vorlesen</string>
+    <string name="title_stopped">Begleiter beendet</string>
+
 </resources>
