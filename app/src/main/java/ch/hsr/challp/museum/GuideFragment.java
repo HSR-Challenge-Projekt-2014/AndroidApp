@@ -25,22 +25,13 @@ public class GuideFragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getFragmentManager().beginTransaction().replace(R.id.content_frame, new PointOfInterestFragment()).commit();
+                verifyBluetoothAndStartGuide();
             }
         });
-
-        Button startBeaconTestButton = (Button) view.findViewById(R.id.start_beacon_test);
-        startBeaconTestButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                verifyBluetooth();
-            }
-        });
-
         return view;
     }
 
-    private void verifyBluetooth() {
+    private void verifyBluetoothAndStartGuide() {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (!bluetoothAdapter.isEnabled()) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -81,7 +72,6 @@ public class GuideFragment extends Fragment {
     private void startServiceAndGoToBeaconTest() {
         Intent serviceIntent = new Intent(getActivity(), BeaconScanService.class);
         getActivity().startService(serviceIntent);
-        Intent intent = new Intent(getActivity(), BeaconTest.class);
-        startActivity(intent);
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, new GuideRunningFragment()).commit();
     }
 }

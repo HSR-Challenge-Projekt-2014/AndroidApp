@@ -7,19 +7,21 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
 import org.altbeacon.beacon.Beacon;
 
-import ch.hsr.challp.museum.BeaconTest;
+import ch.hsr.challp.museum.HomeActivity;
 import ch.hsr.challp.museum.R;
 import ch.hsr.challp.museum.broadcastreceiver.NotificationReceiver;
 
 public class BeaconServiceNotificationProvider {
 
     private static final Integer NOTIFICATION_ID = 1337;
-    private final static Integer VIBRATE_DURATION = 200; // miliseconds
+    private final static Integer VIBRATE_DURATION = 200; // milliseconds
+    private final SharedPreferences prefs;
 
     private NotificationCompat.Builder builder;
     private NotificationManager notificationManager;
@@ -30,17 +32,18 @@ public class BeaconServiceNotificationProvider {
         this.context = context;
         this.builder = new NotificationCompat.Builder(context);
         this.notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        this.prefs = context.getSharedPreferences(HomeActivity.SETTINGS, Context.MODE_PRIVATE);
         initNotification();
     }
 
     private void initNotification() {
         builder.setOngoing(true);
-        builder.setPriority(Notification.PRIORITY_MAX);
+        builder.setPriority(Notification.PRIORITY_MAX); // TODO decrease priority
 
         // go to activity when clicked
-        Intent resultIntent = new Intent(context, BeaconTest.class);
+        Intent resultIntent = new Intent(context, HomeActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(BeaconTest.class);
+        stackBuilder.addParentStack(HomeActivity.class);
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
@@ -61,9 +64,12 @@ public class BeaconServiceNotificationProvider {
     }
 
     public void createPoiNotification(Beacon beacon) {
+        // check if notifications are enabled
+        if(prefs.getBoolean(HomeActivity.NOTIFICATIONS, true)) {
+            builder.setVibrate(new long[]{0, VIBRATE_DURATION, VIBRATE_DURATION / 2, VIBRATE_DURATION});
+        }
         builder.setContentText("Neuer Inhalt verfügbar: " + beacon.getId3() + " " + beacon.getDistance() + "m");
         builder.setSmallIcon(R.drawable.ic_stat_notification);
-        builder.setVibrate(new long[]{0, VIBRATE_DURATION, VIBRATE_DURATION/2, VIBRATE_DURATION});
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
 

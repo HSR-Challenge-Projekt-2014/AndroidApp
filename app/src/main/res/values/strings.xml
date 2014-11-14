@@ -21,15 +21,6 @@
         <item>Historisches</item>
         <item>Spass und Spannung</item>
     </string-array>
-    <string-array name="rooms_list">
-        <item>Raum 1</item>
-        <item>Raum 2</item>
-        <item>Raum 3</item>
-    </string-array>
-    <string-array name="filters_list">
-        <item>Neuste</item>
-        <item>Beliebteste</item>
-    </string-array>
 
     <string name="title_activity_question">QuestionActivity</string>
     <string name="poi_fragment_title">Point of Interest Fragment</string>
