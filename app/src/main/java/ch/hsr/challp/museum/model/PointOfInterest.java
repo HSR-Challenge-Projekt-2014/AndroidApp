@@ -46,13 +46,14 @@ public class PointOfInterest {
         return contents;
     }
 
+
     public BeaconReference getBeacon() {
         return beacon;
     }
 
     static {
         List<Content> contents = new ArrayList<>();
-        contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
+        contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer, R.drawable.bear_face, "Foobar", "Da ihr gewiß schon die Abenteuer von Tom Sawyer gelesen habt, so brauche ich mich euch nicht vorzustellen. Jenes Buch hat ein gewisser Mark Twain geschrieben und was drinsteht ist wahr – wenigstens meistenteils. Hie und da hat er etwas dazugedichtet, aber das tut nichts. Ich kenne niemand, der nicht gelegentlich einmal ein bißchen lügen täte, ausgenommen etwa Tante Polly oder die Witwe Douglas oder Mary. Toms Tante Polly und seine Schwester Mary und die Witwe Douglas kommen alle in dem Buche vom Tom Sawyer vor, das wie gesagt, mit wenigen Ausnahmen eine wahre Geschichte ist. – Am Ende von dieser Geschichte wird erzählt, wie Tom und ich das Geld fanden, das die Räuber in der Höhle verborgen hatten, wodurch wir nachher sehr reich wurden. Jeder von uns bekam sechstausend Dollars, lauter Gold. Es war ein großartiger Anblick, als wir das Geld auf einem Haufen liegen sahen. Kreisrichter Thatcher bewahrte meinen Teil auf und legte ihn auf Zinsen an, die jeden Tag einen Dollar für mich ausmachen. Ich weiß wahrhaftig nicht, was ich mit dem vielen Geld anfangen soll. Die Witwe Douglas nahm mich als Sohn an und will versuchen, mich zu sievilisieren wie sie sagt. Das schmeckt mir aber schlecht, kann ich euch sagen, das Leben wird mir furchtbar sauer in dem Hause mit der abscheulichen Regelmäßigkeit, wo immer um dieselbe Zeit gegessen und geschlafen werden soll, einen Tag wie den andern. Einmal bin ich auch schon durchgebrannt, bin in meine alten Lumpen gekrochen, und – hast du nicht gesehen, war ich draußen im Wald und in der Freiheit. Tom Sawyer aber, mein alter Freund Tom, spürte mich wieder auf, versprach, er wolle eine Räuberbande gründen und ich solle Mitglied werden, wenn ich noch einmal zu der Witwe zurückkehre und mich weiter ›sievilisieren‹ lasse. Da tat ich's denn.", "Raum 1 Topic 2"));
         contents.add(new Content("Historisches", R.drawable.content_historisches, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
         contents.add(new Content("Spass und Spannung", R.drawable.content_spass, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
         contents.add(new Content("Liebesleben", R.drawable.content_liebensleben, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));

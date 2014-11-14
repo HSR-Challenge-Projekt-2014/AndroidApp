@@ -1,2 +1,10 @@
 <menu xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ch.hsr.challp.museum.ContentActivity" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="ch.hsr.challp.museum.ContentActivity">
+    <item
+        android:id="@+id/action_play_content"
+        android:icon="@drawable/ic_action_headphones"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/action_play_content" />
+</menu>
