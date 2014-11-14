@@ -137,14 +137,22 @@ public class ContentActivity extends Activity {
 
                 @Override
                 public void run() {
-                    if (tts != null && index < stringsToSpeech.size()) {
-                        if (!tts.isSpeaking()) {
+                    if (tts == null) {
+                        isPlaying = false;
+                        return;
+                    }
+
+                    if (!tts.isSpeaking()) {
+                        if (index < stringsToSpeech.size()) {
                             tts.speak(stringsToSpeech.get(index), TextToSpeech.QUEUE_FLUSH, null);
                             index++;
+                        } else {
+                            isPlaying = false;
                         }
+                    }
+
+                    if (isPlaying()) {
                         handler.postDelayed(this, 100);
-                    } else {
-                        isPlaying = false;
                     }
                 }
             };
