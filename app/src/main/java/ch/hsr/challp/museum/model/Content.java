@@ -5,37 +5,49 @@ import android.os.Parcelable;
 
 public class Content implements Parcelable {
 
+    // this is used to regenerate the content. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Content> CREATOR = new Parcelable.Creator<Content>() {
+        public Content createFromParcel(Parcel in) {
+            return new Content(in);
+        }
+
+        public Content[] newArray(int size) {
+            return new Content[size];
+        }
+    };
     private final int previewImageResource;
-    private final String previewTitle;
     private final int imageResource;
     private final String title;
     private final String contentText;
-    private final String previewLocation;
+    private Topic topic;
+    private String youTubeId;
+    private Room room = null;
 
     private Content(Parcel in) {
         previewImageResource = in.readInt();
-        previewTitle = in.readString();
+        topic = Topic.findById(in.readInt());
         imageResource = in.readInt();
         title = in.readString();
         contentText = in.readString();
-        previewLocation = in.readString();
+        room = Room.findById(in.readInt());
+        youTubeId = in.readString();
     }
 
-    public Content(String previewTitle, int previewImageResource, int imageResource, String title, String contentText, String previewLocation) {
+    public Content(Topic topic, int previewImageResource, int imageResource, String title, String contentText) {
+        this(topic, previewImageResource, imageResource, title, contentText, null);
+    }
+
+    public Content(Topic topic, int previewImageResource, int imageResource, String title, String contentText, String youTubeId) {
+        this.topic = topic;
         this.previewImageResource = previewImageResource;
-        this.previewTitle = previewTitle;
         this.imageResource = imageResource;
         this.title = title;
         this.contentText = contentText;
-        this.previewLocation = previewLocation;
+        this.youTubeId = youTubeId;
     }
 
     public int getPreviewImageResource() {
         return previewImageResource;
-    }
-
-    public String getPreviewTitle() {
-        return previewTitle;
     }
 
     public String getTitle() {
@@ -50,32 +62,37 @@ public class Content implements Parcelable {
         return imageResource;
     }
 
-    public String getPreviewLocation() {
-        return previewLocation;
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public String getYouTubeId() {
+        return youTubeId;
+    }
+
+    public boolean hasYouTubeVideo() {
+        return youTubeId != null;
     }
 
     @Override
     public String toString() {
         return "Content{" +
                 "previewImageResource=" + previewImageResource +
-                ", previewTitle='" + previewTitle + '\'' +
+                ", topic='" + topic + '\'' +
                 ", imageResource=" + imageResource +
                 ", title='" + title + '\'' +
                 ", contentText='" + contentText + '\'' +
-                ", previewLocation='" + previewLocation + '\'' +
+                ", room='" + room + '\'' +
                 '}';
     }
-
-    // this is used to regenerate the content. All Parcelables must have a CREATOR that implements these two methods
-    public static final Parcelable.Creator<Content> CREATOR = new Parcelable.Creator<Content>() {
-        public Content createFromParcel(Parcel in) {
-            return new Content(in);
-        }
-
-        public Content[] newArray(int size) {
-            return new Content[size];
-        }
-    };
 
     @Override
     public int describeContents() {
@@ -85,11 +102,12 @@ public class Content implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(previewImageResource);
-        parcel.writeString(previewTitle);
+        parcel.writeInt(topic.getId());
         parcel.writeInt(imageResource);
         parcel.writeString(title);
         parcel.writeString(contentText);
-        parcel.writeString(previewLocation);
+        parcel.writeInt(room.getId());
+        parcel.writeString(youTubeId);
     }
 
 }
