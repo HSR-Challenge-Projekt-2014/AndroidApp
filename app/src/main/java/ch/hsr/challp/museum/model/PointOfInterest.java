@@ -14,14 +14,13 @@ public class PointOfInterest {
     private final int id;
     private final String title;
     private final int headerResource;
-    private final List<Content> contents;
+    private final List<Content> contents = new ArrayList<>();
     private final BeaconReference beacon;
 
-    public PointOfInterest(int id, String title, int headerResource, List<Content> contents, BeaconReference beacon) {
+    public PointOfInterest(int id, String title, int headerResource, BeaconReference beacon) {
         this.id = id;
         this.title = title;
         this.headerResource = headerResource;
-        this.contents = contents;
         this.beacon = beacon;
     }
 
@@ -71,23 +70,50 @@ public class PointOfInterest {
         return contents;
     }
 
-
     public BeaconReference getBeacon() {
         return beacon;
     }
     static {
-        List<Content> contents = new ArrayList<>();
-        contents.add(new Content("Abenteuerliches", R.drawable.content_abenteuer, R.drawable.bear_face, "Foobar", "Da ihr gewiß schon die Abenteuer von Tom Sawyer gelesen habt, so brauche ich mich euch nicht vorzustellen. Jenes Buch hat ein gewisser Mark Twain geschrieben und was drinsteht ist wahr – wenigstens meistenteils. Hie und da hat er etwas dazugedichtet, aber das tut nichts. Ich kenne niemand, der nicht gelegentlich einmal ein bißchen lügen täte, ausgenommen etwa Tante Polly oder die Witwe Douglas oder Mary. Toms Tante Polly und seine Schwester Mary und die Witwe Douglas kommen alle in dem Buche vom Tom Sawyer vor, das wie gesagt, mit wenigen Ausnahmen eine wahre Geschichte ist. – Am Ende von dieser Geschichte wird erzählt, wie Tom und ich das Geld fanden, das die Räuber in der Höhle verborgen hatten, wodurch wir nachher sehr reich wurden. Jeder von uns bekam sechstausend Dollars, lauter Gold. Es war ein großartiger Anblick, als wir das Geld auf einem Haufen liegen sahen. Kreisrichter Thatcher bewahrte meinen Teil auf und legte ihn auf Zinsen an, die jeden Tag einen Dollar für mich ausmachen. Ich weiß wahrhaftig nicht, was ich mit dem vielen Geld anfangen soll. Die Witwe Douglas nahm mich als Sohn an und will versuchen, mich zu sievilisieren wie sie sagt. Das schmeckt mir aber schlecht, kann ich euch sagen, das Leben wird mir furchtbar sauer in dem Hause mit der abscheulichen Regelmäßigkeit, wo immer um dieselbe Zeit gegessen und geschlafen werden soll, einen Tag wie den andern. Einmal bin ich auch schon durchgebrannt, bin in meine alten Lumpen gekrochen, und – hast du nicht gesehen, war ich draußen im Wald und in der Freiheit. Tom Sawyer aber, mein alter Freund Tom, spürte mich wieder auf, versprach, er wolle eine Räuberbande gründen und ich solle Mitglied werden, wenn ich noch einmal zu der Witwe zurückkehre und mich weiter ›sievilisieren‹ lasse. Da tat ich's denn.", "Raum 1 Topic 2"));
-        contents.add(new Content("Historisches", R.drawable.content_historisches, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Spass und Spannung", R.drawable.content_spass, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Liebesleben", R.drawable.content_liebensleben, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
-        contents.add(new Content("Energie", R.drawable.content_energie, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla", "Raum 1 Topic 2"));
+        /*
+            BÄR in St. Gallen
+         */
         Region region1 = new Region("kontakt-beacon-01", Identifier.parse("F7826DA6-4FA2-4E98-8024-BC5B71E0893E"), Identifier.parse("10244"), Identifier.parse("54936"));
+        PointOfInterest poi1 = new PointOfInterest(1, "Der Bär in St.Gallen", R.drawable.poi_header_bear, new BeaconReference(region1, Room.ONE));
+        poi1.addContent(new Content(Topic.ADVENTURE, R.drawable.content_abenteuer, R.drawable.bear_bittner, "Grizzlys in Alaska", "Endlich ist der bekannte Berner Biologe und Bärenfotograf " +
+                "David Bittner aus der einsamen Wildnis in Alaska zurück. Mitgebracht hat er faszinierendes und neues Bildmaterial.", "KaKcjpmnA6c"));
+        poi1.addContent(new Content(Topic.HISTORIC, R.drawable.content_historisches, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla"));
+        poi1.addContent(new Content(Topic.FUN, R.drawable.content_spass, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla"));
+        poi1.addContent(new Content(Topic.LOVE, R.drawable.content_liebensleben, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla"));
+        poi1.addContent(new Content(Topic.ENERGY, R.drawable.content_energie, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla"));
+        /*
+            FUCHS in Zürich
+         */
         Region region2 = new Region("kontakt-beacon-02", Identifier.parse("F7826DA6-4FA2-4E98-8024-BC5B71E0893E"), Identifier.parse("31576"), Identifier.parse("38281"));
-        PointOfInterest poi1 = new PointOfInterest(1, "Der Bär in St.Ipsum", R.drawable.poi_header, contents, new BeaconReference(region1, Room.ONE));
-        PointOfInterest poi2 = new PointOfInterest(2, "Der Bär in Zürich", R.drawable.poi_header, contents, new BeaconReference(region2, Room.ONE));
+        PointOfInterest poi2 = new PointOfInterest(2, "Der Fuchs in Zürich", R.drawable.poi_header_fox, new BeaconReference(region2, Room.TWO));
+        poi2.addContent(new Content(Topic.HISTORIC, R.drawable.content_historisches, R.drawable.fox_stats, "Entwicklung der Fuchspopulation im 20. Jahrhundert", "Die Jagdstrecke des Fuchses " +
+                "in der Schweiz seit 1930 illustriert die Populationsentwicklung des Fuchses im 20. Jahrhundert: fluktuierende Bestände bis Mitte der 1950er Jahre, anschliessend eine Zunahme, " +
+                "die von der Tollwutepizootie unterbrochen wird und schliesslich einen rapiden Anstieg von 1984 bis 1995. Die Jagdstrecke nahm in dieser Zeit um den Faktor 4,0 zu, obwohl die " +
+                "Motivation vieler Jäger, Füchse zu schiessen, wegen des Zusammenbruchs der Fellpreise gesunken ist. Parallel zur Zunahme der Jagdstrecke stieg die Zahl der tot gefundenen " +
+                "Füchse um den Faktor 3,6 an. Die Fuchspopulation scheint heute die Tragfähigkeit des Lebensraumes erreicht zu haben. \n" +
+                "Der starke Anstieg der Fuchspopulation seit den 1980er Jahren ist die Folge der wirksamen Bekämpfung und Ausrottung der " +
+                "Tollwut in der Schweiz. Der langfristige Anstieg seit den 1930er Jahren muss aber auf Veränderungen im Lebensraum beruhen. " +
+                "Die landwirtschaftliche Produktion hat zum Beispiel zwischen 1930 und 1990 in der Schweiz um das Vierfache zugenommen. Die " +
+                "Mechanisierung der Ernte nach dem zweiten Weltkrieg hat zu einer Steigerung des Nahrungsangebotes für Füchse geführt, da mehr " +
+                "Feldfrüchte zurückgelassen werden als bei der Handernte. Mit der Zunahme der Fuchspopulationen nach der Tollwutepitzootie wurden " +
+                "auch immer häufiger Füchse in urbanen Gebieten beobachte. Einzelne Füchse dürften zwar schon immer in den Wohngebieten des Menschen " +
+                "gelebt haben, ab Mitte der 1980er Jahre nahm dieses Phänomen jedoch stark zu.\n"));
+        poi2.addContent(new Content(Topic.FUN, R.drawable.content_spass, R.drawable.fox_mouse, "Mit Feigen fängt man Füchse", "Dass er Dörrobst, Datteln, getrocknete " +
+                "Feigen und Bananen, Baumnüsse und sogar Schokolade als Köder auslegt, erstaunt den Laien, den Fachmann wundert's nicht. Denn Füchse sind Allesfresser, " +
+                "die nicht nur Gänse, Hühner und Kaninchen stehlen, sondern sich in freier Wildbahn auch von Beeren, Nüssen und Obst ernähren. " +
+                "Sie sind Hundeartige und von Gebiss und Verdauungssystem her nicht ausschliesslich auf den Verzehr von tierischem Eiweiss ausgelegt.\n" +
+                "\n", "rTyrTn9VXmQ"));
         ALL.add(poi1);
         ALL.add(poi2);
+    }
+
+    private void addContent(Content content) {
+        contents.add(content);
+        content.setRoom(beacon.getRoom());
     }
 
     private static class BeaconReference {

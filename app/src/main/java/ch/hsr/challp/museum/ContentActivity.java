@@ -12,6 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -19,11 +23,14 @@ import java.util.Locale;
 import ch.hsr.challp.museum.model.Content;
 
 
-public class ContentActivity extends Activity {
+public class ContentActivity extends Activity implements YouTubePlayer.OnInitializedListener {
 
     public static final String P_CONTENT_ID = "ContentId";
+    public static final String API_KEY = "AIzaSyB3Lk1ZU2K9ozvL0rrHjK6qa2xMxiim8gM";
     private TextToSpeech tts;
     private ContentReader contentReader;
+    private YouTubePlayerFragment youtubeFragment;
+    private String youTubeId;
 
     @Override
     protected void onStart() {
@@ -54,23 +61,42 @@ public class ContentActivity extends Activity {
         Content content = getIntent().getParcelableExtra(P_CONTENT_ID);
 
         ((ImageView) findViewById(R.id.page_preview_image)).setImageResource(content.getPreviewImageResource());
-        ((TextView) findViewById(R.id.page_preview_description)).setText(content.getPreviewTitle());
-        ((TextView) findViewById(R.id.page_preview_location)).setText(content.getPreviewLocation());
+        ((TextView) findViewById(R.id.page_preview_description)).setText(content.getTopic().getName());
+        ((TextView) findViewById(R.id.page_preview_location)).setText(content.getRoom().getName());
         ((TextView) findViewById(R.id.page_title)).setText(content.getTitle());
         ((TextView) findViewById(R.id.page_text)).setText(content.getContentText());
         ((ImageView) findViewById(R.id.page_image)).setImageResource(content.getImageResource());
+
+        if (content.hasYouTubeVideo()) {
+            youtubeFragment = new YouTubePlayerFragment();
+            getFragmentManager().beginTransaction().replace(R.id.page_video, youtubeFragment).commit();
+            youtubeFragment.initialize(API_KEY, this);
+            youtubeFragment.setRetainInstance(true);
+            youTubeId = content.getYouTubeId();
+        }
 
         final ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setTitle(R.string.title_activity_content);
         }
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_content, menu);
         return true;
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
+        if (!wasRestored) {
+            youTubePlayer.cueVideo(youTubeId);
+        }
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
     }
 
     protected void onStop() {
@@ -161,5 +187,3 @@ public class ContentActivity extends Activity {
 
     }
 }
-
-
