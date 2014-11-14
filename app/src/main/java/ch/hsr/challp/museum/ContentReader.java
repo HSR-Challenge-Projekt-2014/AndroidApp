@@ -6,17 +6,21 @@ import android.util.Log;
 
 import java.util.List;
 
+import ch.hsr.challp.museum.interfaces.ContentReaderCallback;
+
 public class ContentReader {
     public static final int DELAY_MILLIS = 100;
     private TextToSpeech tts;
     private List<String> stringsToSpeech;
+    private ContentReaderCallback callback;
     private boolean isPlaying = false;
     private Handler handler;
     private Runnable runnable;
 
-    public ContentReader(TextToSpeech tts, List<String> stringsToSpeech) {
+    public ContentReader(TextToSpeech tts, List<String> stringsToSpeech, ContentReaderCallback callback) {
         this.tts = tts;
         this.stringsToSpeech = stringsToSpeech;
+        this.callback = callback;
     }
 
     public boolean isPlaying() {
@@ -56,6 +60,8 @@ public class ContentReader {
 
                 if (isPlaying()) {
                     handler.postDelayed(this, DELAY_MILLIS);
+                } else {
+                    callback.readerCompleted();
                 }
             }
         };

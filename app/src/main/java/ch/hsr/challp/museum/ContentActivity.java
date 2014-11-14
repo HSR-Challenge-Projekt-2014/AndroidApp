@@ -18,10 +18,11 @@ import com.google.android.youtube.player.YouTubePlayerFragment;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import ch.hsr.challp.museum.interfaces.ContentReaderCallback;
 import ch.hsr.challp.museum.model.Content;
 
 
-public class ContentActivity extends Activity implements YouTubePlayer.OnInitializedListener {
+public class ContentActivity extends Activity implements YouTubePlayer.OnInitializedListener, ContentReaderCallback {
 
     public static final String P_CONTENT_ID = "ContentId";
     public static final String API_KEY = "AIzaSyB3Lk1ZU2K9ozvL0rrHjK6qa2xMxiim8gM";
@@ -49,7 +50,7 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         final ArrayList<String> texts = new ArrayList<>();
         texts.add(((TextView) findViewById(R.id.page_title)).getText().toString());
         texts.add(((TextView) findViewById(R.id.page_text)).getText().toString());
-        contentReader = new ContentReader(tts, texts);
+        contentReader = new ContentReader(tts, texts, this);
     }
 
     @Override
@@ -79,9 +80,14 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         }
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_content, menu);
+        if (contentReader.isPlaying()) {
+            getMenuInflater().inflate(R.menu.menu_content_playing, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.menu_content, menu);
+        }
         return true;
     }
 
@@ -113,7 +119,11 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         if (id == R.id.action_play_content) {
             Log.d(getClass().getName(), "Text2Speech Button clicked");
             toggleText2Speech();
+            invalidateOptionsMenu();
             return true;
+        } else if (id == R.id.action_play_stop) {
+            toggleText2Speech();
+            invalidateOptionsMenu();
         }
 
         return super.onOptionsItemSelected(item);
@@ -127,5 +137,8 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         }
     }
 
-
+    @Override
+    public void readerCompleted() {
+        invalidateOptionsMenu();
+    }
 }
