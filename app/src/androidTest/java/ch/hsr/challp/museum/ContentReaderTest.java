@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import ch.hsr.challp.museum.interfaces.ContentReaderCallback;
+
 /**
  * TODO: no real test, did not manage to get tts working in test
  */
@@ -47,7 +49,15 @@ public class ContentReaderTest extends AndroidTestCase {
         List<String> texts = new ArrayList<>();
         texts.add("hallo hallo hallo hallo hallo hallo hallo hallo hallo hallo hallo hallo ");
         texts.add("test testtesttesttesttesttesttesttesttesttesttesttesttesttest");
-        reader = new ContentReader(tts, texts);
+
+        ContentReaderCallback callback = new ContentReaderCallback() {
+            @Override
+            public void readerCompleted() {
+
+            }
+        };
+
+        reader = new ContentReader(tts, texts, callback);
     }
 
     @Override
