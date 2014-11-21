@@ -60,6 +60,11 @@ public abstract class ServiceFragment extends Fragment implements BeaconScanClie
         }
     }
 
+    @Override
+    public void goToServiceStoppedActivity() {
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, new GuideStoppedFragment()).commit();
+    }
+
     protected BeaconScanService getBeaconScanService() {
         return beaconScanService;
     }

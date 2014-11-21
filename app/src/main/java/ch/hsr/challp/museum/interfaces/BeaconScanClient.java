@@ -6,6 +6,8 @@ public interface BeaconScanClient {
 
     public void updateBeaconState(Beacon beacon);
 
+    public void goToServiceStoppedActivity();
+
 }
 
 

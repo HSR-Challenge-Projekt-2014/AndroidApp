@@ -1,12 +1,18 @@
 package ch.hsr.challp.museum.service;
 
+import android.app.PendingIntent;
 import android.app.Service;
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -22,6 +28,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import ch.hsr.challp.museum.HomeActivity;
+import ch.hsr.challp.museum.R;
 import ch.hsr.challp.museum.emulator.Emulator;
 import ch.hsr.challp.museum.emulator.TimedBeaconSimulator;
 import ch.hsr.challp.museum.interfaces.BeaconScanClient;
@@ -29,10 +37,8 @@ import ch.hsr.challp.museum.model.PointOfInterest;
 
 
 public class BeaconScanService extends Service implements BeaconConsumer {
-    private final static String TAG = "BeaconScanService";
-
     // change current beacon after new beacon was measured x times
-    private final static Integer BEACON_CHANGE_DELAY = 5;
+    private final static Integer BEACON_CHANGE_DELAY = 3;
 
     private IBinder binder = new LocalBinder();
     private BeaconManager beaconManager;
@@ -46,6 +52,43 @@ public class BeaconScanService extends Service implements BeaconConsumer {
     private List<Region> regions;
     private BeaconServiceNotificationProvider notificationProvider;
     private Region wildcardRegion;
+
+    private final BroadcastReceiver bluetoothBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+
+            if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
+                final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+                switch (state) {
+                    case BluetoothAdapter.STATE_OFF:
+                        if(clients.isEmpty()) {
+                            killSelf();
+                            Intent stopServiceIntent = new Intent(context, HomeActivity.class);
+                            stopServiceIntent.putExtra(HomeActivity.SECTION, HomeActivity.SECTION_GUIDE_STOPPED);
+                            TaskStackBuilder stopStackBuilder = TaskStackBuilder.create(context);
+                            stopStackBuilder.addParentStack(HomeActivity.class);
+                            stopStackBuilder.addNextIntent(stopServiceIntent);
+                            PendingIntent stopServicePendingIntent = stopStackBuilder.getPendingIntent(1, PendingIntent.FLAG_UPDATE_CURRENT);
+                            try {
+                                stopServicePendingIntent.send(context, 0, intent);
+                            } catch (PendingIntent.CanceledException e) {
+                                Log.e(getClass().getName(), "Could not start Stopped Service Fragment.", e);
+                            }
+                        } else {
+                            for (BeaconScanClient client : clients) {
+                                client.goToServiceStoppedActivity();
+                            }
+                        }
+                        break;
+                    case BluetoothAdapter.STATE_TURNING_OFF:
+                        Toast.makeText(context, getString(R.string.bluetooth_off_stopping), Toast.LENGTH_SHORT).show();
+                        break;
+                    // no case for STATE_ON and STATE_TURNING_ON needed
+                }
+            }
+        }
+    };
 
     public Beacon getCurrentBeacon() {
         return currentBeacon;
@@ -144,31 +187,35 @@ public class BeaconScanService extends Service implements BeaconConsumer {
 
         notificationProvider = new BeaconServiceNotificationProvider(this);
         notificationProvider.createServiceRunningNotification();
+
+        IntentFilter filter = new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
+        registerReceiver(bluetoothBroadcastReceiver, filter);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "BeaconScanService starting", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "BeaconScanService starting", Toast.LENGTH_SHORT).show();
         return START_STICKY;
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d(TAG, "Bind Service");
+        Log.d(getClass().getName(), "Bind Service");
         return binder;
     }
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "BeaconScanService stopping", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "BeaconScanService stopping", Toast.LENGTH_SHORT).show();
         notificationProvider.removeNotification();
 
         try {
             beaconManager.stopRangingBeaconsInRegion(wildcardRegion);
         } catch (RemoteException e) {
-            Log.d(TAG, "Error while stopping beacon ranging, " + e.getMessage());
+            Log.d(getClass().getName(), "Error while stopping beacon ranging, " + e.getMessage());
         }
         beaconManager.unbind(this);
+        unregisterReceiver(bluetoothBroadcastReceiver);
     }
 
     @Override
@@ -182,7 +229,7 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         try {
             beaconManager.startRangingBeaconsInRegion(wildcardRegion);
         } catch (RemoteException e) {
-            Log.d(TAG, "Error while starting beacon ranging, " + e.getMessage());
+            Log.d(getClass().getName(), "Error while starting beacon ranging, " + e.getMessage());
         }
     }
 
@@ -210,7 +257,7 @@ public class BeaconScanService extends Service implements BeaconConsumer {
                 }
             });
         } catch (Throwable t) {
-            t.printStackTrace();
+            Log.e(getClass().getName(), t.getMessage(), t);
         }
     }
 
