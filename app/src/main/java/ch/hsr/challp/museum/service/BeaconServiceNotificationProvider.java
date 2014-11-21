@@ -41,18 +41,20 @@ public class BeaconServiceNotificationProvider {
 
         // go to activity when clicked
         Intent resultIntent = new Intent(context, HomeActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(HomeActivity.class);
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        resultIntent.putExtra(HomeActivity.SECTION, HomeActivity.SECTION_GUIDE);
+        TaskStackBuilder ongoingStackBuilder = TaskStackBuilder.create(context);
+        ongoingStackBuilder.addParentStack(HomeActivity.class);
+        ongoingStackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = ongoingStackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setContentIntent(resultPendingIntent);
 
         // buttons
         Intent stopServiceIntent = new Intent(context, HomeActivity.class);
         stopServiceIntent.putExtra(HomeActivity.SECTION, HomeActivity.SECTION_GUIDE_STOPPED);
-        stackBuilder.addParentStack(HomeActivity.class);
-        stackBuilder.addNextIntent(stopServiceIntent);
-        PendingIntent stopServicePendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        TaskStackBuilder stopStackBuilder = TaskStackBuilder.create(context);
+        stopStackBuilder.addParentStack(HomeActivity.class);
+        stopStackBuilder.addNextIntent(stopServiceIntent);
+        PendingIntent stopServicePendingIntent = stopStackBuilder.getPendingIntent(1, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.addAction(android.R.drawable.ic_menu_close_clear_cancel, "Beenden", stopServicePendingIntent);
     }
 
