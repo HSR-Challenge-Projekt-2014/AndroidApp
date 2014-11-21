@@ -38,7 +38,7 @@ import ch.hsr.challp.museum.model.PointOfInterest;
 
 public class BeaconScanService extends Service implements BeaconConsumer {
     // change current beacon after new beacon was measured x times
-    private final static Integer BEACON_CHANGE_DELAY = 3;
+    private final static Integer BEACON_CHANGE_DELAY = 5;
 
     private IBinder binder = new LocalBinder();
     private BeaconManager beaconManager;
