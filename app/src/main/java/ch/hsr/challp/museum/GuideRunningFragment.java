@@ -16,6 +16,7 @@ public class GuideRunningFragment extends ServiceFragment {
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        ((HomeActivity)getActivity()).setStopButtonVisible(true);
         return inflater.inflate(R.layout.fragment_guide_running, container, false);
     }
 

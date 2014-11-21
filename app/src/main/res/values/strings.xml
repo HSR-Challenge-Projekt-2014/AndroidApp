@@ -33,4 +33,5 @@
 
     <string name="vorlesen_stoppen">Vorlesen stoppen</string>
     <string name="bluetooth_off_stopping">Bluetooth wurde deaktivert, stoppe Begleiter.</string>
+    <string name="stop_guide">Begleiter Beenden</string>
 </resources>

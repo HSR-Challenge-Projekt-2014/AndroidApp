@@ -33,6 +33,8 @@ public class PointOfInterestFragment extends ServiceFragment {
         GridView contentView = (GridView) view.findViewById(R.id.POIContentPane);
         contentView.setAdapter(new ContentPreviewAdapter(getActivity(), pointOfInterest.getContents()));
 
+        ((HomeActivity)getActivity()).setStopButtonVisible(true);
+
         return view;
     }
 

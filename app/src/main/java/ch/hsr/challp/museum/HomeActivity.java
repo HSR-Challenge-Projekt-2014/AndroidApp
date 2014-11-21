@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,6 +41,8 @@ public class HomeActivity extends Activity {
     private ListView dList;
     private ListAdapter adapter;
     private ActionBarDrawerToggle dToggle;
+    private MenuItem stopItem;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +132,17 @@ public class HomeActivity extends Activity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        getMenuInflater().inflate(R.menu.menu_guide, menu);
+        stopItem = menu.findItem(R.id.stop_guide);
+        if(isBeaconScanServiceActive()) {
+            stopItem.setVisible(true);
+        }
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Pass the event to ActionBarDrawerToggle, if it returns
         // true, then it has handled the app icon touch event
@@ -136,6 +150,9 @@ public class HomeActivity extends Activity {
             return true;
         }
         // Handle your other action bar items...
+        if(item.getItemId() == R.id.stop_guide) {
+            getFragmentManager().beginTransaction().replace(R.id.content_frame, new GuideStoppedFragment()).commit();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -144,7 +161,7 @@ public class HomeActivity extends Activity {
     private void showContent(int position) {
         Fragment fragment;
         if (position == SECTION_GUIDE) {
-            if (beaconScanServiceActive()) {
+            if (isBeaconScanServiceActive()) {
                 fragment = new GuideRunningFragment();
             } else {
                 fragment = new GuideFragment();
@@ -165,7 +182,7 @@ public class HomeActivity extends Activity {
         dList.setSelection(position);
     }
 
-    private boolean beaconScanServiceActive() {
+    private boolean isBeaconScanServiceActive() {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (BeaconScanService.class.getName().equals(service.service.getClassName())) {
@@ -191,4 +208,14 @@ public class HomeActivity extends Activity {
         return 0;
     }
 
+    public void setStopButtonVisible(boolean visible) {
+        if(stopItem == null) {
+            if(menu != null) {
+                stopItem = menu.findItem(R.id.stop_guide);
+                stopItem.setVisible(visible);
+            }
+        } else {
+            stopItem.setVisible(visible);
+        }
+    }
 }
