@@ -43,6 +43,7 @@ public class HomeActivity extends Activity {
     private ActionBarDrawerToggle dToggle;
     private MenuItem stopItem;
     private Menu menu;
+    private Integer activeSection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,7 @@ public class HomeActivity extends Activity {
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(prefs.getBoolean(NOTIFICATIONS, true)) {
+                if (prefs.getBoolean(NOTIFICATIONS, true)) {
                     prefs.edit().putBoolean(NOTIFICATIONS, false).commit();
                 } else {
                     prefs.edit().putBoolean(NOTIFICATIONS, true).commit();
@@ -132,11 +133,24 @@ public class HomeActivity extends Activity {
     }
 
     @Override
+    protected void onRestoreInstanceState(Bundle in) {
+        super.onRestoreInstanceState(in);
+        activeSection = in.getInt(SECTION);
+        showContent(activeSection);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle out) {
+        out.putInt(SECTION, activeSection);
+        super.onSaveInstanceState(out);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         this.menu = menu;
         getMenuInflater().inflate(R.menu.menu_guide, menu);
         stopItem = menu.findItem(R.id.stop_guide);
-        if(isBeaconScanServiceActive()) {
+        if (isBeaconScanServiceActive()) {
             stopItem.setVisible(true);
         }
         return true;
@@ -150,7 +164,7 @@ public class HomeActivity extends Activity {
             return true;
         }
         // Handle your other action bar items...
-        if(item.getItemId() == R.id.stop_guide) {
+        if (item.getItemId() == R.id.stop_guide) {
             getFragmentManager().beginTransaction().replace(R.id.content_frame, new GuideStoppedFragment()).commit();
         }
 
@@ -159,6 +173,7 @@ public class HomeActivity extends Activity {
 
 
     private void showContent(int position) {
+        activeSection = position;
         Fragment fragment;
         if (position == SECTION_GUIDE) {
             if (isBeaconScanServiceActive()) {
@@ -168,7 +183,7 @@ public class HomeActivity extends Activity {
             }
         } else if (position == SECTION_QUESTION) {
             fragment = new QuestionFragment();
-        }else if (position == SECTION_GUIDE_STOPPED) {
+        } else if (position == SECTION_GUIDE_STOPPED) {
             fragment = new GuideStoppedFragment();
         } else {
             Bundle args = new Bundle();
@@ -199,9 +214,9 @@ public class HomeActivity extends Activity {
 
     private int getSectionIdFromExtras() {
         Intent previousIntent = getIntent();
-        if(previousIntent != null) {
+        if (previousIntent != null) {
             Bundle extras = previousIntent.getExtras();
-            if(extras != null) {
+            if (extras != null) {
                 return extras.getInt(SECTION, 0);
             }
         }
@@ -209,8 +224,8 @@ public class HomeActivity extends Activity {
     }
 
     public void setStopButtonVisible(boolean visible) {
-        if(stopItem == null) {
-            if(menu != null) {
+        if (stopItem == null) {
+            if (menu != null) {
                 stopItem = menu.findItem(R.id.stop_guide);
                 stopItem.setVisible(visible);
             }
