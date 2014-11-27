@@ -50,7 +50,7 @@ public class ContentPreviewAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Log.i(getClass().getName(), "content selected: " + contents.get(i));
                 Intent intent = new Intent(view.getContext(), ContentActivity.class);
-                intent.putExtra(ContentActivity.P_CONTENT_ID, contents.get(i));
+                intent.putExtra(ContentActivity.P_CONTENT, contents.get(i));
                 v.getContext().startActivity(intent);
             }
         });

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -21,10 +22,11 @@ import ch.hsr.challp.museum.model.Content;
 
 public class ContentActivity extends Activity implements YouTubePlayer.OnInitializedListener, ContentReaderCallback {
 
-    public static final String P_CONTENT_ID = "ContentId";
+    public static final String P_CONTENT = "ContentId";
     public static final String API_KEY = "AIzaSyB3Lk1ZU2K9ozvL0rrHjK6qa2xMxiim8gM";
     private ContentReader contentReader;
     private String youTubeId;
+    private Content content;
 
     @Override
     protected void onStart() {
@@ -40,7 +42,7 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_content);
-        Content content = getIntent().getParcelableExtra(P_CONTENT_ID);
+        content = getIntent().getParcelableExtra(P_CONTENT);
 
         ((ImageView) findViewById(R.id.page_preview_image)).setImageResource(content.getPreviewImageResource());
         ((TextView) findViewById(R.id.page_preview_description)).setText(content.getTopic().getName());
@@ -106,6 +108,11 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
             return true;
         } else if (id == R.id.action_play_stop) {
             toggleText2Speech();
+            invalidateOptionsMenu();
+        } else if (id == R.id.action_read_later) {
+            Content.saveContent(this.content);
+            Toast toast = Toast.makeText(this, content.getTitle() + getString(R.string.read_later_saved), Toast.LENGTH_LONG);
+            toast.show();
             invalidateOptionsMenu();
         }
 

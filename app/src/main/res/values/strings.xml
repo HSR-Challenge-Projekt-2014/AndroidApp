@@ -37,4 +37,6 @@
     <string name="tts_starting_not_possible_message">Text2Speech kann nicht gestartet werden, bitte überprüfen Sie Ihre Einstellungen.</string>
     <string name="about_museum">Über das Museum</string>
     <string name="titleImageDescription">Museums Titelbild</string>
+    <string name="read_later">Später lesen</string>
+    <string name="read_later_saved">" erfolgreich für \"Später lesen\" gespeichert"</string>
 </resources>

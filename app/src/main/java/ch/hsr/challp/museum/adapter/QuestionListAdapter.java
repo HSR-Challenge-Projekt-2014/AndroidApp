@@ -24,7 +24,7 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
     private List<Question> shownItems;
 
     public QuestionListAdapter(Context context, List<Question> items) {
-        super(context, R.layout.question_row, items);
+        super(context, R.layout.preview_row, items);
         this.context = context;
         this.allItems = new ArrayList<>(items);
         this.shownItems = new ArrayList<>(items);
@@ -54,9 +54,9 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
-        View view = mInflater.inflate(R.layout.question_row, null);
-        TextView title = (TextView) view.findViewById(R.id.question_row_title);
-        ImageView image = (ImageView) view.findViewById(R.id.question_row_image);
+        View view = mInflater.inflate(R.layout.preview_row, null);
+        TextView title = (TextView) view.findViewById(R.id.preview_row_title);
+        ImageView image = (ImageView) view.findViewById(R.id.preview_row_image);
         title.setText(question.getTitle());
         image.setImageResource(question.getImage());
         return view;

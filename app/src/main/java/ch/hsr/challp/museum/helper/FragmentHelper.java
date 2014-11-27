@@ -13,12 +13,15 @@ import ch.hsr.challp.museum.GuideStoppedFragment;
 import ch.hsr.challp.museum.PointOfInterestFragment;
 import ch.hsr.challp.museum.QuestionFragment;
 import ch.hsr.challp.museum.R;
+import ch.hsr.challp.museum.ReadLaterFragment;
 
 public class FragmentHelper {
 
     public static void show(FragmentActivity activity, FragmentManager fragmentManager, FragmentName name, Integer poiId) {
-        Fragment fragment = null;
-        if (name == FragmentName.GUIDE) {
+        Fragment fragment;
+        if (name == FragmentName.READ_LATER) {
+            fragment = new ReadLaterFragment();
+        } else if (name == FragmentName.GUIDE) {
             fragment = new GuideFragment();
         } else if (name == FragmentName.QUESTIONS) {
             fragment = new QuestionFragment();

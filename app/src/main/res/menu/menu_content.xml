@@ -2,6 +2,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context="ch.hsr.challp.museum.ContentActivity">
     <item
+        android:id="@+id/action_read_later"
+        android:icon="@drawable/ic_action_add_to_queue"
+        android:showAsAction="always"
+        android:title="@string/read_later" />
+    <item
         android:id="@+id/action_play_content"
         android:icon="@drawable/ic_action_headphones"
         android:orderInCategory="100"

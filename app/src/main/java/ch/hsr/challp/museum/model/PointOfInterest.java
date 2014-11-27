@@ -24,10 +24,6 @@ public class PointOfInterest {
         this.beacon = beacon;
     }
 
-    public static List<PointOfInterest> getAll() {
-        return ALL;
-    }
-
     public static List<Region> getAllRegions() {
         List<Region> result = new ArrayList<>();
         for (PointOfInterest poi : ALL) {
@@ -73,6 +69,7 @@ public class PointOfInterest {
     public BeaconReference getBeacon() {
         return beacon;
     }
+
     static {
         /*
             BÄR in St. Gallen

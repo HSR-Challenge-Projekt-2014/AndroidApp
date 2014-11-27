@@ -3,6 +3,9 @@ package ch.hsr.challp.museum.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Content implements Parcelable {
 
     // this is used to regenerate the content. All Parcelables must have a CREATOR that implements these two methods
@@ -22,6 +25,7 @@ public class Content implements Parcelable {
     private Topic topic;
     private String youTubeId;
     private Room room = null;
+    private static List<Content> savedContents = new ArrayList<>();
 
     private Content(Parcel in) {
         previewImageResource = in.readInt();
@@ -44,6 +48,14 @@ public class Content implements Parcelable {
         this.title = title;
         this.contentText = contentText;
         this.youTubeId = youTubeId;
+    }
+
+    public static List<Content> getSavedContents() {
+        return savedContents;
+    }
+
+    public static void saveContent(Content content) {
+        savedContents.add(content);
     }
 
     public int getPreviewImageResource() {
