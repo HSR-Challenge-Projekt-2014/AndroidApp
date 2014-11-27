@@ -15,6 +15,7 @@ import org.altbeacon.beacon.Beacon;
 
 import ch.hsr.challp.museum.HomeActivity;
 import ch.hsr.challp.museum.R;
+import ch.hsr.challp.museum.helper.FragmentName;
 import ch.hsr.challp.museum.model.PointOfInterest;
 import ch.hsr.challp.museum.model.Room;
 
@@ -43,7 +44,7 @@ public class BeaconServiceNotificationProvider {
 
         // go to activity when clicked
         Intent resultIntent = new Intent(context, HomeActivity.class);
-        resultIntent.putExtra(HomeActivity.SECTION, HomeActivity.SECTION_GUIDE);
+        resultIntent.putExtra(HomeActivity.SECTION, FragmentName.getId(FragmentName.GUIDE));
         TaskStackBuilder ongoingStackBuilder = TaskStackBuilder.create(context);
         ongoingStackBuilder.addParentStack(HomeActivity.class);
         ongoingStackBuilder.addNextIntent(resultIntent);
@@ -52,7 +53,7 @@ public class BeaconServiceNotificationProvider {
 
         // buttons
         Intent stopServiceIntent = new Intent(context, HomeActivity.class);
-        stopServiceIntent.putExtra(HomeActivity.SECTION, HomeActivity.SECTION_GUIDE_STOPPED);
+        stopServiceIntent.putExtra(HomeActivity.SECTION, FragmentName.getId(FragmentName.GUIDE_STOPPED));
         TaskStackBuilder stopStackBuilder = TaskStackBuilder.create(context);
         stopStackBuilder.addParentStack(HomeActivity.class);
         stopStackBuilder.addNextIntent(stopServiceIntent);

@@ -32,6 +32,7 @@ import ch.hsr.challp.museum.HomeActivity;
 import ch.hsr.challp.museum.R;
 import ch.hsr.challp.museum.emulator.Emulator;
 import ch.hsr.challp.museum.emulator.TimedBeaconSimulator;
+import ch.hsr.challp.museum.helper.FragmentName;
 import ch.hsr.challp.museum.interfaces.BeaconScanClient;
 import ch.hsr.challp.museum.model.PointOfInterest;
 
@@ -44,15 +45,6 @@ public class BeaconScanService extends Service implements BeaconConsumer {
     private BeaconManager beaconManager;
 
     private List<BeaconScanClient> clients;
-
-    private Beacon currentBeacon;
-    private Beacon nextBeacon;
-    private Integer nextBeaconChangeDelay = 0;
-    private Integer noBeaconChangeDelay = 0;
-    private List<Region> regions;
-    private BeaconServiceNotificationProvider notificationProvider;
-    private Region wildcardRegion;
-
     private final BroadcastReceiver bluetoothBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -62,10 +54,10 @@ public class BeaconScanService extends Service implements BeaconConsumer {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
                 switch (state) {
                     case BluetoothAdapter.STATE_OFF:
-                        if(clients.isEmpty()) {
+                        if (clients.isEmpty()) {
                             killSelf();
                             Intent stopServiceIntent = new Intent(context, HomeActivity.class);
-                            stopServiceIntent.putExtra(HomeActivity.SECTION, HomeActivity.SECTION_GUIDE_STOPPED);
+                            stopServiceIntent.putExtra(HomeActivity.SECTION, FragmentName.getId(FragmentName.GUIDE_STOPPED));
                             TaskStackBuilder stopStackBuilder = TaskStackBuilder.create(context);
                             stopStackBuilder.addParentStack(HomeActivity.class);
                             stopStackBuilder.addNextIntent(stopServiceIntent);
@@ -89,6 +81,13 @@ public class BeaconScanService extends Service implements BeaconConsumer {
             }
         }
     };
+    private Beacon currentBeacon;
+    private Beacon nextBeacon;
+    private Integer nextBeaconChangeDelay = 0;
+    private Integer noBeaconChangeDelay = 0;
+    private List<Region> regions;
+    private BeaconServiceNotificationProvider notificationProvider;
+    private Region wildcardRegion;
 
     public Beacon getCurrentBeacon() {
         return currentBeacon;

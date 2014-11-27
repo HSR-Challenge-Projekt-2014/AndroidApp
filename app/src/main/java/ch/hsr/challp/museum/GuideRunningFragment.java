@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 
 import org.altbeacon.beacon.Beacon;
 
+import ch.hsr.challp.museum.helper.FragmentHelper;
+import ch.hsr.challp.museum.helper.FragmentName;
 import ch.hsr.challp.museum.model.PointOfInterest;
 
 
@@ -17,7 +19,15 @@ public class GuideRunningFragment extends ServiceFragment {
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((HomeActivity)getActivity()).setStopButtonVisible(true);
-        return inflater.inflate(R.layout.fragment_guide_running, container, false);
+
+        View fragment = inflater.inflate(R.layout.fragment_guide_running, container, false);
+        fragment.findViewById(R.id.button_questions).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentHelper.show(getFragmentChangeListener(), getFragmentManager(), FragmentName.QUESTIONS, null);
+            }
+        });
+        return fragment;
     }
 
     @Override
@@ -31,11 +41,7 @@ public class GuideRunningFragment extends ServiceFragment {
     public void updateBeaconState(Beacon beacon) {
         if (beacon != null) {
             PointOfInterest pointOfInterest = PointOfInterest.findByBeacon(beacon);
-            PointOfInterestFragment fragment = new PointOfInterestFragment();
-            Bundle args = new Bundle();
-            args.putInt(PointOfInterestFragment.KEY_POI_ID, pointOfInterest.getId());
-            fragment.setArguments(args);
-            getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+            FragmentHelper.showPoi(getFragmentChangeListener(), getFragmentManager(), pointOfInterest.getId());
         }
     }
 }
