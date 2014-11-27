@@ -28,7 +28,6 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
     public static final String API_KEY = "AIzaSyB3Lk1ZU2K9ozvL0rrHjK6qa2xMxiim8gM";
     private TextToSpeech tts;
     private ContentReader contentReader;
-    private YouTubePlayerFragment youtubeFragment;
     private String youTubeId;
 
     @Override
@@ -67,7 +66,7 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         ((ImageView) findViewById(R.id.page_image)).setImageResource(content.getImageResource());
 
         if (content.hasYouTubeVideo()) {
-            youtubeFragment = new YouTubePlayerFragment();
+            YouTubePlayerFragment youtubeFragment = new YouTubePlayerFragment();
             getFragmentManager().beginTransaction().replace(R.id.page_video, youtubeFragment).commit();
             youtubeFragment.initialize(API_KEY, this);
             youtubeFragment.setRetainInstance(true);
