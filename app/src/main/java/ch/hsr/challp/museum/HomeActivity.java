@@ -185,6 +185,8 @@ public class HomeActivity extends Activity {
             fragment = new QuestionFragment();
         } else if (position == SECTION_GUIDE_STOPPED) {
             fragment = new GuideStoppedFragment();
+        } else if (position == SECTION_INFORMATION) {
+            fragment = new AboutFragment();
         } else {
             Bundle args = new Bundle();
             args.putString("Menu", titles[position]);
