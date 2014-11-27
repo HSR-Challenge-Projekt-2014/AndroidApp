@@ -2,16 +2,13 @@ package ch.hsr.challp.museum;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import ch.hsr.challp.museum.interfaces.ContentReaderCallback;
 import ch.hsr.challp.museum.model.Question;
@@ -21,28 +18,16 @@ public class QuestionActivity extends Activity implements ContentReaderCallback 
 
     public static final String P_QUESTION_ID = "QuestionId";
 
-    private TextToSpeech tts;
     private ContentReader contentReader;
 
     @Override
     protected void onStart() {
         super.onStart();
-        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int code) {
-                if (code == TextToSpeech.SUCCESS) {
-                    tts.setLanguage(Locale.GERMAN);
-                } else {
-                    tts = null;
-                    Toast.makeText(getApplicationContext(), getString(R.string.tts_starting_not_possible_message),
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
         final ArrayList<String> texts = new ArrayList<>();
         texts.add(((TextView) findViewById(R.id.page_title)).getText().toString());
         texts.add(((TextView) findViewById(R.id.page_text)).getText().toString());
-        contentReader = new ContentReader(tts, texts, this);
+        contentReader = new ContentReader(this, texts, this);
     }
 
     @Override
@@ -119,9 +104,8 @@ public class QuestionActivity extends Activity implements ContentReaderCallback 
     @Override
     protected void onStop() {
         // Important, shut the tts service after leaving the activity
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
+        if (contentReader != null) {
+            contentReader.shutDown();
         }
         super.onStop();
     }

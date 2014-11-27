@@ -1,10 +1,13 @@
 package ch.hsr.challp.museum;
 
+import android.content.Context;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
+import java.util.Locale;
 
 import ch.hsr.challp.museum.interfaces.ContentReaderCallback;
 
@@ -17,8 +20,19 @@ public class ContentReader {
     private Handler handler;
     private Runnable runnable;
 
-    public ContentReader(TextToSpeech tts, List<String> stringsToSpeech, ContentReaderCallback callback) {
-        this.tts = tts;
+    public ContentReader(final Context context, List<String> stringsToSpeech, ContentReaderCallback callback) {
+        tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int code) {
+                if (code == TextToSpeech.SUCCESS) {
+                    tts.setLanguage(Locale.GERMAN);
+                } else {
+                    tts = null;
+                    Toast.makeText(context, context.getString(R.string.tts_starting_not_possible_message),
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         this.stringsToSpeech = stringsToSpeech;
         this.callback = callback;
     }
@@ -68,4 +82,8 @@ public class ContentReader {
         handler.postAtFrontOfQueue(runnable);
     }
 
+    public void shutDown() {
+        tts.stop();
+        tts.shutdown();
+    }
 }
