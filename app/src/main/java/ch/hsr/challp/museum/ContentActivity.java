@@ -42,7 +42,7 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
                     tts.setLanguage(Locale.GERMAN);
                 } else {
                     tts = null;
-                    Toast.makeText(getApplicationContext(), "Text2Speech kann nicht gestartet werden, bitte überprüfen Sie Ihre Einstellungen.",
+                    Toast.makeText(getApplicationContext(), getString(R.string.tts_starting_not_possible_message),
                             Toast.LENGTH_SHORT).show();
                 }
             }
@@ -103,13 +103,14 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
 
     }
 
+    @Override
     protected void onStop() {
         // Important, shut the tts service after leaving the activity
         if (tts != null) {
             tts.stop();
             tts.shutdown();
         }
-        super.onDestroy();
+        super.onStop();
     }
 
     @Override

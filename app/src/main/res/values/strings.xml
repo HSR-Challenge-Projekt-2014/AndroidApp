@@ -34,4 +34,5 @@
     <string name="vorlesen_stoppen">Vorlesen stoppen</string>
     <string name="bluetooth_off_stopping">Bluetooth wurde deaktivert, stoppe Begleiter.</string>
     <string name="stop_guide">Begleiter Beenden</string>
+    <string name="tts_starting_not_possible_message">Text2Speech kann nicht gestartet werden, bitte überprüfen Sie Ihre Einstellungen.</string>
 </resources>
