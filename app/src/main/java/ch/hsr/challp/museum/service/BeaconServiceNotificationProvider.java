@@ -15,6 +15,8 @@ import org.altbeacon.beacon.Beacon;
 
 import ch.hsr.challp.museum.HomeActivity;
 import ch.hsr.challp.museum.R;
+import ch.hsr.challp.museum.model.PointOfInterest;
+import ch.hsr.challp.museum.model.Room;
 
 public class BeaconServiceNotificationProvider {
 
@@ -60,7 +62,9 @@ public class BeaconServiceNotificationProvider {
 
     public void createServiceRunningNotification() {
         builder.setContentTitle("Museumsbegleiter aktiv");
-        builder.setContentText("Zur App wechseln");
+        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        bigTextStyle.bigText("Zur App wechseln");
+        builder.setStyle(bigTextStyle);
         builder.setSmallIcon(R.drawable.ic_guide_running);
         builder.setVibrate(null);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
@@ -71,7 +75,13 @@ public class BeaconServiceNotificationProvider {
         if (prefs.getBoolean(HomeActivity.NOTIFICATIONS, true)) {
             builder.setVibrate(new long[]{0, VIBRATE_DURATION, VIBRATE_DURATION / 2, VIBRATE_DURATION});
         }
-        builder.setContentText("Neuer Inhalt verfügbar: " + beacon.getId3() + " " + beacon.getDistance() + "m");
+        PointOfInterest poi = PointOfInterest.findByBeacon(beacon);
+        Room room = poi.getBeacon().getRoom();
+        String notification = "Inhalt verfügbar: %s in %s";
+
+        NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
+        bigTextStyle.bigText(String.format(notification, poi.getTitle(), room.getName()));
+        builder.setStyle(bigTextStyle);
         builder.setSmallIcon(R.drawable.ic_stat_notification);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }

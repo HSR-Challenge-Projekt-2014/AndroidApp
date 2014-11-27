@@ -116,7 +116,7 @@ public class PointOfInterest {
         content.setRoom(beacon.getRoom());
     }
 
-    private static class BeaconReference {
+    public static class BeaconReference {
         private Region region;
         private Room room;
 
