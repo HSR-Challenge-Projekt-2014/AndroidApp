@@ -7,6 +7,11 @@
         android:showAsAction="always"
         android:title="@string/read_later" />
     <item
+        android:id="@+id/action_remove_read_later"
+        android:icon="@drawable/ic_action_discard"
+        android:showAsAction="always"
+        android:title="@string/remove_read_later" />
+    <item
         android:id="@+id/action_play_content"
         android:icon="@drawable/ic_action_headphones"
         android:orderInCategory="100"

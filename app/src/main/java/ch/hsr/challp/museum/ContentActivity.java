@@ -65,7 +65,6 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_content, menu);
@@ -85,8 +84,10 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         }
         if (content != null && Content.getSavedContents().contains(content)) {
             menu.findItem(R.id.action_read_later).setEnabled(false).setVisible(false);
+            menu.findItem(R.id.action_remove_read_later).setEnabled(true).setVisible(true);
         } else {
             menu.findItem(R.id.action_read_later).setEnabled(true).setVisible(true);
+            menu.findItem(R.id.action_remove_read_later).setEnabled(false).setVisible(false);
         }
         return true;
     }
@@ -126,6 +127,11 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
             Log.d(getClass().getName(), "read later button clicked");
             Content.saveContent(this.content);
             Toast toast = Toast.makeText(this, content.getTitle() + getString(R.string.read_later_saved), Toast.LENGTH_LONG);
+            toast.show();
+        } else if (id == R.id.action_remove_read_later) {
+            Log.d(getClass().getName(), "remove read later");
+            Content.unsaveContent(content);
+            Toast toast = Toast.makeText(this, content.getTitle() + getString(R.string.read_later_removed), Toast.LENGTH_SHORT);
             toast.show();
         }
         invalidateOptionsMenu();
