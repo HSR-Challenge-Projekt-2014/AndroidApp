@@ -68,10 +68,25 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_content, menu);
+
+        invalidateOptionsMenu();
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
         if (contentReader.isPlaying()) {
-            getMenuInflater().inflate(R.menu.menu_content_playing, menu);
+            menu.findItem(R.id.action_play_content).setEnabled(false).setVisible(false);
+            menu.findItem(R.id.action_play_stop).setEnabled(true).setVisible(true);
         } else {
-            getMenuInflater().inflate(R.menu.menu_content, menu);
+            menu.findItem(R.id.action_play_content).setEnabled(true).setVisible(true);
+            menu.findItem(R.id.action_play_stop).setEnabled(false).setVisible(false);
+        }
+        if (content != null && Content.getSavedContents().contains(content)) {
+            menu.findItem(R.id.action_read_later).setEnabled(false).setVisible(false);
+        } else {
+            menu.findItem(R.id.action_read_later).setEnabled(true).setVisible(true);
         }
         return true;
     }
@@ -102,20 +117,18 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         int id = item.getItemId();
 
         if (id == R.id.action_play_content) {
-            Log.d(getClass().getName(), "Text2Speech Button clicked");
+            Log.d(getClass().getName(), "play text2speech Button clicked");
             toggleText2Speech();
-            invalidateOptionsMenu();
-            return true;
         } else if (id == R.id.action_play_stop) {
+            Log.d(getClass().getName(), "stop text2speech Button clicked");
             toggleText2Speech();
-            invalidateOptionsMenu();
         } else if (id == R.id.action_read_later) {
+            Log.d(getClass().getName(), "read later button clicked");
             Content.saveContent(this.content);
             Toast toast = Toast.makeText(this, content.getTitle() + getString(R.string.read_later_saved), Toast.LENGTH_LONG);
             toast.show();
-            invalidateOptionsMenu();
         }
-
+        invalidateOptionsMenu();
         return super.onOptionsItemSelected(item);
     }
 

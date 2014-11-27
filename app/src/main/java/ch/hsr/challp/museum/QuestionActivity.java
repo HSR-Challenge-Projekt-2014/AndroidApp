@@ -57,12 +57,21 @@ public class QuestionActivity extends Activity implements ContentReaderCallback 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (contentReader.isPlaying()) {
-            getMenuInflater().inflate(R.menu.menu_question_playing, menu);
-        } else {
-            getMenuInflater().inflate(R.menu.menu_question, menu);
-        }
+        getMenuInflater().inflate(R.menu.menu_question, menu);
 
+        invalidateOptionsMenu();
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (contentReader.isPlaying()) {
+            menu.findItem(R.id.action_play_content).setEnabled(false).setVisible(false);
+            menu.findItem(R.id.action_play_stop).setEnabled(true).setVisible(true);
+        } else {
+            menu.findItem(R.id.action_play_content).setEnabled(true).setVisible(true);
+            menu.findItem(R.id.action_play_stop).setEnabled(false).setVisible(false);
+        }
         return true;
     }
 

@@ -12,4 +12,10 @@
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/action_play_content" />
+    <item
+        android:id="@+id/action_play_stop"
+        android:icon="@drawable/ic_action_pause"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/vorlesen_stoppen" />
 </menu>
