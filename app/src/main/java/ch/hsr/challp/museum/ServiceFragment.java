@@ -1,6 +1,5 @@
 package ch.hsr.challp.museum;
 
-import android.app.Fragment;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,10 +7,12 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import ch.hsr.challp.museum.helper.FragmentHelper;
+import ch.hsr.challp.museum.helper.FragmentName;
 import ch.hsr.challp.museum.interfaces.BeaconScanClient;
 import ch.hsr.challp.museum.service.BeaconScanService;
 
-public abstract class ServiceFragment extends Fragment implements BeaconScanClient {
+public abstract class ServiceFragment extends DrawerFragment implements BeaconScanClient {
 
     private BeaconScanService beaconScanService = null;
 
@@ -62,7 +63,7 @@ public abstract class ServiceFragment extends Fragment implements BeaconScanClie
 
     @Override
     public void goToServiceStoppedActivity() {
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, new GuideStoppedFragment()).commit();
+        FragmentHelper.show(getFragmentChangeListener(), getFragmentManager(), FragmentName.GUIDE_STOPPED, null);
     }
 
     protected BeaconScanService getBeaconScanService() {

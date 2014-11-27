@@ -1,7 +1,6 @@
 package ch.hsr.challp.museum;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.bluetooth.BluetoothAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import ch.hsr.challp.museum.emulator.Emulator;
+import ch.hsr.challp.museum.helper.FragmentHelper;
+import ch.hsr.challp.museum.helper.FragmentName;
 import ch.hsr.challp.museum.service.BeaconScanService;
 
 
-public class GuideFragment extends Fragment {
+public class GuideFragment extends DrawerFragment {
 
     @Nullable
     @Override
@@ -73,6 +74,6 @@ public class GuideFragment extends Fragment {
     private void startServiceAndGoToBeaconTest() {
         Intent serviceIntent = new Intent(getActivity(), BeaconScanService.class);
         getActivity().startService(serviceIntent);
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, new GuideRunningFragment()).commit();
+        FragmentHelper.show(getFragmentChangeListener(), getFragmentManager(), FragmentName.GUIDE_RUNNING, null);
     }
 }

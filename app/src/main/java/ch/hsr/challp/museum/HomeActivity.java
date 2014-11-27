@@ -2,7 +2,6 @@ package ch.hsr.challp.museum;
 
 import android.app.Activity;
 import android.app.ActivityManager;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,45 +23,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.hsr.challp.museum.adapter.NavDrawerListAdapter;
+import ch.hsr.challp.museum.helper.FragmentHelper;
+import ch.hsr.challp.museum.helper.FragmentName;
 import ch.hsr.challp.museum.model.NavDrawerItem;
 import ch.hsr.challp.museum.service.BeaconScanService;
 
-public class HomeActivity extends Activity {
-    public static final int SECTION_GUIDE = 0;
-    public static final int SECTION_QUESTION = 1;
-    public static final int SECTION_READ_LATER = 2;
-    public static final int SECTION_INFORMATION = 3;
-    public static final int SECTION_GUIDE_STOPPED = 4;
+public class HomeActivity extends Activity implements FragmentHelper.FragmentActivity {
+
     public static final String NOTIFICATIONS = "NOTIFICATIONS";
     public static final String SETTINGS = "SETTINGS";
     public static final String SECTION = "SECTION";
-    private String[] titles;
+    public static final String POI = "POI";
     private DrawerLayout dLayout;
     private ListView dList;
     private ListAdapter adapter;
     private ActionBarDrawerToggle dToggle;
     private MenuItem stopItem;
     private Menu menu;
-    private Integer activeSection;
+    private FragmentName activeFragment;
+    private Integer activePOI = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        titles = new String[]{
-                getString(R.string.title_companion),
-                getString(R.string.title_question),
-                getString(R.string.title_read_later),
-                getString(R.string.title_about),
-                getString(R.string.title_stopped)
-        };
         dLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         dList = (ListView) findViewById(R.id.left_drawer_list);
         List<NavDrawerItem> items = new ArrayList<>();
-        items.add(new NavDrawerItem(getString(R.string.title_companion), R.drawable.ic_guide));
-        items.add(new NavDrawerItem(getString(R.string.title_question), R.drawable.ic_question));
-        items.add(new NavDrawerItem(getString(R.string.title_read_later), R.drawable.ic_read_later));
-        items.add(new NavDrawerItem(getString(R.string.title_about), R.drawable.ic_information));
+        for (FragmentName fragmentName : FragmentName.DRAWER_FRAGMENTS) {
+            items.add(new NavDrawerItem(getString(fragmentName.getTitle()), fragmentName.getIcon()));
+        }
 
         // notification switch
         Switch notificationSwitch = (Switch) dLayout.findViewById(R.id.switch_notification);
@@ -86,7 +76,7 @@ public class HomeActivity extends Activity {
 
             public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
                 dLayout.closeDrawers();
-                showContent(position);
+                showContent(FragmentName.DRAWER_FRAGMENTS[position]);
             }
 
         });
@@ -135,13 +125,15 @@ public class HomeActivity extends Activity {
     @Override
     protected void onRestoreInstanceState(Bundle in) {
         super.onRestoreInstanceState(in);
-        activeSection = in.getInt(SECTION);
-        showContent(activeSection);
+        activeFragment = FragmentName.getFragmentName(in.getInt(SECTION));
+        activePOI = in.getInt(POI);
+        showContent(activeFragment);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle out) {
-        out.putInt(SECTION, activeSection);
+        out.putInt(SECTION, FragmentName.getId(activeFragment));
+        if (activePOI != null) out.putInt(POI, activePOI);
         super.onSaveInstanceState(out);
     }
 
@@ -165,36 +157,28 @@ public class HomeActivity extends Activity {
         }
         // Handle your other action bar items...
         if (item.getItemId() == R.id.stop_guide) {
-            getFragmentManager().beginTransaction().replace(R.id.content_frame, new GuideStoppedFragment()).commit();
+            FragmentHelper.show(this, getFragmentManager(), FragmentName.GUIDE_STOPPED, null);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-
-    private void showContent(int position) {
-        activeSection = position;
-        Fragment fragment;
-        if (position == SECTION_GUIDE) {
-            if (isBeaconScanServiceActive()) {
-                fragment = new GuideRunningFragment();
-            } else {
-                fragment = new GuideFragment();
-            }
-        } else if (position == SECTION_QUESTION) {
-            fragment = new QuestionFragment();
-        } else if (position == SECTION_GUIDE_STOPPED) {
-            fragment = new GuideStoppedFragment();
-        } else {
-            Bundle args = new Bundle();
-            args.putString("Menu", titles[position]);
-            fragment = new DetailFragment();
-            fragment.setArguments(args);
-        }
-        setTitleByFragment(position);
-        getFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+    @Override
+    public void onFragmentChanged(FragmentName newFragment, Integer poiID) {
+        activeFragment = newFragment;
+        activePOI = poiID;
+        int position = newFragment.getDrawerPosition();
         dList.setItemChecked(position, true);
         dList.setSelection(position);
+        setTitle(getString(newFragment.getTitle()));
+    }
+
+    private void showContent(FragmentName name) {
+        if (name == FragmentName.GUIDE && isBeaconScanServiceActive()) {
+            // TODO show POI, if available
+            name = FragmentName.GUIDE_RUNNING;
+        }
+        FragmentHelper.show(this, getFragmentManager(), name, activePOI);
     }
 
     private boolean isBeaconScanServiceActive() {
@@ -207,20 +191,19 @@ public class HomeActivity extends Activity {
         return false;
     }
 
-    private void setTitleByFragment(int position) {
-        String title = titles[position];
+    private void setTitle(String title) {
         if (getActionBar() != null) getActionBar().setTitle(title);
     }
 
-    private int getSectionIdFromExtras() {
+    private FragmentName getSectionIdFromExtras() {
         Intent previousIntent = getIntent();
         if (previousIntent != null) {
             Bundle extras = previousIntent.getExtras();
             if (extras != null) {
-                return extras.getInt(SECTION, 0);
+                return FragmentName.getFragmentName(extras.getInt(SECTION, 0));
             }
         }
-        return 0;
+        return FragmentName.GUIDE;
     }
 
     public void setStopButtonVisible(boolean visible) {
@@ -233,4 +216,5 @@ public class HomeActivity extends Activity {
             stopItem.setVisible(visible);
         }
     }
+
 }
