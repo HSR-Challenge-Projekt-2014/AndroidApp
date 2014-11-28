@@ -19,6 +19,7 @@
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,7 +27,7 @@
             android:name="ch.hsr.challp.museum.QuestionActivity"
             android:label="@string/title_activity_question"
             android:parentActivityName="ch.hsr.challp.museum.HomeActivity">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.hsr.challp.museum.HomeActivity" />
         </activity>
@@ -35,7 +36,7 @@
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:label="@string/title_activity_content"
             android:parentActivityName="ch.hsr.challp.museum.ContentActivity">
-            <meta-data
+        <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ch.hsr.challp.museum.ContentActivity" />
         </activity>
@@ -43,7 +44,15 @@
         <service
             android:name="ch.hsr.challp.museum.service.BeaconScanService"
             android:exported="false" />
-        
+
+        <activity
+            android:name="ch.hsr.challp.museum.QuestionFormActivity"
+            android:label="@string/title_question_ask"
+            android:parentActivityName="ch.hsr.challp.museum.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ch.hsr.challp.museum.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>

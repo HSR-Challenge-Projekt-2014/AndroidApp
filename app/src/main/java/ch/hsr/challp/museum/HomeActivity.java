@@ -145,6 +145,9 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
         if (isBeaconScanServiceActive()) {
             stopItem.setVisible(true);
         }
+        if (FragmentName.QUESTIONS == activeFragment) {
+            menu.findItem(R.id.action_ask_question).setVisible(true);
+        }
         return true;
     }
 
@@ -158,6 +161,8 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
         // Handle your other action bar items...
         if (item.getItemId() == R.id.stop_guide) {
             FragmentHelper.show(this, getFragmentManager(), FragmentName.GUIDE_STOPPED, null);
+        } else if (item.getItemId() == R.id.action_ask_question) {
+            startActivity(new Intent(getApplicationContext(), QuestionFormActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
