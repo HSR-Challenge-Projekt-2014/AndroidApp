@@ -126,4 +126,36 @@ public class Content implements Parcelable {
     public static void unsaveContent(Content content) {
         savedContents.remove(content);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Content content = (Content) o;
+
+        if (imageResource != content.imageResource) return false;
+        if (previewImageResource != content.previewImageResource) return false;
+        if (contentText != null ? !contentText.equals(content.contentText) : content.contentText != null)
+            return false;
+        if (room != null ? !room.equals(content.room) : content.room != null) return false;
+        if (title != null ? !title.equals(content.title) : content.title != null) return false;
+        if (topic != null ? !topic.equals(content.topic) : content.topic != null) return false;
+        if (youTubeId != null ? !youTubeId.equals(content.youTubeId) : content.youTubeId != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = previewImageResource;
+        result = 31 * result + imageResource;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (contentText != null ? contentText.hashCode() : 0);
+        result = 31 * result + (topic != null ? topic.hashCode() : 0);
+        result = 31 * result + (youTubeId != null ? youTubeId.hashCode() : 0);
+        result = 31 * result + (room != null ? room.hashCode() : 0);
+        return result;
+    }
 }
