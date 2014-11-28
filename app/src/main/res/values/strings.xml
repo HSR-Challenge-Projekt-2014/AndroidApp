@@ -38,7 +38,7 @@
     <string name="about_museum">Über das Museum</string>
     <string name="titleImageDescription">Museums Titelbild</string>
     <string name="read_later">Später lesen</string>
-    <string name="read_later_saved"> erfolgreich für "Später lesen" gespeichert</string>
+    <string name="read_later_saved"> für "Später lesen" gespeichert</string>
     <string name="remove_read_later">Inhalt von Später lesen löschen</string>
     <string name="read_later_removed"> von "Später lesen" entfernt.</string>
 </resources>
