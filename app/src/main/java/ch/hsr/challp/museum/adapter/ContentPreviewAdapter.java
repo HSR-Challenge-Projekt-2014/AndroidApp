@@ -33,7 +33,7 @@ public class ContentPreviewAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return contents.get(i);
     }
 
     @Override
