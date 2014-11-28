@@ -13,25 +13,27 @@
         <ImageView
             android:id="@+id/poiHeader"
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
+            android:layout_height="@dimen/header_img_height"
             android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/poiTitle"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:padding="15dp"
-            android:textSize="@dimen/title_font_size"
-            android:background="@drawable/border" />
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/element_spacing"
+            android:paddingTop="@dimen/element_spacing_wide"
+            android:textSize="@dimen/font_large" />
 
         <GridView
             android:id="@+id/POIContentPane"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:numColumns="3"
-            android:verticalSpacing="10dp"
-            android:horizontalSpacing="15dp"
+            android:verticalSpacing="@dimen/element_spacing"
+            android:horizontalSpacing="@dimen/element_spacing"
             android:gravity="start"
-            android:padding="15dp" />
+            android:padding="@dimen/activity_horizontal_margin" />
     </LinearLayout>
 </FrameLayout>

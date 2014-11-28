@@ -44,7 +44,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Mo-Fr:"
-                    android:paddingRight="@dimen/activity_horizontal_margin" />
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_medium" />
 
 
                 <TextView
@@ -52,7 +53,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="08:00 bis 12:00 Uhr"
-                    android:layout_column="2" />
+                    android:layout_column="2"
+                    android:textSize="@dimen/font_medium" />
             </TableRow>
 
 
@@ -65,7 +67,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="14:00 bis 18:00 Uhr"
-                    android:layout_column="2" />
+                    android:layout_column="2"
+                    android:textSize="@dimen/font_medium" />
             </TableRow>
 
 
@@ -79,7 +82,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Sa:"
-                    android:paddingRight="@dimen/activity_horizontal_margin" />
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_medium" />
 
 
                 <TextView
@@ -87,7 +91,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="09:00 bis 17:00 Uhr"
-                    android:layout_column="2" />
+                    android:layout_column="2"
+                    android:textSize="@dimen/font_medium" />
 
             </TableRow>
 
@@ -101,7 +106,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="So:"
-                    android:paddingRight="@dimen/activity_horizontal_margin" />
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_medium" />
 
 
                 <TextView
@@ -109,7 +115,8 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Geschlossen"
-                    android:layout_column="2" />
+                    android:layout_column="2"
+                    android:textSize="@dimen/font_medium" />
 
             </TableRow>
 
@@ -120,7 +127,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Adresse"
-            android:paddingBottom="5dp" />
+            android:paddingBottom="5dp"
+            android:textSize="@dimen/font_large" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -132,19 +140,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Grosser Muristalden 6" />
+                android:text="Grosser Muristalden 6"
+                android:textSize="@dimen/font_medium" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="3006 Bern" />
+                android:text="3006 Bern"
+                android:textSize="@dimen/font_medium" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Schweiz" />
+                android:text="Schweiz"
+                android:textSize="@dimen/font_medium" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
