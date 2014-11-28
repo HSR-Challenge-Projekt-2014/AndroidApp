@@ -33,7 +33,14 @@ public class ContentReader {
                 }
             }
         });
+
         this.stringsToSpeech = stringsToSpeech;
+        this.callback = callback;
+    }
+
+    public ContentReader(TextToSpeech tts, List<String> texts, ContentReaderCallback callback) {
+        this.tts = tts;
+        this.stringsToSpeech = texts;
         this.callback = callback;
     }
 

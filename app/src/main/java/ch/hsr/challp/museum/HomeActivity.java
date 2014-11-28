@@ -149,7 +149,7 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
         if (isBeaconScanServiceActive()) {
             stopItem.setVisible(true);
         }
-        if (FragmentName.QUESTIONS == activeFragment) {
+        if (FragmentName.QUESTIONS == activeFragment || FragmentName.POI == activeFragment) {
             menu.findItem(R.id.action_ask_question).setVisible(true);
         }
         return true;

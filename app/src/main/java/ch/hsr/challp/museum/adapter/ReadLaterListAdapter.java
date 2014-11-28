@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ch.hsr.challp.museum.R;
@@ -18,27 +17,10 @@ import ch.hsr.challp.museum.model.Content;
 public class ReadLaterListAdapter extends ArrayAdapter<Content> {
 
     private final Context context;
-    private final List<Content> allItems;
 
     public ReadLaterListAdapter(Context context, List<Content> items) {
         super(context, R.layout.preview_row, items);
         this.context = context;
-        this.allItems = new ArrayList<>(items);
-    }
-
-    @Override
-    public Content getItem(int position) {
-        return allItems.get(position);
-    }
-
-    @Override
-    public int getPosition(Content item) {
-        return allItems.indexOf(item);
-    }
-
-    @Override
-    public int getCount() {
-        return allItems.size();
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -59,6 +41,4 @@ public class ReadLaterListAdapter extends ArrayAdapter<Content> {
         metaRight.setText(content.getRoom().getName());
         return view;
     }
-
-
 }
