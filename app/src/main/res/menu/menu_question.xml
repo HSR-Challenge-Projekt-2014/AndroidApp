@@ -15,7 +15,7 @@
         android:title="@string/action_play_content" />
     <item
         android:id="@+id/action_ask_question"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@drawable/ic_action_new"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/action_ask_question" />

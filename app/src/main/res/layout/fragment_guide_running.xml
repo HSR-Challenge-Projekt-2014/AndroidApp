@@ -28,14 +28,6 @@
             android:text="Benachrichtigungen sind aktiviert, sobald Informationen abrufbar sind, werden Sie darauf aufmerksam gemacht."
             android:textSize="14sp" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:src="@drawable/ic_guide" />
-
         <Button
             android:id="@+id/button_questions"
             android:layout_width="wrap_content"

@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Museum</string>
-    <string name="action_settings">Settings</string>
     <string name="action_ask_question">Ask Question</string>
     <string name="title_activity_home">Museum Begleiter</string>
     <string name="title_companion">Begleiter</string>
@@ -10,32 +9,15 @@
     <string name="title_read_later">Später lesen</string>
     <string name="title_about">Über das Museum</string>
     <string name="title_question_ask">Eine Frage stellen</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
     <string name="drawer_open">Menu öffnen</string>
     <string name="drawer_close">Menu schliessen</string>
-    <string name="title_activity_beacon_test">BeaconTest</string>
-
-    <string-array name="topics_list">
-        <item>Abenteuerliches</item>
-        <item>Historisches</item>
-        <item>Spass und Spannung</item>
-    </string-array>
-
     <string name="title_activity_question">QuestionActivity</string>
-    <string name="poi_fragment_title">Point of Interest Fragment</string>
-    <string name="content_title">Spass und Spannung</string>
-    <string name="content_header_description">Content header description</string>
-    <string name="start_beacon_test">BeaconTest starten</string>
     <string name="title_activity_content">Begleiter</string>
     <string name="action_play_content">Inhalt vorlesen</string>
-    <string name="title_stopped">Begleiter beendet</string>
     <string name="vorlesen_stoppen">Vorlesen stoppen</string>
     <string name="bluetooth_off_stopping">Bluetooth wurde deaktivert, stoppe Begleiter.</string>
     <string name="stop_guide">Begleiter beenden</string>
     <string name="tts_starting_not_possible_message">Text2Speech kann nicht gestartet werden, bitte überprüfen Sie Ihre Einstellungen.</string>
-    <string name="about_museum">Über das Museum</string>
     <string name="titleImageDescription">Museums Titelbild</string>
     <string name="button_submit_question">Frage stellen</string>
     <string name="your_question">Deine Frage an das Museum</string>
@@ -48,8 +30,8 @@
     <string name="question_checkbox_notification">mich über die Antwort informieren</string>
     <string name="question_success">Frage gespeichert</string>
     <string name="read_later">Später lesen</string>
-    <string name="read_later_saved">&#160;für "Später lesen" gespeichert</string>
+    <string name="read_later_saved">&#160;wurde gespeichert.</string>
     <string name="remove_read_later">Inhalt von Später lesen löschen</string>
-    <string name="read_later_removed">&#160;von "Später lesen" entfernt.</string>
+    <string name="read_later_removed">&#160;wurde entfernt.</string>
     <string name="no_read_later_items_saved">Keine Inhalte gespeichert. \nBitte starten Sie den Begleiter</string>
 </resources>
