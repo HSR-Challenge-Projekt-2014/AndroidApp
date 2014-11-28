@@ -45,7 +45,10 @@ public class FragmentHelper {
         String fragmentId = "0";
         if(currentFrag != null) {
             FragmentActivity fragmentActivity = (FragmentActivity) currentFrag.getActivity();
-            fragmentId = FragmentName.getId(fragmentActivity.getActiveFragment()).toString();
+            FragmentName activeFragment = fragmentActivity.getActiveFragment();
+            if(activeFragment != null) {
+                fragmentId = FragmentName.getId(activeFragment).toString();
+            }
         }
         if (name.addToBackStack()) tr = tr.addToBackStack(fragmentId);
         tr.commit();
