@@ -78,10 +78,14 @@ public class PointOfInterest {
         PointOfInterest poi1 = new PointOfInterest(1, "Der Bär in St.Gallen", R.drawable.poi_header_bear, new BeaconReference(region1, Room.ONE));
         poi1.addContent(new Content(Topic.ADVENTURE, R.drawable.content_abenteuer, R.drawable.bear_bittner, "Grizzlys in Alaska", "Endlich ist der bekannte Berner Biologe und Bärenfotograf " +
                 "David Bittner aus der einsamen Wildnis in Alaska zurück. Mitgebracht hat er faszinierendes und neues Bildmaterial.", "KaKcjpmnA6c"));
-        poi1.addContent(new Content(Topic.HISTORIC, R.drawable.content_historisches, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla"));
-        poi1.addContent(new Content(Topic.FUN, R.drawable.content_spass, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla"));
-        poi1.addContent(new Content(Topic.LOVE, R.drawable.content_liebensleben, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla"));
-        poi1.addContent(new Content(Topic.ENERGY, R.drawable.content_energie, R.drawable.bear_face, "Foobar", "Lorem Ipsum blabla"));
+        poi1.addContent(new Content(Topic.HISTORIC, R.drawable.content_historisches, R.drawable.letzter_baer_der_ch, "Der letzte Bär der Schweiz", "Jon Sarott Bischoff und Padruot Fried waren " +
+                "im Val S-charl auf der Gemsjagd. Dabei schossen sie am 1.September 1904 in der Flanke des Piz Pisoc eine 116 kg schwere Bärin. Der letzte Bär der Schweiz. In einem " +
+                "Gebiet, das 10 Jahre später (1914) in den Nationalpark integriert wurde."));
+        poi1.addContent(new Content(Topic.FUN, R.drawable.content_spass, R.drawable.bear_fun, "Die meisten Tiere sehen rasiert lustig aus.", "Bären NICHT!"));
+        poi1.addContent(new Content(Topic.LOVE, R.drawable.content_liebensleben, R.drawable.bear_sex, "Alle Bären glauben, sie seien der Vater", "Normalerweise paart sich " +
+                "ein Braunbärenweibchen nur mit einem Männchen. Das führt aber auch dazu, dass zahlreiche andere Männchen der Bärenpopulation den folgenden Nachwuchs nicht " +
+                "als eigenen ansehen und eventuell umbringen. Anders ist es, wenn die Braunbärin mit vielen Männchen kopuliert - dann glauben später alle, sie seien der Vater, " +
+                "und lassen den Wurf in Ruhe."));
         /*
             FUCHS in Zürich
          */

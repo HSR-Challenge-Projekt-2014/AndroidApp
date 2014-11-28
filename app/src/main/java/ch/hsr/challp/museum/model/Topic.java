@@ -6,7 +6,7 @@ import java.util.List;
 public class Topic {
 
     public static final Topic ALL_ITEMS = new Topic(1, "Alle");
-    public static final Topic ADVENTURE = new Topic(2, "Abenteuerliches");
+    public static final Topic ADVENTURE = new Topic(2, "Abenteuer");
     public static final Topic HISTORIC = new Topic(3, "Historisches");
     public static final Topic FUN = new Topic(4, "Spass und Spannung");
     public static final Topic LOVE = new Topic(5, "Liebesleben");
