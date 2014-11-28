@@ -2,6 +2,9 @@ package ch.hsr.challp.museum;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +12,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -178,6 +182,11 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
         setTitle(getString(newFragment.getTitle()));
     }
 
+    @Override
+    public FragmentName getActiveFragment() {
+        return activeFragment;
+    }
+
     private void showContent(FragmentName name) {
         if (name == FragmentName.GUIDE && isBeaconScanServiceActive()) {
             // TODO show POI, if available
@@ -220,6 +229,38 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
         } else {
             stopItem.setVisible(visible);
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (getFragmentManager().getBackStackEntryCount() == 0) {
+                this.finish();
+                return false;
+            } else {
+                if(isBeaconScanServiceActive() && getFragmentManager().getBackStackEntryCount() == 1) {
+                    this.finish();
+                    return false;
+                }
+                getFragmentManager().popBackStack();
+                int index = getFragmentManager().getBackStackEntryCount() - 1;
+                FragmentManager.BackStackEntry backStackEntryAt = getFragmentManager().getBackStackEntryAt(index);
+                Integer fragmentId = Integer.parseInt(backStackEntryAt.getName());
+                onFragmentChanged(FragmentName.getFragmentName(fragmentId), activePOI);
+                removeCurrentFragment();
+                return false;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    public void removeCurrentFragment() {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Fragment currentFrag = getFragmentManager().findFragmentById(R.id.content_frame);
+        if (currentFrag != null) {
+            transaction.remove(currentFrag);
+        }
+        transaction.commit();
     }
 
 }
