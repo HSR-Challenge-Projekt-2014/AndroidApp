@@ -2,6 +2,7 @@ package ch.hsr.challp.museum;
 
 import android.app.Fragment;
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -20,19 +21,48 @@ import ch.hsr.challp.museum.model.Content;
 public class ReadLaterFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
     private ReadLaterListAdapter mAdapter;
+    private View view;
+    private ListView list;
+    private Context context;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.fragment_read_later, container, false);
+        view = inflater.inflate(R.layout.fragment_read_later, container, false);
 
-        mAdapter = new ReadLaterListAdapter(container.getContext(), Content.getSavedContents());
-        ListView list = (ListView) result.findViewById(R.id.read_later_list_view);
+        list = (ListView) view.findViewById(R.id.read_later_list_view);
+        context = container.getContext();
+
+        mAdapter = new ReadLaterListAdapter(context, Content.getSavedContents());
+        mAdapter.setNotifyOnChange(true);
         list.setAdapter(mAdapter);
+
+        updateElementsVisibility();
 
         list.setOnItemClickListener(this);
 
-        return result;
+        return view;
+    }
+
+    private void updateList() {
+        mAdapter.clear();
+        mAdapter.addAll(Content.getSavedContents());
+        mAdapter.notifyDataSetChanged();
+        updateElementsVisibility();
+    }
+
+    private void updateElementsVisibility() {
+        if (!mAdapter.isEmpty()) {
+            view.findViewById(R.id.no_read_later_items_text).setVisibility(View.GONE);
+        } else {
+            view.findViewById(R.id.no_read_later_items_text).setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onResume() {
+        updateList();
+        super.onResume();
     }
 
     @Override

@@ -130,7 +130,7 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
             toast.show();
         } else if (id == R.id.action_remove_read_later) {
             Log.d(getClass().getName(), "remove read later");
-            Content.unsaveContent(content);
+            Content.removeSavedContent(content);
             Toast toast = Toast.makeText(this, content.getTitle() + getString(R.string.read_later_removed), Toast.LENGTH_SHORT);
             toast.show();
         }

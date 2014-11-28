@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Content implements Parcelable {
@@ -52,11 +51,15 @@ public class Content implements Parcelable {
     }
 
     public static List<Content> getSavedContents() {
-        return Collections.unmodifiableList(savedContents);
+        return new ArrayList<>(savedContents);
     }
 
     public static void saveContent(Content content) {
         savedContents.add(content);
+    }
+
+    public static void removeSavedContent(Content content) {
+        savedContents.remove(content);
     }
 
     public int getPreviewImageResource() {
@@ -123,9 +126,6 @@ public class Content implements Parcelable {
         parcel.writeString(youTubeId);
     }
 
-    public static void unsaveContent(Content content) {
-        savedContents.remove(content);
-    }
 
     @Override
     public boolean equals(Object o) {

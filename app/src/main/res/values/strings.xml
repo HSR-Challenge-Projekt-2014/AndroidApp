@@ -41,4 +41,5 @@
     <string name="read_later_saved"> für "Später lesen" gespeichert</string>
     <string name="remove_read_later">Inhalt von Später lesen löschen</string>
     <string name="read_later_removed"> von "Später lesen" entfernt.</string>
+    <string name="no_read_later_items_saved">Keine Inhalte gespeichert. \nBitte starten Sie den Begleiter</string>
 </resources>

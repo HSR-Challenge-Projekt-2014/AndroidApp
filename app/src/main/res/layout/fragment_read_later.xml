@@ -9,6 +9,14 @@
     android:orientation="vertical"
     tools:context="ch.hsr.challp.museum.HomeActivity$PlaceholderFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/no_read_later_items_saved"
+        android:id="@+id/no_read_later_items_text"
+        android:gravity="center_vertical|center_horizontal" />
+
     <ListView
         android:id="@+id/read_later_list_view"
         android:layout_width="match_parent"
