@@ -48,8 +48,8 @@
     <string name="question_checkbox_notification">mich über die Antwort informieren</string>
     <string name="question_success">Frage gespeichert</string>
     <string name="read_later">Später lesen</string>
-    <string name="read_later_saved"> für "Später lesen" gespeichert</string>
+    <string name="read_later_saved">&#160;für "Später lesen" gespeichert</string>
     <string name="remove_read_later">Inhalt von Später lesen löschen</string>
-    <string name="read_later_removed"> von "Später lesen" entfernt.</string>
+    <string name="read_later_removed">&#160;von "Später lesen" entfernt.</string>
     <string name="no_read_later_items_saved">Keine Inhalte gespeichert. \nBitte starten Sie den Begleiter</string>
 </resources>
