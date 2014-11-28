@@ -7,4 +7,11 @@
         android:showAsAction="always"
         android:title="@string/stop_guide"
         android:visible="false" />
+    <item
+        android:id="@+id/action_ask_question"
+        android:icon="@android:drawable/ic_menu_add"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:title="@string/action_ask_question"
+        android:visible="false" />
 </menu>

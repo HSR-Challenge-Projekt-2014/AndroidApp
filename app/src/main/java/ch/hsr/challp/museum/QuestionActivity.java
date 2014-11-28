@@ -1,6 +1,7 @@
 package ch.hsr.challp.museum;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -94,8 +95,8 @@ public class QuestionActivity extends Activity implements ContentReaderCallback 
         int id = item.getItemId();
 
         if (id == R.id.action_ask_question) {
-            // TODO add question form
-            Log.w(getClass().getName(), "question form not yet implemented");
+            Intent i = new Intent(getApplicationContext(), QuestionFormActivity.class);
+            startActivity(i);
             return true;
         } else if (id == R.id.action_play_content) {
             Log.d(getClass().getName(), "Text2Speech Button clicked");
