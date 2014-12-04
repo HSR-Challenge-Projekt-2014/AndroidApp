@@ -6,7 +6,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     tools:context="ch.hsr.challp.museum.HomeActivity$PlaceholderFragment">
 
     <TextView
@@ -23,5 +22,4 @@
         android:layout_height="match_parent">
 
     </ListView>
-
 </LinearLayout>

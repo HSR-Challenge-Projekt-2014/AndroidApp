@@ -8,39 +8,39 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="ch.hsr.challp.museum.HomeActivity$PlaceholderFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <Spinner
-                android:id="@+id/spinner_topic"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
-
-            <Spinner
-                android:id="@+id/spinner_room"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="0.5" />
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinner_topic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5" />
+
+                <Spinner
+                    android:id="@+id/spinner_room"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="0.5" />
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/question_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
 
         </LinearLayout>
-
-        <ListView
-            android:id="@+id/question_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </ListView>
-
-    </LinearLayout>
 
 </RelativeLayout>

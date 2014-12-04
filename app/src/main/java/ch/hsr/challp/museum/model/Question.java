@@ -13,6 +13,8 @@ public class Question {
         all.add(new Question(1, "Warum ist der Bär aus der Schweiz verschwunden?", fillText, R.drawable.bear_face, Topic.HISTORIC, Room.ONE));
         all.add(new Question(2, "Frisst der Bär auch Erdbeeren oder Himbeeren, sofern sie aus einem biologischen Garten stammen?", fillText + " " + fillText, R.drawable.bear_drawing, Topic.FUN, Room.ONE));
         all.add(new Question(3, "Sind die Alpen kalkhaltige Erdkrustenfalten?", fillText, R.drawable.bear_drawing, Topic.ADVENTURE, Room.TWO));
+        all.add(new Question(4, "Sind die Alpen kalkhaltige Erdkrustenfalten?", fillText, R.drawable.bear_drawing, Topic.ADVENTURE, Room.TWO));
+        all.add(new Question(5, "Sind die Alpen kalkhaltige Erdkrustenfalten?", fillText, R.drawable.bear_drawing, Topic.ADVENTURE, Room.TWO));
     }
 
     private final int id;
