@@ -52,17 +52,6 @@
                     android:paddingBottom="@dimen/element_spacing_wide"
                     android:text="In der Zwischenzeit können Sie beantwortete Besucher-Fragen duchsehen."
                     android:textSize="@dimen/font_medium" />
-
-                <Button
-                    android:id="@+id/button_questions"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:height="@dimen/button_height"
-                    android:background="@drawable/button_border"
-                    android:padding="@dimen/element_spacing"
-                    android:text="Fragen ans Museum"
-                    android:textColor="@android:color/white" />
-
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

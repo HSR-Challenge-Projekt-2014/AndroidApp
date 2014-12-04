@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import org.altbeacon.beacon.Beacon;
 
 import ch.hsr.challp.museum.helper.FragmentHelper;
-import ch.hsr.challp.museum.helper.FragmentName;
 import ch.hsr.challp.museum.model.PointOfInterest;
 
 
@@ -20,14 +19,7 @@ public class GuideRunningFragment extends ServiceFragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ((HomeActivity)getActivity()).setStopButtonVisible(true);
 
-        View fragment = inflater.inflate(R.layout.fragment_guide_running, container, false);
-        fragment.findViewById(R.id.button_questions).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentHelper.show(getFragmentChangeListener(), getFragmentManager(), FragmentName.QUESTIONS, null);
-            }
-        });
-        return fragment;
+        return inflater.inflate(R.layout.fragment_guide_running, container, false);
     }
 
     @Override
