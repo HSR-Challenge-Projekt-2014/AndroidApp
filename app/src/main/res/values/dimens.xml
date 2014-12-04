@@ -9,6 +9,8 @@
     <dimen name="element_spacing_wide">16dp</dimen>
     <dimen name="button_height">48dp</dimen>
 
+    <dimen name="image_thumbnail_square">50dp</dimen>
+
     <dimen name="font_micro">12sp</dimen>
     <dimen name="font_small">14sp</dimen>
     <dimen name="font_medium">18sp</dimen>
