@@ -25,7 +25,7 @@
         android:title="@string/vorlesen_stoppen" />
     <item
         android:id="@+id/action_ask_question"
-        android:icon="@drawable/ic_action_help"
+        android:icon="@drawable/ic_action_add_question"
         android:orderInCategory="100"
         android:showAsAction="ifRoom"
         android:title="@string/action_ask_question" />

@@ -9,7 +9,7 @@
         android:visible="false" />
     <item
         android:id="@+id/action_ask_question"
-        android:icon="@drawable/ic_action_new"
+        android:icon="@drawable/ic_action_add_question"
         android:orderInCategory="100"
         android:showAsAction="always"
         android:title="@string/action_ask_question"
