@@ -43,7 +43,8 @@ public class ContentPreviewAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int i, final View view, ViewGroup viewGroup) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View result = inflater.inflate(R.layout.content_preview, null);
 
         result.setOnClickListener(new View.OnClickListener() {
@@ -55,9 +56,10 @@ public class ContentPreviewAdapter extends BaseAdapter {
             }
         });
 
-        ((TextView) result.findViewById(R.id.contentPreviewDescription)).setText(contents.get(i).getTopic().getName());
-        ((ImageView) result.findViewById(R.id.contentPreviewImage)).setImageResource(contents.get(i).getPreviewImageResource());
-
+        ((TextView) result.findViewById(R.id.contentPreviewDescription))
+                .setText(contents.get(i).getTopic().getName());
+        ((ImageView) result.findViewById(R.id.contentPreviewImage))
+                .setImageResource(contents.get(i).getPreviewImageResource());
 
         return result;
     }

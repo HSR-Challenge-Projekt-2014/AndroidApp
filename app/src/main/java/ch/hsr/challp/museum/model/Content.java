@@ -18,6 +18,7 @@ public class Content implements Parcelable {
             return new Content[size];
         }
     };
+    private static List<Content> savedContents = new ArrayList<>();
     private final int previewImageResource;
     private final int imageResource;
     private final String title;
@@ -25,7 +26,6 @@ public class Content implements Parcelable {
     private Topic topic;
     private String youTubeId;
     private Room room = null;
-    private static List<Content> savedContents = new ArrayList<>();
 
     private Content(Parcel in) {
         previewImageResource = in.readInt();
@@ -37,11 +37,13 @@ public class Content implements Parcelable {
         youTubeId = in.readString();
     }
 
-    public Content(Topic topic, int previewImageResource, int imageResource, String title, String contentText) {
+    public Content(Topic topic, int previewImageResource, int imageResource, String title,
+            String contentText) {
         this(topic, previewImageResource, imageResource, title, contentText, null);
     }
 
-    public Content(Topic topic, int previewImageResource, int imageResource, String title, String contentText, String youTubeId) {
+    public Content(Topic topic, int previewImageResource, int imageResource, String title,
+            String contentText, String youTubeId) {
         this.topic = topic;
         this.previewImageResource = previewImageResource;
         this.imageResource = imageResource;
@@ -129,20 +131,37 @@ public class Content implements Parcelable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Content content = (Content) o;
 
-        if (imageResource != content.imageResource) return false;
-        if (previewImageResource != content.previewImageResource) return false;
-        if (contentText != null ? !contentText.equals(content.contentText) : content.contentText != null)
+        if (imageResource != content.imageResource) {
             return false;
-        if (room != null ? !room.equals(content.room) : content.room != null) return false;
-        if (title != null ? !title.equals(content.title) : content.title != null) return false;
-        if (topic != null ? !topic.equals(content.topic) : content.topic != null) return false;
-        if (youTubeId != null ? !youTubeId.equals(content.youTubeId) : content.youTubeId != null)
+        }
+        if (previewImageResource != content.previewImageResource) {
             return false;
+        }
+        if (contentText != null ? !contentText.equals(content.contentText)
+                : content.contentText != null) {
+            return false;
+        }
+        if (room != null ? !room.equals(content.room) : content.room != null) {
+            return false;
+        }
+        if (title != null ? !title.equals(content.title) : content.title != null) {
+            return false;
+        }
+        if (topic != null ? !topic.equals(content.topic) : content.topic != null) {
+            return false;
+        }
+        if (youTubeId != null ? !youTubeId.equals(content.youTubeId) : content.youTubeId != null) {
+            return false;
+        }
 
         return true;
     }

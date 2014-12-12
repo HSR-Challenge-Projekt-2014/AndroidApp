@@ -67,14 +67,16 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         List<Question> filterResult = new ArrayList<>(allItems);
         if (!(topic == null || Topic.ALL_ITEMS.equals(topic))) {
             for (Question q : new ArrayList<>(allItems)) {
-                if (!q.getTopic().equals(topic))
+                if (!q.getTopic().equals(topic)) {
                     filterResult.remove(q);
+                }
             }
         }
         if (!(room == null || Room.ALL_ROOMS.equals(room))) {
             for (Question q : new ArrayList<>(allItems)) {
-                if (!q.getRoom().equals(room))
+                if (!q.getRoom().equals(room)) {
                     filterResult.remove(q);
+                }
             }
         }
         shownItems = filterResult;

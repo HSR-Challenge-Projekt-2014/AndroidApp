@@ -1,168 +1,168 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ch.hsr.challp.museum.AboutFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="ch.hsr.challp.museum.AboutFragment">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/poiHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:src="@drawable/museum"
-                android:contentDescription="@string/titleImageDescription"
-                android:scaleType="centerCrop" />
+                    android:id="@+id/poiHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:src="@drawable/museum"
+                    android:contentDescription="@string/titleImageDescription"
+                    android:scaleType="centerCrop"/>
 
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingTop="@dimen/activity_vertical_margin">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Öffnungszeiten"
-                    android:paddingBottom="10dp" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Öffnungszeiten"
+                        android:paddingBottom="10dp"/>
 
                 <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp">
 
                     <TableRow
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:clickable="false"
-                        android:baselineAligned="false">
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:clickable="false"
+                            android:baselineAligned="false">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Mo-Fr:"
-                            android:paddingRight="@dimen/activity_horizontal_margin"
-                            android:textSize="@dimen/font_medium" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Mo-Fr:"
+                                android:paddingRight="@dimen/activity_horizontal_margin"
+                                android:textSize="@dimen/font_medium"/>
 
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="08:00 bis 12:00 Uhr"
-                            android:layout_column="2"
-                            android:textSize="@dimen/font_medium" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="08:00 bis 12:00 Uhr"
+                                android:layout_column="2"
+                                android:textSize="@dimen/font_medium"/>
                     </TableRow>
 
 
                     <TableRow
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent">
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="14:00 bis 18:00 Uhr"
-                            android:layout_column="2"
-                            android:textSize="@dimen/font_medium" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="14:00 bis 18:00 Uhr"
+                                android:layout_column="2"
+                                android:textSize="@dimen/font_medium"/>
                     </TableRow>
 
 
                     <TableRow
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:paddingTop="3dp">
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:paddingTop="3dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Sa:"
-                            android:paddingRight="@dimen/activity_horizontal_margin"
-                            android:textSize="@dimen/font_medium" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Sa:"
+                                android:paddingRight="@dimen/activity_horizontal_margin"
+                                android:textSize="@dimen/font_medium"/>
 
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="09:00 bis 17:00 Uhr"
-                            android:layout_column="2"
-                            android:textSize="@dimen/font_medium" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="09:00 bis 17:00 Uhr"
+                                android:layout_column="2"
+                                android:textSize="@dimen/font_medium"/>
 
                     </TableRow>
 
                     <TableRow
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:paddingTop="3dp">
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:paddingTop="3dp">
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="So:"
-                            android:paddingRight="@dimen/activity_horizontal_margin"
-                            android:textSize="@dimen/font_medium" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="So:"
+                                android:paddingRight="@dimen/activity_horizontal_margin"
+                                android:textSize="@dimen/font_medium"/>
 
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Geschlossen"
-                            android:layout_column="2"
-                            android:textSize="@dimen/font_medium" />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:text="Geschlossen"
+                                android:layout_column="2"
+                                android:textSize="@dimen/font_medium"/>
 
                     </TableRow>
 
                 </TableLayout>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Adresse"
-                    android:paddingBottom="5dp"
-                    android:textSize="@dimen/font_large" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Adresse"
+                        android:paddingBottom="5dp"
+                        android:textSize="@dimen/font_large"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/about_fragment_address">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/about_fragment_address">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Grosser Muristalden 6"
-                        android:textSize="@dimen/font_medium" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Grosser Muristalden 6"
+                            android:textSize="@dimen/font_medium"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="3006 Bern"
-                        android:textSize="@dimen/font_medium" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="3006 Bern"
+                            android:textSize="@dimen/font_medium"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Schweiz"
-                        android:textSize="@dimen/font_medium" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="Schweiz"
+                            android:textSize="@dimen/font_medium"/>
                 </LinearLayout>
             </LinearLayout>
 

@@ -46,13 +46,21 @@ public class Room {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Room room = (Room) o;
 
-        if (!id.equals(room.id)) return false;
-        if (name != null ? !name.equals(room.name) : room.name != null) return false;
+        if (!id.equals(room.id)) {
+            return false;
+        }
+        if (name != null ? !name.equals(room.name) : room.name != null) {
+            return false;
+        }
 
         return true;
     }

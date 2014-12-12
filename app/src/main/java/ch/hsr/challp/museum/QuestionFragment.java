@@ -21,7 +21,8 @@ import ch.hsr.challp.museum.model.Question;
 import ch.hsr.challp.museum.model.Room;
 import ch.hsr.challp.museum.model.Topic;
 
-public class QuestionFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
+public class QuestionFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
     private Spinner spinnerTopic;
     private Spinner spinnerRoom;
@@ -29,17 +30,20 @@ public class QuestionFragment extends Fragment implements LoaderManager.LoaderCa
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_questions, container, false);
         spinnerTopic = (Spinner) result.findViewById(R.id.spinner_topic);
         spinnerRoom = (Spinner) result.findViewById(R.id.spinner_room);
 
-        ArrayAdapter<Topic> topicAdapter = new ArrayAdapter<>(container.getContext(), android.R.layout.simple_spinner_item, Topic.getAll());
+        ArrayAdapter<Topic> topicAdapter = new ArrayAdapter<>(container.getContext(),
+                android.R.layout.simple_spinner_item, Topic.getAll());
         topicAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTopic.setAdapter(topicAdapter);
         spinnerTopic.setOnItemSelectedListener(new SpinnerListener());
 
-        ArrayAdapter<Room> roomAdapter = new ArrayAdapter<>(container.getContext(), android.R.layout.simple_spinner_item, Room.getAll());
+        ArrayAdapter<Room> roomAdapter = new ArrayAdapter<>(container.getContext(),
+                android.R.layout.simple_spinner_item, Room.getAll());
         roomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRoom.setAdapter(roomAdapter);
         spinnerRoom.setOnItemSelectedListener(new SpinnerListener());

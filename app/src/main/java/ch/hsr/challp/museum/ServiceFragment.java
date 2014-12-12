@@ -50,7 +50,8 @@ public abstract class ServiceFragment extends DrawerFragment implements BeaconSc
 
     protected void bindServiceNow() {
         Intent serviceIntent = new Intent(getActivity(), BeaconScanService.class);
-        getActivity().getApplicationContext().bindService(serviceIntent, serviceConnectionConnection, Context.BIND_AUTO_CREATE);
+        getActivity().getApplicationContext()
+                .bindService(serviceIntent, serviceConnectionConnection, Context.BIND_AUTO_CREATE);
     }
 
     protected void unbindServiceNow() {
@@ -63,7 +64,9 @@ public abstract class ServiceFragment extends DrawerFragment implements BeaconSc
 
     @Override
     public void goToServiceStoppedActivity() {
-        FragmentHelper.show(getFragmentChangeListener(), getFragmentManager(), FragmentName.GUIDE_STOPPED, null);
+        FragmentHelper
+                .show(getFragmentChangeListener(), getFragmentManager(), FragmentName.GUIDE_STOPPED,
+                        null);
     }
 
     protected BeaconScanService getBeaconScanService() {

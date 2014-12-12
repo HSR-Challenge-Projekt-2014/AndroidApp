@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimedBeaconSimulator implements org.altbeacon.beacon.simulator.BeaconSimulator {
+
     private List<Beacon> beacons;
 
     public TimedBeaconSimulator() {

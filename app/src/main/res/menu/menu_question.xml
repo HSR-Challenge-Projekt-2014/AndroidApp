@@ -1,22 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="ch.hsr.challp.museum.QuestionActivity">
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="ch.hsr.challp.museum.QuestionActivity">
     <item
-        android:id="@+id/action_play_stop"
-        android:icon="@drawable/ic_action_pause"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/vorlesen_stoppen" />
+            android:id="@+id/action_play_stop"
+            android:icon="@drawable/ic_action_pause"
+            android:orderInCategory="100"
+            android:showAsAction="always"
+            android:title="@string/vorlesen_stoppen"/>
     <item
-        android:id="@+id/action_play_content"
-        android:icon="@drawable/ic_action_headphones"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/action_play_content" />
+            android:id="@+id/action_play_content"
+            android:icon="@drawable/ic_action_headphones"
+            android:orderInCategory="100"
+            android:showAsAction="always"
+            android:title="@string/action_play_content"/>
     <item
-        android:id="@+id/action_ask_question"
-        android:icon="@drawable/ic_action_add_question"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/action_ask_question" />
+            android:id="@+id/action_ask_question"
+            android:icon="@drawable/ic_action_add_question"
+            android:orderInCategory="100"
+            android:showAsAction="always"
+            android:title="@string/action_ask_question"/>
 </menu>

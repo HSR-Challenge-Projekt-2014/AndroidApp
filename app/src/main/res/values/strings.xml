@@ -17,7 +17,9 @@
     <string name="vorlesen_stoppen">Vorlesen stoppen</string>
     <string name="bluetooth_off_stopping">Bluetooth wurde deaktivert, stoppe Begleiter.</string>
     <string name="stop_guide">Begleiter beenden</string>
-    <string name="tts_starting_not_possible_message">Text2Speech kann nicht gestartet werden, bitte überprüfen Sie Ihre Einstellungen.</string>
+    <string name="tts_starting_not_possible_message">Text2Speech kann nicht gestartet werden, bitte
+        überprüfen Sie Ihre Einstellungen.
+    </string>
     <string name="titleImageDescription">Museums Titelbild</string>
     <string name="button_submit_question">Frage stellen</string>
     <string name="your_question">Deine Frage an das Museum</string>
@@ -26,12 +28,16 @@
     <string name="question_section_contact">Dein Kontakt</string>
     <string name="question_info_contact">Deine Kontaktdaten werden nicht veröffentlicht.</string>
     <string name="question_section_question">Deine Frage</string>
-    <string name="question_info_question">Wir beantworten Fragen üblicherweise innert 3 Arbeitstagen.</string>
+    <string name="question_info_question">Wir beantworten Fragen üblicherweise innert 3
+        Arbeitstagen.
+    </string>
     <string name="question_checkbox_notification">mich über die Antwort informieren</string>
     <string name="question_success">Frage gespeichert</string>
     <string name="read_later">Später lesen</string>
     <string name="read_later_saved">&#160;wurde gespeichert.</string>
     <string name="remove_read_later">Inhalt von Später lesen löschen</string>
     <string name="read_later_removed">&#160;wurde entfernt.</string>
-    <string name="no_read_later_items_saved">Keine Inhalte gespeichert. \nBitte starten Sie den Begleiter</string>
+    <string name="no_read_later_items_saved">Keine Inhalte gespeichert. \nBitte starten Sie den
+        Begleiter
+    </string>
 </resources>

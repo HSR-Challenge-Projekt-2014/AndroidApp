@@ -17,7 +17,8 @@ import ch.hsr.challp.museum.ReadLaterFragment;
 
 public class FragmentHelper {
 
-    public static void show(FragmentActivity activity, FragmentManager fragmentManager, FragmentName name, Integer poiId) {
+    public static void show(FragmentActivity activity, FragmentManager fragmentManager,
+            FragmentName name, Integer poiId) {
         Fragment fragment;
         if (name == FragmentName.READ_LATER) {
             fragment = new ReadLaterFragment();
@@ -40,17 +41,20 @@ public class FragmentHelper {
             fragment = new DetailFragment();
             fragment.setArguments(args);
         }
-        FragmentTransaction tr = fragmentManager.beginTransaction().replace(R.id.content_frame, fragment);
+        FragmentTransaction tr = fragmentManager.beginTransaction()
+                .replace(R.id.content_frame, fragment);
         Fragment currentFrag = fragmentManager.findFragmentById(R.id.content_frame);
         String fragmentId = "0";
-        if(currentFrag != null) {
+        if (currentFrag != null) {
             FragmentActivity fragmentActivity = (FragmentActivity) currentFrag.getActivity();
             FragmentName activeFragment = fragmentActivity.getActiveFragment();
-            if(activeFragment != null) {
+            if (activeFragment != null) {
                 fragmentId = FragmentName.getId(activeFragment).toString();
             }
         }
-        if (name.addToBackStack()) tr = tr.addToBackStack(fragmentId);
+        if (name.addToBackStack()) {
+            tr = tr.addToBackStack(fragmentId);
+        }
         tr.commit();
         activity.onFragmentChanged(name, null);
     }
@@ -65,7 +69,9 @@ public class FragmentHelper {
     }
 
     public interface FragmentActivity {
+
         public void onFragmentChanged(FragmentName newFragment, Integer poi);
+
         public FragmentName getActiveFragment();
     }
 

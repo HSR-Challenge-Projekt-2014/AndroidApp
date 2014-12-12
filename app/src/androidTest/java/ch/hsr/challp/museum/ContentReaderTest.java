@@ -1,10 +1,10 @@
 package ch.hsr.challp.museum;
 
+import junit.framework.Assert;
+
 import android.speech.tts.TextToSpeech;
 import android.test.AndroidTestCase;
 import android.util.Log;
-
-import junit.framework.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,8 @@ public class ContentReaderTest extends AndroidTestCase {
 
     @Override
     public void setUp() {
-        Log.i(getClass().getName(), "contentReader Test on Thread " + android.os.Process.getThreadPriority(android.os.Process.myTid()));
+        Log.i(getClass().getName(), "contentReader Test on Thread " + android.os.Process
+                .getThreadPriority(android.os.Process.myTid()));
         loaded = false;
         // this will not be successfull, so the tests are working with an invalid tts enginge
         tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
@@ -70,7 +71,8 @@ public class ContentReaderTest extends AndroidTestCase {
     }
 
     public void testIsPlaying() throws Exception {
-        Log.i(getClass().getName(), "testIsPlaying(), thread" + android.os.Process.getThreadPriority(android.os.Process.myTid()));
+        Log.i(getClass().getName(), "testIsPlaying(), thread" + android.os.Process
+                .getThreadPriority(android.os.Process.myTid()));
         reader.play();
         Assert.assertFalse(reader.isPlaying()); // doesn't work, no working engine
     }

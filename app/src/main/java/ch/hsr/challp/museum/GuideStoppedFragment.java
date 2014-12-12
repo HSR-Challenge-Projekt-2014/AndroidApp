@@ -1,5 +1,7 @@
 package ch.hsr.challp.museum;
 
+import org.altbeacon.beacon.Beacon;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -7,14 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.altbeacon.beacon.Beacon;
-
 
 public class GuideStoppedFragment extends ServiceFragment {
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_guide_stopped, container, false);
     }
 

@@ -22,7 +22,8 @@ public class QuestionFormActivity extends Activity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), getString(R.string.question_success), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.question_success),
+                        Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), HomeActivity.class);
                 i.putExtra(HomeActivity.SECTION, FragmentName.getId(FragmentName.QUESTIONS));
                 startActivity(i);

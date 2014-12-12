@@ -21,7 +21,8 @@ public class GuideFragment extends DrawerFragment {
 
     @Nullable
     @Override
-    public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         Button startButton = (Button) view.findViewById(R.id.guide_start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -49,12 +50,13 @@ public class GuideFragment extends DrawerFragment {
                     }
                 }
             });
-            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    goHome();
-                }
-            });
+            builder.setNegativeButton(android.R.string.cancel,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            goHome();
+                        }
+                    });
             builder.show();
         } else {
             startServiceAndGoToBeaconTest();
@@ -74,6 +76,8 @@ public class GuideFragment extends DrawerFragment {
     private void startServiceAndGoToBeaconTest() {
         Intent serviceIntent = new Intent(getActivity(), BeaconScanService.class);
         getActivity().startService(serviceIntent);
-        FragmentHelper.show(getFragmentChangeListener(), getFragmentManager(), FragmentName.GUIDE_RUNNING, null);
+        FragmentHelper
+                .show(getFragmentChangeListener(), getFragmentManager(), FragmentName.GUIDE_RUNNING,
+                        null);
     }
 }

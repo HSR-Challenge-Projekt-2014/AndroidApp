@@ -12,6 +12,7 @@ import java.util.Locale;
 import ch.hsr.challp.museum.interfaces.ContentReaderCallback;
 
 public class ContentReader {
+
     public static final int DELAY_MILLIS = 100;
     private TextToSpeech tts;
     private List<String> stringsToSpeech;
@@ -20,7 +21,8 @@ public class ContentReader {
     private Handler handler;
     private Runnable runnable;
 
-    public ContentReader(final Context context, List<String> stringsToSpeech, ContentReaderCallback callback) {
+    public ContentReader(final Context context, List<String> stringsToSpeech,
+            ContentReaderCallback callback) {
         tts = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int code) {
@@ -28,7 +30,8 @@ public class ContentReader {
                     tts.setLanguage(Locale.GERMAN);
                 } else {
                     tts = null;
-                    Toast.makeText(context, context.getString(R.string.tts_starting_not_possible_message),
+                    Toast.makeText(context,
+                            context.getString(R.string.tts_starting_not_possible_message),
                             Toast.LENGTH_SHORT).show();
                 }
             }

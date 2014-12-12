@@ -1,5 +1,9 @@
 package ch.hsr.challp.museum;
 
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerFragment;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -11,17 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
-
 import java.util.ArrayList;
 
 import ch.hsr.challp.museum.interfaces.ContentReaderCallback;
 import ch.hsr.challp.museum.model.Content;
 
 
-public class ContentActivity extends Activity implements YouTubePlayer.OnInitializedListener, ContentReaderCallback {
+public class ContentActivity extends Activity
+        implements YouTubePlayer.OnInitializedListener, ContentReaderCallback {
 
     public static final String P_CONTENT = "ContentId";
     public static final String API_KEY = "AIzaSyB3Lk1ZU2K9ozvL0rrHjK6qa2xMxiim8gM";
@@ -45,8 +46,10 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         setContentView(R.layout.activity_content);
         content = getIntent().getParcelableExtra(P_CONTENT);
 
-        ((ImageView) findViewById(R.id.page_preview_image)).setImageResource(content.getPreviewImageResource());
-        ((TextView) findViewById(R.id.page_preview_description)).setText(content.getTopic().getName());
+        ((ImageView) findViewById(R.id.page_preview_image))
+                .setImageResource(content.getPreviewImageResource());
+        ((TextView) findViewById(R.id.page_preview_description))
+                .setText(content.getTopic().getName());
         ((TextView) findViewById(R.id.page_preview_location)).setText(content.getRoom().getName());
         ((TextView) findViewById(R.id.page_title)).setText(content.getTitle());
         ((TextView) findViewById(R.id.page_text)).setText(content.getContentText());
@@ -54,7 +57,8 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
 
         if (content.hasYouTubeVideo()) {
             YouTubePlayerFragment youtubeFragment = new YouTubePlayerFragment();
-            getFragmentManager().beginTransaction().replace(R.id.page_video, youtubeFragment).commit();
+            getFragmentManager().beginTransaction().replace(R.id.page_video, youtubeFragment)
+                    .commit();
             youtubeFragment.initialize(API_KEY, this);
             youtubeFragment.setRetainInstance(true);
             youTubeId = content.getYouTubeId();
@@ -94,14 +98,16 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
     }
 
     @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean wasRestored) {
+    public void onInitializationSuccess(YouTubePlayer.Provider provider,
+            YouTubePlayer youTubePlayer, boolean wasRestored) {
         if (!wasRestored) {
             youTubePlayer.cueVideo(youTubeId);
         }
     }
 
     @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+    public void onInitializationFailure(YouTubePlayer.Provider provider,
+            YouTubeInitializationResult youTubeInitializationResult) {
 
     }
 
@@ -127,12 +133,16 @@ public class ContentActivity extends Activity implements YouTubePlayer.OnInitial
         } else if (id == R.id.action_read_later) {
             Log.d(getClass().getName(), "read later button clicked");
             Content.saveContent(this.content);
-            Toast toast = Toast.makeText(this, content.getTitle() + getString(R.string.read_later_saved), Toast.LENGTH_LONG);
+            Toast toast = Toast
+                    .makeText(this, content.getTitle() + getString(R.string.read_later_saved),
+                            Toast.LENGTH_LONG);
             toast.show();
         } else if (id == R.id.action_remove_read_later) {
             Log.d(getClass().getName(), "remove read later");
             Content.removeSavedContent(content);
-            Toast toast = Toast.makeText(this, content.getTitle() + getString(R.string.read_later_removed), Toast.LENGTH_SHORT);
+            Toast toast = Toast
+                    .makeText(this, content.getTitle() + getString(R.string.read_later_removed),
+                            Toast.LENGTH_SHORT);
             toast.show();
         } else if (id == R.id.action_ask_question) {
             startActivity(new Intent(getApplicationContext(), QuestionFormActivity.class));

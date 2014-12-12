@@ -8,11 +8,13 @@ import ch.hsr.challp.museum.R;
 public enum FragmentName {
 
     GUIDE(0, R.string.title_companion, R.drawable.ic_guide, false),
-    GUIDE_RUNNING(0, R.string.title_companion, -1, true), GUIDE_STOPPED(0, R.string.title_companion, -1, false), POI(0, R.string.title_companion, -1, true),
+    GUIDE_RUNNING(0, R.string.title_companion, -1, true), GUIDE_STOPPED(0, R.string.title_companion,
+            -1, false), POI(0, R.string.title_companion, -1, true),
     QUESTIONS(1, R.string.title_question, R.drawable.ic_action_help_light, true),
     READ_LATER(2, R.string.title_read_later, R.drawable.ic_action_important_light, true),
     ABOUT(3, R.string.title_about, R.drawable.ic_action_about_light, true);
-    public static FragmentName[] DRAWER_FRAGMENTS = new FragmentName[]{GUIDE, QUESTIONS, READ_LATER, ABOUT};
+    public static FragmentName[] DRAWER_FRAGMENTS = new FragmentName[]{GUIDE, QUESTIONS, READ_LATER,
+            ABOUT};
     private static Map<Integer, FragmentName> ENUM_BY_ID = new HashMap<>();
     private int drawerPosition;
     private int title;

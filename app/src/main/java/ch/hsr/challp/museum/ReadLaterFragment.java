@@ -18,7 +18,8 @@ import android.widget.ListView;
 import ch.hsr.challp.museum.adapter.ReadLaterListAdapter;
 import ch.hsr.challp.museum.model.Content;
 
-public class ReadLaterFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
+public class ReadLaterFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
     private ReadLaterListAdapter mAdapter;
     private View view;
@@ -27,7 +28,8 @@ public class ReadLaterFragment extends Fragment implements LoaderManager.LoaderC
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_read_later, container, false);
 
         list = (ListView) view.findViewById(R.id.read_later_list_view);

@@ -1,8 +1,8 @@
 package ch.hsr.challp.museum;
 
-import android.test.ActivityUnitTestCase;
-
 import junit.framework.Assert;
+
+import android.test.ActivityUnitTestCase;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>

@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 public class AboutFragment extends DrawerFragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_about, container, false);
         View address = view.findViewById(R.id.about_fragment_address);
         address.setOnClickListener(new View.OnClickListener() {

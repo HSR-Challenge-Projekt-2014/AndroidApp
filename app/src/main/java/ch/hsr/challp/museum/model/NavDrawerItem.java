@@ -1,6 +1,7 @@
 package ch.hsr.challp.museum.model;
 
 public class NavDrawerItem {
+
     private final String title;
     private final int icon;
 

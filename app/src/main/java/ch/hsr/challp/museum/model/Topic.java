@@ -11,7 +11,8 @@ public class Topic {
     public static final Topic FUN = new Topic(4, "Spass und Spannung");
     public static final Topic LOVE = new Topic(5, "Liebesleben");
     public static final Topic ENERGY = new Topic(6, "Energie");
-    private static final List<Topic> ALL = Arrays.asList(ALL_ITEMS, ADVENTURE, HISTORIC, FUN, LOVE, ENERGY);
+    private static final List<Topic> ALL = Arrays
+            .asList(ALL_ITEMS, ADVENTURE, HISTORIC, FUN, LOVE, ENERGY);
     private final String name;
     private Integer id;
 
@@ -48,13 +49,21 @@ public class Topic {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Topic topic = (Topic) o;
 
-        if (id != null ? !id.equals(topic.id) : topic.id != null) return false;
-        if (name != null ? !name.equals(topic.name) : topic.name != null) return false;
+        if (id != null ? !id.equals(topic.id) : topic.id != null) {
+            return false;
+        }
+        if (name != null ? !name.equals(topic.name) : topic.name != null) {
+            return false;
+        }
 
         return true;
     }

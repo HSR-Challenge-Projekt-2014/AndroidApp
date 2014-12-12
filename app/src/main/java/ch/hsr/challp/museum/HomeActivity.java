@@ -55,7 +55,8 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
         dList = (ListView) findViewById(R.id.left_drawer_list);
         List<NavDrawerItem> items = new ArrayList<>();
         for (FragmentName fragmentName : FragmentName.DRAWER_FRAGMENTS) {
-            items.add(new NavDrawerItem(getString(fragmentName.getTitle()), fragmentName.getIcon()));
+            items.add(
+                    new NavDrawerItem(getString(fragmentName.getTitle()), fragmentName.getIcon()));
         }
 
         // notification switch
@@ -137,7 +138,9 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
     @Override
     protected void onSaveInstanceState(Bundle out) {
         out.putInt(SECTION, FragmentName.getId(activeFragment));
-        if (activePOI != null) out.putInt(POI, activePOI);
+        if (activePOI != null) {
+            out.putInt(POI, activePOI);
+        }
         super.onSaveInstanceState(out);
     }
 
@@ -197,7 +200,8 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
 
     private boolean isBeaconScanServiceActive() {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+        for (ActivityManager.RunningServiceInfo service : manager
+                .getRunningServices(Integer.MAX_VALUE)) {
             if (BeaconScanService.class.getName().equals(service.service.getClassName())) {
                 return true;
             }
@@ -206,7 +210,9 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
     }
 
     private void setTitle(String title) {
-        if (getActionBar() != null) getActionBar().setTitle(title);
+        if (getActionBar() != null) {
+            getActionBar().setTitle(title);
+        }
     }
 
     private FragmentName getSectionIdFromExtras() {
@@ -238,13 +244,15 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
                 this.finish();
                 return false;
             } else {
-                if(isBeaconScanServiceActive() && getFragmentManager().getBackStackEntryCount() == 1) {
+                if (isBeaconScanServiceActive()
+                        && getFragmentManager().getBackStackEntryCount() == 1) {
                     this.finish();
                     return false;
                 }
                 getFragmentManager().popBackStack();
                 int index = getFragmentManager().getBackStackEntryCount() - 1;
-                FragmentManager.BackStackEntry backStackEntryAt = getFragmentManager().getBackStackEntryAt(index);
+                FragmentManager.BackStackEntry backStackEntryAt = getFragmentManager()
+                        .getBackStackEntryAt(index);
                 Integer fragmentId = Integer.parseInt(backStackEntryAt.getName());
                 onFragmentChanged(FragmentName.getFragmentName(fragmentId), activePOI);
                 removeCurrentFragment();
