@@ -3,12 +3,12 @@
     tools:context="ch.hsr.challp.museum.ContentActivity">
     <item
         android:id="@+id/action_read_later"
-        android:icon="@drawable/ic_action_important"
+        android:icon="@drawable/ic_action_not_important"
         android:showAsAction="always"
         android:title="@string/read_later" />
     <item
         android:id="@+id/action_remove_read_later"
-        android:icon="@drawable/ic_action_not_important"
+        android:icon="@drawable/ic_action_important"
         android:showAsAction="always"
         android:title="@string/remove_read_later" />
     <item
