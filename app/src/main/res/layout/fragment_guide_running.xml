@@ -43,6 +43,7 @@
                         android:layout_height="76dp"
                         android:layout_gravity="center_horizontal"
                         android:paddingBottom="@dimen/element_spacing_wide"
+                        android:contentDescription="@string/guide_running_wait"
                         android:src="@drawable/wait"/>
 
                 <TextView

@@ -54,7 +54,10 @@ public class QuestionListAdapter extends ArrayAdapter<Question> {
         LayoutInflater mInflater = (LayoutInflater) context
                 .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
-        View view = mInflater.inflate(R.layout.preview_row, null);
+        View view = convertView;
+        if (view == null) {
+            view = mInflater.inflate(R.layout.preview_row, null);
+        }
         TextView title = (TextView) view.findViewById(R.id.preview_row_title);
         ImageView image = (ImageView) view.findViewById(R.id.preview_row_image);
         title.setText(question.getTitle());

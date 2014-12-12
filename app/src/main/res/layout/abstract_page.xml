@@ -23,6 +23,7 @@
                 <ImageView
                         android:id="@+id/page_preview_image"
                         android:layout_width="@dimen/image_thumbnail_square"
+                        android:contentDescription="@string/poi_header_image"
                         android:layout_height="@dimen/image_thumbnail_square"
                         android:scaleType="centerCrop"/>
 
@@ -64,6 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/element_spacing_wide"
                         android:layout_marginTop="@dimen/element_spacing_wide"
+                        android:contentDescription="@string/poi_header_image"
                         android:scaleType="center"/>
 
                 <TextView

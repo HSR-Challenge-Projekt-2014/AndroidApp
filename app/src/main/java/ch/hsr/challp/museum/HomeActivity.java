@@ -67,9 +67,9 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (prefs.getBoolean(NOTIFICATIONS, true)) {
-                    prefs.edit().putBoolean(NOTIFICATIONS, false).commit();
+                    prefs.edit().putBoolean(NOTIFICATIONS, false).apply();
                 } else {
-                    prefs.edit().putBoolean(NOTIFICATIONS, true).commit();
+                    prefs.edit().putBoolean(NOTIFICATIONS, true).apply();
                 }
             }
         });

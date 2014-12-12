@@ -5,18 +5,18 @@
             android:id="@+id/action_play_stop"
             android:icon="@drawable/ic_action_pause"
             android:orderInCategory="100"
-            android:showAsAction="always"
+            android:showAsAction="ifRoom"
             android:title="@string/vorlesen_stoppen"/>
     <item
             android:id="@+id/action_play_content"
             android:icon="@drawable/ic_action_headphones"
             android:orderInCategory="100"
-            android:showAsAction="always"
+            android:showAsAction="ifRoom"
             android:title="@string/action_play_content"/>
     <item
             android:id="@+id/action_ask_question"
             android:icon="@drawable/ic_action_add_question"
             android:orderInCategory="100"
-            android:showAsAction="always"
+            android:showAsAction="ifRoom"
             android:title="@string/action_ask_question"/>
 </menu>

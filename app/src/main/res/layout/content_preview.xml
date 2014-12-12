@@ -8,6 +8,7 @@
             android:id="@+id/contentPreviewImage"
             android:layout_width="match_parent"
             android:layout_height="80dp"
+            android:contentDescription="@string/content.preview"
             android:scaleType="centerCrop"/>
 
     <TextView

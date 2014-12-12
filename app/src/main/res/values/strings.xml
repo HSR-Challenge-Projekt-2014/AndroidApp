@@ -40,4 +40,9 @@
     <string name="no_read_later_items_saved">Keine Inhalte gespeichert. \nBitte starten Sie den
         Begleiter
     </string>
+    <string name="content.preview">Vorschau</string>
+    <string name="drawer.menu_icon">Menu Icon</string>
+    <string name="question_preview_image">Frage Vorschaubild</string>
+    <string name="poi_header_image">Illustration</string>
+    <string name="guide_running_wait">Sanduhr</string>
 </resources>

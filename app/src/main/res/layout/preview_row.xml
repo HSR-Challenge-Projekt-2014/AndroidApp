@@ -17,6 +17,7 @@
                 android:id="@+id/preview_row_image"
                 android:layout_width="80dp"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/question_preview_image"
                 android:scaleType="centerCrop"/>
 
         <LinearLayout

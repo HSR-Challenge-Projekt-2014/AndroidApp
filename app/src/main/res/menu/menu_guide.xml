@@ -4,14 +4,14 @@
             android:id="@+id/stop_guide"
             android:icon="@drawable/ic_stop_guide"
             android:orderInCategory="100"
-            android:showAsAction="always"
+            android:showAsAction="ifRoom"
             android:title="@string/stop_guide"
             android:visible="false"/>
     <item
             android:id="@+id/action_ask_question"
             android:icon="@drawable/ic_action_add_question"
             android:orderInCategory="100"
-            android:showAsAction="always"
+            android:showAsAction="ifRoom"
             android:title="@string/action_ask_question"
             android:visible="false"/>
 </menu>

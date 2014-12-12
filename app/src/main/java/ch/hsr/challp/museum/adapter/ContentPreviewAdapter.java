@@ -42,15 +42,19 @@ public class ContentPreviewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int i, final View view, ViewGroup viewGroup) {
+    public View getView(final int i, final View convertView, final ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View result = inflater.inflate(R.layout.content_preview, null);
+
+        View result = convertView;
+        if (result == null) {
+            result = inflater.inflate(R.layout.content_preview, null);
+        }
 
         result.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Log.i(getClass().getName(), "content selected: " + contents.get(i));
-                Intent intent = new Intent(view.getContext(), ContentActivity.class);
+                Intent intent = new Intent(viewGroup.getContext(), ContentActivity.class);
                 intent.putExtra(ContentActivity.P_CONTENT, contents.get(i));
                 v.getContext().startActivity(intent);
             }
