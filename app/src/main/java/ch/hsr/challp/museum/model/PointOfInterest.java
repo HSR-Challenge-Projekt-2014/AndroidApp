@@ -18,7 +18,7 @@ public class PointOfInterest {
     private final List<Content> contents = new ArrayList<>();
     private final BeaconReference beacon;
 
-    public PointOfInterest(int id, String title, int headerResource, BeaconReference beacon) {
+    private PointOfInterest(int id, String title, int headerResource, BeaconReference beacon) {
         this.id = id;
         this.title = title;
         this.headerResource = headerResource;

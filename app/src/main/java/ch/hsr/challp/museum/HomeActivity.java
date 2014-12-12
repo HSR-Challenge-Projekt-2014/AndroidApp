@@ -37,10 +37,9 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
     public static final String NOTIFICATIONS = "NOTIFICATIONS";
     public static final String SETTINGS = "SETTINGS";
     public static final String SECTION = "SECTION";
-    public static final String POI = "POI";
+    private static final String POI = "POI";
     private DrawerLayout dLayout;
     private ListView dList;
-    private ListAdapter adapter;
     private ActionBarDrawerToggle dToggle;
     private MenuItem stopItem;
     private Menu menu;
@@ -74,7 +73,7 @@ public class HomeActivity extends Activity implements FragmentHelper.FragmentAct
             }
         });
 
-        adapter = new NavDrawerListAdapter(getApplicationContext(), items);
+        ListAdapter adapter = new NavDrawerListAdapter(getApplicationContext(), items);
         dList.setAdapter(adapter);
         dList.setOnItemClickListener(new OnItemClickListener() {
             @Override

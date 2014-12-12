@@ -23,8 +23,6 @@ public class ReadLaterFragment extends Fragment
 
     private ReadLaterListAdapter mAdapter;
     private View view;
-    private ListView list;
-    private Context context;
 
     @Nullable
     @Override
@@ -32,8 +30,8 @@ public class ReadLaterFragment extends Fragment
             Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_read_later, container, false);
 
-        list = (ListView) view.findViewById(R.id.read_later_list_view);
-        context = container.getContext();
+        ListView list = (ListView) view.findViewById(R.id.read_later_list_view);
+        Context context = container.getContext();
 
         mAdapter = new ReadLaterListAdapter(context, Content.getSavedContents());
         mAdapter.setNotifyOnChange(true);

@@ -25,7 +25,7 @@ public class ContentActivity extends Activity
         implements YouTubePlayer.OnInitializedListener, ContentReaderCallback {
 
     public static final String P_CONTENT = "ContentId";
-    public static final String API_KEY = "AIzaSyB3Lk1ZU2K9ozvL0rrHjK6qa2xMxiim8gM";
+    private static final String API_KEY = "AIzaSyB3Lk1ZU2K9ozvL0rrHjK6qa2xMxiim8gM";
     private ContentReader contentReader;
     private String youTubeId;
     private Content content;

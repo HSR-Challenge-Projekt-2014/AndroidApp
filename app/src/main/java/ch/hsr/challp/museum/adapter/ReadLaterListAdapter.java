@@ -31,7 +31,7 @@ public class ReadLaterListAdapter extends ArrayAdapter<Content> {
 
         View view = convertView;
         if (view == null) {
-            mInflater.inflate(R.layout.preview_row, null);
+            view = mInflater.inflate(R.layout.preview_row, null);
         }
         TextView title = (TextView) view.findViewById(R.id.preview_row_title);
         ImageView image = (ImageView) view.findViewById(R.id.preview_row_image);

@@ -13,7 +13,7 @@ import ch.hsr.challp.museum.interfaces.ContentReaderCallback;
 
 public class ContentReader {
 
-    public static final int DELAY_MILLIS = 100;
+    private static final int DELAY_MILLIS = 100;
     private TextToSpeech tts;
     private List<String> stringsToSpeech;
     private ContentReaderCallback callback;

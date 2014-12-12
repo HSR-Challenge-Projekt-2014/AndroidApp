@@ -12,13 +12,11 @@ import ch.hsr.challp.museum.helper.FragmentName;
 
 public class QuestionFormActivity extends Activity {
 
-    private Button submit;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_form);
-        submit = (Button) findViewById(R.id.button_submit);
+        Button submit = (Button) findViewById(R.id.button_submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
