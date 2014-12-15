@@ -42,7 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/element_spacing_wide"
-                        android:text="Dies ist der interaktive Begleiter des Naturmuseums. Der Begleiter wird Ihnen während des blablablabla..."
+                        android:text="Dies ist der interaktive Begleiter des Naturmuseums. Der Begleiter wird Ihnen während Ihrem presönlichen Rundang zusätzliche Informationen an Ihrer jeweiligen Position zu Verfügung stellen. Ausserdem haben Sie die Möglichkeit, zu jeder Zeit, Fragen an das Museum zu stellen."
                         android:textSize="@dimen/font_medium"/>
 
                 <Button

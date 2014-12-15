@@ -34,7 +34,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/element_spacing_wide"
-                        android:text="An dieser Position sind keine zusätzlichen Informationen verfügbar."
+                        android:text="An dieser Position sind keine zusätzlichen Informationen verfügbar. Sie werden Informiert, sobald sich dies ändert."
                         android:textSize="@dimen/font_medium"/>
 
                 <ImageView
@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingBottom="@dimen/element_spacing_wide"
-                        android:text="In der Zwischenzeit können Sie beantwortete Besucher-Fragen duchsehen."
+                        android:text="In der Zwischenzeit können Sie beantwortete Besucher-Fragen duchsehen. Wählen Sie dazu den Punkt 'Fragen ans Museum' aus dem Menü."
                         android:textSize="@dimen/font_medium"/>
             </LinearLayout>
         </LinearLayout>

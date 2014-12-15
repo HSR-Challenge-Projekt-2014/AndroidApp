@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Museum</string>
+    <string name="app_name">Begleiter</string>
     <string name="action_ask_question">Frage stellen</string>
-    <string name="title_activity_home">Museum Begleiter</string>
+    <string name="title_activity_home">Museums Begleiter</string>
     <string name="title_companion">Begleiter</string>
     <string name="title_question">Frage ans Museum</string>
     <string name="title_read_later">Später lesen</string>

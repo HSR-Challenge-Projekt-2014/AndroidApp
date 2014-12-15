@@ -71,7 +71,7 @@ public class BeaconServiceNotificationProvider {
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
         bigTextStyle.bigText("Zur App wechseln");
         builder.setStyle(bigTextStyle);
-        builder.setSmallIcon(R.drawable.ic_guide);
+        builder.setSmallIcon(R.drawable.ic_owl);
         builder.setVibrate(null);
         notificationManager.notify(NOTIFICATION_ID, builder.build());
     }
