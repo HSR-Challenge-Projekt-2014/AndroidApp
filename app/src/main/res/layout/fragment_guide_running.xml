@@ -1,58 +1,58 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:context="ch.hsr.challp.museum.AboutFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ch.hsr.challp.museum.AboutFragment">
 
     <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <ImageView
-                    android:id="@+id/poiHeader"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/header_img_height"
-                    android:contentDescription="@string/titleImageDescription"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/museum_innen_02"/>
+                android:id="@+id/poiHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/header_img_height"
+                android:contentDescription="@string/titleImageDescription"
+                android:scaleType="centerCrop"
+                android:src="@drawable/museum_innen_02" />
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingLeft="@dimen/activity_horizontal_margin"
-                    android:paddingRight="@dimen/activity_horizontal_margin"
-                    android:paddingTop="@dimen/activity_vertical_margin">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin">
 
                 <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/element_spacing_wide"
-                        android:text="An dieser Position sind keine zusätzlichen Informationen verfügbar. Sie werden Informiert, sobald sich dies ändert."
-                        android:textSize="@dimen/font_medium"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/element_spacing_wide"
+                    android:text="@string/no_more_information_available"
+                    android:textSize="@dimen/font_medium" />
 
                 <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="56dp"
-                        android:layout_height="76dp"
-                        android:layout_gravity="center_horizontal"
-                        android:paddingBottom="@dimen/element_spacing_wide"
-                        android:contentDescription="@string/guide_running_wait"
-                        android:src="@drawable/wait"/>
+                    android:id="@+id/imageView"
+                    android:layout_width="56dp"
+                    android:layout_height="76dp"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingBottom="@dimen/element_spacing_wide"
+                    android:contentDescription="@string/guide_running_wait"
+                    android:src="@drawable/wait" />
 
                 <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/element_spacing_wide"
-                        android:text="In der Zwischenzeit können Sie beantwortete Besucher-Fragen duchsehen. Wählen Sie dazu den Punkt 'Fragen ans Museum' aus dem Menü."
-                        android:textSize="@dimen/font_medium"/>
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/element_spacing_wide"
+                    android:text="@string/read_questions_suggestion"
+                    android:textSize="@dimen/font_medium" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

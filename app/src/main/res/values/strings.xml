@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Begleiter</string>
     <string name="action_ask_question">Frage stellen</string>
     <string name="title_activity_home">Museums Begleiter</string>
@@ -14,12 +13,10 @@
     <string name="title_activity_question">QuestionActivity</string>
     <string name="title_activity_content">Begleiter</string>
     <string name="action_play_content">Inhalt vorlesen</string>
-    <string name="vorlesen_stoppen">Vorlesen stoppen</string>
+    <string name="stop_reading">Vorlesen stoppen</string>
     <string name="bluetooth_off_stopping">Bluetooth wurde deaktivert, stoppe Begleiter.</string>
     <string name="stop_guide">Begleiter beenden</string>
-    <string name="tts_starting_not_possible_message">Text2Speech kann nicht gestartet werden, bitte
-        überprüfen Sie Ihre Einstellungen.
-    </string>
+    <string name="tts_starting_not_possible_message">Text2Speech kann nicht gestartet werden, bitte überprüfen Sie Ihre Einstellungen.</string>
     <string name="titleImageDescription">Museums Titelbild</string>
     <string name="button_submit_question">Frage stellen</string>
     <string name="your_question">Deine Frage an das Museum</string>
@@ -28,21 +25,27 @@
     <string name="question_section_contact">Dein Kontakt</string>
     <string name="question_info_contact">Deine Kontaktdaten werden nicht veröffentlicht.</string>
     <string name="question_section_question">Deine Frage</string>
-    <string name="question_info_question">Wir beantworten Fragen üblicherweise innert 3
-        Arbeitstagen.
-    </string>
+    <string name="question_info_question">Wir beantworten Fragen üblicherweise innert 3 Arbeitstagen.</string>
     <string name="question_checkbox_notification">mich über die Antwort informieren</string>
     <string name="question_success">Frage gespeichert</string>
     <string name="read_later">Später lesen</string>
     <string name="read_later_saved">&#160;wurde gespeichert.</string>
     <string name="remove_read_later">Inhalt von Später lesen löschen</string>
     <string name="read_later_removed">&#160;wurde entfernt.</string>
-    <string name="no_read_later_items_saved">Keine Inhalte gespeichert. \nBitte starten Sie den
-        Begleiter
-    </string>
+    <string name="no_read_later_items_saved">Keine Inhalte gespeichert. \nBitte starten Sie den Begleiter</string>
     <string name="content.preview">Vorschau</string>
     <string name="drawer.menu_icon">Menu Icon</string>
     <string name="question_preview_image">Frage Vorschaubild</string>
-    <string name="poi_header_image">Illustration</string>
     <string name="guide_running_wait">Sanduhr</string>
+    <string name="begleiter_active">Museumsbegleiter aktiv</string>
+    <string name="switch_to_app">Zur App wechseln</string>
+    <string name="content_available_in" formatted="false">Inhalt verfügbar: %s in %s</string>
+    <string name="bluetooth_not_activated">Bluetooth nicht aktiviert</string>
+    <string name="activate_bluetooth_question">Bluetooth aktivieren?</string>
+    <string name="title_answered_question">Beantwortete Frage</string>
+    <string name="notifications">Benachrichtigungen</string>
+    <string name="no_more_information_available">An dieser Position sind keine zusätzlichen Informationen verfügbar. Sie werden Informiert, sobald sich dies ändert.</string>
+    <string name="read_questions_suggestion">In der Zwischenzeit können Sie beantwortete Besucher-Fragen duchsehen. Wählen Sie dazu den Punkt \'Fragen ans Museum\' aus dem Menü.</string>
+    <string name="begleiter_shutdown">Begleiter wurde beendet</string>
+    <string name="begleiter_shutdown_thankyou">Der Museums-Begleiter wurde beendet, besten Dank für Ihren Besuch!</string>
 </resources>

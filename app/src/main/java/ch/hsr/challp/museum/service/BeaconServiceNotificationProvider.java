@@ -1,8 +1,6 @@
 package ch.hsr.challp.museum.service;
 
 
-import org.altbeacon.beacon.Beacon;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,6 +10,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+
+import org.altbeacon.beacon.Beacon;
 
 import ch.hsr.challp.museum.HomeActivity;
 import ch.hsr.challp.museum.R;
@@ -67,9 +67,9 @@ public class BeaconServiceNotificationProvider {
     }
 
     public void createServiceRunningNotification() {
-        builder.setContentTitle("Museumsbegleiter aktiv");
+        builder.setContentTitle(context.getString(R.string.begleiter_active));
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
-        bigTextStyle.bigText("Zur App wechseln");
+        bigTextStyle.bigText(context.getString(R.string.switch_to_app));
         builder.setStyle(bigTextStyle);
         builder.setSmallIcon(R.drawable.ic_owl);
         builder.setVibrate(null);
@@ -84,7 +84,7 @@ public class BeaconServiceNotificationProvider {
         }
         PointOfInterest poi = PointOfInterest.findByBeacon(beacon);
         Room room = poi.getBeacon().getRoom();
-        String notification = "Inhalt verfügbar: %s in %s";
+        String notification = context.getString(R.string.content_available_in);
 
         NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
         bigTextStyle.bigText(String.format(notification, poi.getTitle(), room.getName()));

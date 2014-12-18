@@ -1,12 +1,5 @@
 package ch.hsr.challp.museum.service;
 
-import org.altbeacon.beacon.Beacon;
-import org.altbeacon.beacon.BeaconConsumer;
-import org.altbeacon.beacon.BeaconManager;
-import org.altbeacon.beacon.BeaconParser;
-import org.altbeacon.beacon.RangeNotifier;
-import org.altbeacon.beacon.Region;
-
 import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
@@ -22,6 +15,13 @@ import android.os.RemoteException;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.Toast;
+
+import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.BeaconConsumer;
+import org.altbeacon.beacon.BeaconManager;
+import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.RangeNotifier;
+import org.altbeacon.beacon.Region;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +41,7 @@ public class BeaconScanService extends Service implements BeaconConsumer {
 
     // change current beacon after new beacon was measured x times
     private final static Integer BEACON_CHANGE_DELAY = 5;
+    public static final String REGION_NAME = "Museum";
 
     private IBinder binder = new LocalBinder();
     private BeaconManager beaconManager;
@@ -197,7 +198,7 @@ public class BeaconScanService extends Service implements BeaconConsumer {
         }
 
         regions = PointOfInterest.getAllRegions();
-        wildcardRegion = new Region("Museum", null, null, null);
+        wildcardRegion = new Region(REGION_NAME, null, null, null);
 
         notificationProvider = new BeaconServiceNotificationProvider(this);
         notificationProvider.createServiceRunningNotification();

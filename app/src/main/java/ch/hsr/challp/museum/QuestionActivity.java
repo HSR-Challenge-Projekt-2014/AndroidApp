@@ -35,7 +35,7 @@ public class QuestionActivity extends Activity implements ContentReaderCallback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
-        setTitle("Beantwortete Frage");
+        setTitle(getString(R.string.title_answered_question));
 
         Integer questionId = getIntent().getIntExtra(P_QUESTION_ID, 0);
         Question question = Question.getById(questionId);

@@ -6,7 +6,7 @@
             android:icon="@drawable/ic_action_pause"
             android:orderInCategory="100"
             android:showAsAction="ifRoom"
-            android:title="@string/vorlesen_stoppen"/>
+        android:title="@string/stop_reading" />
     <item
             android:id="@+id/action_play_content"
             android:icon="@drawable/ic_action_headphones"

@@ -22,7 +22,7 @@ public class GuideFragment extends DrawerFragment {
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         Button startButton = (Button) view.findViewById(R.id.guide_start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -38,8 +38,8 @@ public class GuideFragment extends DrawerFragment {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter != null && !bluetoothAdapter.isEnabled() && !Emulator.isEmulator()) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Bluetooth not enabled");
-            builder.setMessage("Enable Bluetooth now?");
+            builder.setTitle(getString(R.string.bluetooth_not_activated));
+            builder.setMessage(getString(R.string.activate_bluetooth_question));
             builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {

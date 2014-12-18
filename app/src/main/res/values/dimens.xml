@@ -8,6 +8,9 @@
     <dimen name="element_spacing">8dp</dimen>
     <dimen name="element_spacing_wide">16dp</dimen>
     <dimen name="button_height">48dp</dimen>
+    <dimen name="divider_size">1dp</dimen>
+    <dimen name="textView_padding">6dp</dimen>
+    <dimen name="small_padding">3dp</dimen>
 
     <dimen name="image_thumbnail_square">50dp</dimen>
 
@@ -15,6 +18,9 @@
     <dimen name="font_small">14sp</dimen>
     <dimen name="font_medium">18sp</dimen>
     <dimen name="font_large">22sp</dimen>
+    <dimen name="font_huge">40sp</dimen>
 
     <dimen name="header_img_height">150dp</dimen>
+    <dimen name="layout_width">300dp</dimen>
+
 </resources>

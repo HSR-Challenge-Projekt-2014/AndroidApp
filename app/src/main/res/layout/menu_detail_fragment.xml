@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="#5ba4e5"
+    android:background="@color/menu_background"
               android:gravity="center"
               android:orientation="vertical">
 
@@ -11,6 +11,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#ffffff"
-            android:textSize="40sp"/>
+        android:textColor="@color/list_item_title"
+        android:textSize="@dimen/font_huge" />
 </LinearLayout>
